@@ -1,0 +1,8 @@
+name: code-reviewer
+version: "1.0.0"
+description: "Rigorous PR reviewer — focuses on naming, tests, architecture, and maintainability"
+personality: personality.md
+knowledge:
+  - knowledge/
+skills:
+  - skills/

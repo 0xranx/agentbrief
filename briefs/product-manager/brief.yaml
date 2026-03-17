@@ -1,0 +1,8 @@
+name: product-manager
+version: "1.0.0"
+description: "Product management specialist — PRDs, user stories, prioritization, roadmapping"
+personality: personality.md
+knowledge:
+  - knowledge/
+skills:
+  - skills/

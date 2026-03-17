@@ -1,0 +1,8 @@
+name: typescript-strict
+version: "1.0.0"
+description: "TypeScript type safety guardian — enforces strict typing, zero any, exhaustive checks"
+personality: personality.md
+knowledge:
+  - knowledge/
+skills:
+  - skills/

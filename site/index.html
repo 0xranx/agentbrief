@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgentBrief — Pluggable role definitions for AI coding agents</title>
+<meta name="description" content="One command turns your Claude Code, Cursor, OpenCode, or Codex into a specialized professional. Browse official briefs for development, product, marketing, and more.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1117;--surface:#161b22;--border:#30363d;--text:#e6edf3;--muted:#8b949e;--accent:#58a6ff;--green:#3fb950;--purple:#bc8cff;--orange:#d29922}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:960px;margin:0 auto;padding:0 24px}
+
+/* Hero */
+.hero{padding:80px 0 60px;text-align:center}
+.hero h1{font-size:48px;font-weight:700;margin-bottom:8px}
+.hero h1 span{color:var(--accent)}
+.hero .tagline{font-size:20px;color:var(--muted);margin-bottom:40px}
+.terminal{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px 32px;text-align:left;display:inline-block;max-width:100%;font-family:'SF Mono',SFMono-Regular,Consolas,'Liberation Mono',Menlo,monospace;font-size:15px;line-height:1.8}
+.terminal .prompt{color:var(--green)}
+.terminal .cmd{color:var(--text)}
+.terminal .comment{color:var(--muted)}
+
+/* Section */
+section{padding:60px 0}
+section h2{font-size:28px;font-weight:600;margin-bottom:8px}
+section .subtitle{color:var(--muted);margin-bottom:32px}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-top:32px}
+.step{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px}
+.step .num{display:inline-block;width:32px;height:32px;line-height:32px;text-align:center;border-radius:50%;background:var(--accent);color:var(--bg);font-weight:700;font-size:14px;margin-bottom:12px}
+.step h3{font-size:16px;margin-bottom:8px}
+.step p{color:var(--muted);font-size:14px}
+.step code{background:var(--bg);padding:2px 6px;border-radius:4px;font-size:13px}
+
+/* Registry */
+.registry-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.brief-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;transition:border-color .2s}
+.brief-card:hover{border-color:var(--accent)}
+.brief-card .name{font-weight:600;font-size:16px;margin-bottom:4px}
+.brief-card .badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:12px;margin-left:8px;vertical-align:middle}
+.badge.official{background:rgba(59,185,80,.15);color:var(--green)}
+.brief-card .desc{color:var(--muted);font-size:14px;margin-top:4px}
+.brief-card .cmd{font-family:'SF Mono',monospace;font-size:12px;color:var(--accent);margin-top:12px;background:var(--bg);padding:6px 10px;border-radius:6px}
+
+/* Catalog */
+.catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.catalog-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center;transition:border-color .2s}
+.catalog-card:hover{border-color:var(--purple)}
+.catalog-card .icon{font-size:28px;margin-bottom:8px}
+.catalog-card h3{font-size:15px;margin-bottom:4px}
+.catalog-card p{font-size:13px;color:var(--muted)}
+
+/* Engines */
+.engines{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:24px}
+.engine{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center}
+.engine .file{font-family:monospace;font-size:13px;color:var(--accent)}
+.engine .mode{font-size:12px;color:var(--muted);margin-top:4px}
+
+/* Footer */
+footer{border-top:1px solid var(--border);padding:40px 0;text-align:center;color:var(--muted);font-size:14px}
+footer a{color:var(--muted)}
+footer a:hover{color:var(--accent)}
+footer .links{margin-bottom:8px}
+footer .links a{margin:0 12px}
+
+@media(max-width:600px){
+  .hero h1{font-size:32px}
+  .hero .tagline{font-size:16px}
+  .terminal{font-size:13px;padding:16px 20px}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- Hero -->
+<section class="hero">
+  <h1>Agent<span>Brief</span></h1>
+  <p class="tagline">Pluggable role definitions for AI coding agents.</p>
+  <div class="terminal">
+    <div><span class="prompt">$</span> <span class="cmd">npm install -g agentbrief</span></div>
+    <div><span class="prompt">$</span> <span class="cmd">agentbrief use security-auditor</span></div>
+    <div class="comment"># Your AI agent is now an OWASP security auditor</div>
+    <br>
+    <div><span class="prompt">$</span> <span class="cmd">agentbrief search</span></div>
+    <div class="comment"># Browse 10+ official briefs across dev, product, growth &amp; ops</div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section>
+  <h2>How It Works</h2>
+  <p class="subtitle">Three steps. Under 60 seconds.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="num">1</div>
+      <h3>Install</h3>
+      <p><code>npm install -g agentbrief</code></p>
+    </div>
+    <div class="step">
+      <div class="num">2</div>
+      <h3>Apply a Brief</h3>
+      <p><code>agentbrief use security-auditor</code></p>
+      <p>Injects role, knowledge, and rules into your agent's instruction files.</p>
+    </div>
+    <div class="step">
+      <div class="num">3</div>
+      <h3>Start Coding</h3>
+      <p>Open a new conversation. Your agent now behaves as a specialist.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Official Registry -->
+<section>
+  <h2>Official Briefs</h2>
+  <p class="subtitle">Ready to use. Just type <code style="background:var(--surface);padding:2px 6px;border-radius:4px">agentbrief use &lt;name&gt;</code></p>
+  <div class="registry-grid">
+
+    <div class="brief-card">
+      <div class="name">security-auditor <span class="badge official">official</span></div>
+      <div class="desc">OWASP/CWE security review specialist</div>
+      <div class="cmd">agentbrief use security-auditor</div>
+    </div>
+
+    <div class="brief-card">
+      <div class="name">code-reviewer <span class="badge official">official</span></div>
+      <div class="desc">Rigorous PR review — naming, tests, architecture</div>
+      <div class="cmd">agentbrief use code-reviewer</div>
+    </div>
+
+    <div class="brief-card">
+      <div class="name">typescript-strict <span class="badge official">official</span></div>
+      <div class="desc">TypeScript type safety guardian — zero any</div>
+      <div class="cmd">agentbrief use typescript-strict</div>
+    </div>
+
+    <div class="brief-card">
+      <div class="name">nextjs-fullstack <span class="badge official">official</span></div>
+      <div class="desc">Next.js 15 + App Router + React 19 + Tailwind</div>
+      <div class="cmd">agentbrief use nextjs-fullstack</div>
+    </div>
+
+    <div class="brief-card">
+      <div class="name">frontend-design <span class="badge official">official</span></div>
+      <div class="desc">React + Tailwind + shadcn/ui design engineering</div>
+      <div class="cmd">agentbrief use frontend-design</div>
+    </div>
+
+    <div class="brief-card">
+      <div class="name">devops-sre <span class="badge official">official</span></div>
+      <div class="desc">Infrastructure monitoring, incident response, IaC</div>
+      <div class="cmd">agentbrief use devops-sre</div>
+    </div>
+
+    <div class="brief-card">
+      <div class="name">tech-writer <span class="badge official">official</span></div>
+      <div class="desc">Technical documentation with style guide adherence</div>
+      <div class="cmd">agentbrief use tech-writer</div>
+    </div>
+
+    <div class="brief-card">
+      <div class="name">growth-engineer <span class="badge official">official</span></div>
+      <div class="desc">CRO, SEO, analytics, growth engineering</div>
+      <div class="cmd">agentbrief use growth-engineer</div>
+    </div>
+
+    <div class="brief-card">
+      <div class="name">product-manager <span class="badge official">official</span></div>
+      <div class="desc">PRD generation, user stories, prioritization</div>
+      <div class="cmd">agentbrief use product-manager</div>
+    </div>
+
+    <div class="brief-card">
+      <div class="name">startup-builder <span class="badge official">official</span></div>
+      <div class="desc">Idea validation → MVP → launch workflow</div>
+      <div class="cmd">agentbrief use startup-builder</div>
+    </div>
+
+  </div>
+  <p style="color:var(--muted);margin-top:24px;font-size:14px">Each brief is a complete function pack — includes role identity, domain knowledge, and methodology skills (TDD, systematic debugging, verification, etc.) bundled together.</p>
+</section>
+
+<!-- Catalog Categories -->
+<section>
+  <h2>Catalog</h2>
+  <p class="subtitle">Curated resources across the full business lifecycle. <a href="https://github.com/0xranx/agentbrief/blob/main/CATALOG.md">View full catalog →</a></p>
+  <div class="catalog-grid">
+    <div class="catalog-card"><div class="icon">💻</div><h3>Development</h3><p>Frameworks, QA, DevOps, testing</p></div>
+    <div class="catalog-card"><div class="icon">📦</div><h3>Product</h3><p>PM, UX design, data analysis</p></div>
+    <div class="catalog-card"><div class="icon">📈</div><h3>Marketing & Growth</h3><p>SEO, CRO, copywriting, sales</p></div>
+    <div class="catalog-card"><div class="icon">⚙️</div><h3>Operations</h3><p>Scrum, customer success, HR</p></div>
+    <div class="catalog-card"><div class="icon">💰</div><h3>Finance & Legal</h3><p>FP&A, contract review, compliance</p></div>
+    <div class="catalog-card"><div class="icon">🚀</div><h3>Startup</h3><p>Validation to MVP to launch</p></div>
+  </div>
+</section>
+
+<!-- Supported Engines -->
+<section>
+  <h2>Works With Every Agent</h2>
+  <p class="subtitle">One brief, compiled and optimized for each engine automatically.</p>
+  <div class="engines">
+    <div class="engine"><h3>Claude Code</h3><div class="file">CLAUDE.md</div><div class="mode">Full output</div></div>
+    <div class="engine"><h3>Cursor</h3><div class="file">.cursorrules</div><div class="mode">Minimal — dense rules</div></div>
+    <div class="engine"><h3>OpenCode</h3><div class="file">AGENTS.md</div><div class="mode">Concise</div></div>
+    <div class="engine"><h3>Codex</h3><div class="file">AGENTS.md</div><div class="mode">Concise</div></div>
+  </div>
+</section>
+
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="links">
+    <a href="https://github.com/0xranx/agentbrief">GitHub</a>
+    <a href="https://www.npmjs.com/package/agentbrief">npm</a>
+    <a href="https://github.com/0xranx/agentbrief/blob/main/CATALOG.md">Catalog</a>
+  </div>
+  <div>MIT License · Built by <a href="https://github.com/0xranx">0xranx</a></div>
+</footer>
+
+</body>
+</html>

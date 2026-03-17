@@ -1,0 +1,12 @@
+name: nextjs-fullstack
+version: "1.0.0"
+description: "Next.js 15 + App Router + React 19 + Tailwind full-stack specialist"
+personality: personality.md
+knowledge:
+  - knowledge/
+skills:
+  - skills/
+scale:
+  timeout: 120
+  engine: claude-code
+  model: claude-sonnet-4-6

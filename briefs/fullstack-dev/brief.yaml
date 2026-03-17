@@ -1,0 +1,9 @@
+name: fullstack-dev
+version: "1.0.0"
+description: Full-stack TypeScript developer — Next.js + strict types + design + code review
+personality: personality.md
+extends:
+  - typescript-strict
+  - nextjs-fullstack
+  - frontend-design
+  - code-reviewer

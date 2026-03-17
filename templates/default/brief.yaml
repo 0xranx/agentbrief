@@ -1,0 +1,7 @@
+name: my-agent
+version: "0.1.0"
+description: My agent brief
+personality: personality.md
+knowledge:
+  - knowledge/
+skills: []

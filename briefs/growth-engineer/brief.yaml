@@ -1,0 +1,8 @@
+name: growth-engineer
+version: "1.0.0"
+description: "Growth engineering specialist — CRO, SEO, analytics, conversion optimization"
+personality: personality.md
+knowledge:
+  - knowledge/
+skills:
+  - skills/

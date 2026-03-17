@@ -1,0 +1,9 @@
+name: startup-kit
+version: "1.0.0"
+description: Startup builder kit — product + growth + launch + security
+personality: personality.md
+extends:
+  - startup-builder
+  - product-manager
+  - growth-engineer
+  - security-auditor

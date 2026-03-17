@@ -1,0 +1,64 @@
+{
+  "name": "agentbrief",
+  "version": "0.1.0",
+  "description": "Pluggable role definitions for AI coding agents",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "bin": {
+    "agentbrief": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/cli.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "biome check src/",
+    "lint:fix": "biome check --write src/",
+    "format": "biome format --write src/",
+    "prepublishOnly": "pnpm run build"
+  },
+  "dependencies": {
+    "commander": "^13.0.0",
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.6",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^22.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.7.0",
+    "vitest": "^4.0.18"
+  },
+  "files": [
+    "dist",
+    "!dist/__tests__",
+    "templates",
+    "briefs",
+    "registry.yaml"
+  ],
+  "keywords": [
+    "ai",
+    "agent",
+    "role",
+    "persona",
+    "brief",
+    "claude-code",
+    "cursor",
+    "opencode",
+    "codex",
+    "coding-agent"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0xranx/agentbrief"
+  },
+  "homepage": "https://github.com/0xranx/agentbrief#readme"
+}

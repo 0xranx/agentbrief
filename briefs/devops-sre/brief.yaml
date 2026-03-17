@@ -1,0 +1,12 @@
+name: devops-sre
+version: "1.0.0"
+description: "DevOps/SRE specialist — infrastructure, monitoring, incident response, CI/CD"
+personality: personality.md
+knowledge:
+  - knowledge/
+skills:
+  - skills/
+scale:
+  timeout: 120
+  engine: claude-code
+  model: claude-sonnet-4-6

@@ -1,0 +1,6 @@
+name: security-auditor
+version: "0.1.0"
+description: Security review specialist
+personality: personality.md
+knowledge:
+  - knowledge/

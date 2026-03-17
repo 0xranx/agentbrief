@@ -1,0 +1,81 @@
+# AgentBrief Official Registry
+#
+# Maps short names to GitHub sources.
+# Users can type `agentbrief use <name>` instead of the full GitHub path.
+#
+# Official briefs are bundled in the npm package (briefs/ directory) and
+# resolve locally without network access. The GitHub source below serves
+# as a fallback and canonical URL for reference.
+#
+# Trust levels:
+#   official  — Maintained by the AgentBrief team
+#   verified  — Community briefs reviewed and approved via PR
+#   community — Listed but not reviewed (shown with warning)
+
+# ── Development ──────────────────────────────────────────
+
+security-auditor:
+  source: github:0xranx/agentbrief/briefs/security-auditor
+  description: OWASP/CWE security review specialist
+  trust: official
+
+code-reviewer:
+  source: github:0xranx/agentbrief/briefs/code-reviewer
+  description: Rigorous PR review — naming, tests, architecture
+  trust: official
+
+typescript-strict:
+  source: github:0xranx/agentbrief/briefs/typescript-strict
+  description: TypeScript type safety guardian — zero any
+  trust: official
+
+nextjs-fullstack:
+  source: github:0xranx/agentbrief/briefs/nextjs-fullstack
+  description: Next.js 15 + App Router + React 19 + Tailwind
+  trust: official
+
+frontend-design:
+  source: github:0xranx/agentbrief/briefs/frontend-design
+  description: React + Tailwind + shadcn/ui design engineering
+  trust: official
+
+# ── Operations ───────────────────────────────────────────
+
+devops-sre:
+  source: github:0xranx/agentbrief/briefs/devops-sre
+  description: Infrastructure monitoring, incident response, IaC
+  trust: official
+
+tech-writer:
+  source: github:0xranx/agentbrief/briefs/tech-writer
+  description: Technical documentation with style guide adherence
+  trust: official
+
+# ── Business ─────────────────────────────────────────────
+
+growth-engineer:
+  source: github:0xranx/agentbrief/briefs/growth-engineer
+  description: CRO, SEO, analytics, growth engineering
+  trust: official
+
+product-manager:
+  source: github:0xranx/agentbrief/briefs/product-manager
+  description: PRD generation, user stories, prioritization
+  trust: official
+
+startup-builder:
+  source: github:0xranx/agentbrief/briefs/startup-builder
+  description: Idea validation → MVP → launch workflow
+  trust: official
+
+# ── Combo Packs ──────────────────────────────────────────
+
+fullstack-dev:
+  source: github:0xranx/agentbrief/briefs/fullstack-dev
+  description: Full-stack TypeScript developer — extends typescript-strict + nextjs + design + review
+  trust: official
+
+startup-kit:
+  source: github:0xranx/agentbrief/briefs/startup-kit
+  description: Startup builder kit — extends startup + product + growth + security
+  trust: official

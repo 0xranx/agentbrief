@@ -1,0 +1,8 @@
+name: startup-builder
+version: "1.0.0"
+description: "Startup builder — idea validation, MVP planning, go-to-market, fundraising"
+personality: personality.md
+knowledge:
+  - knowledge/
+skills:
+  - skills/
