@@ -1,7 +1,7 @@
 {
   "name": "agentbrief",
-  "version": "0.1.2",
-  "description": "Pluggable role definitions for AI coding agents",
+  "version": "0.2.1",
+  "description": "One command turns your AI coding agent into a domain specialist",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -12,7 +12,7 @@
     }
   },
   "bin": {
-    "agentbrief": "./dist/cli.js"
+    "agentbrief": "dist/cli.js"
   },
   "scripts": {
     "build": "tsc",
@@ -58,7 +58,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/0xranx/agentbrief"
+    "url": "git+https://github.com/0xranx/agentbrief.git"
   },
   "homepage": "https://github.com/0xranx/agentbrief#readme"
 }
