@@ -84,6 +84,7 @@ agentbrief use startup-founder      # Grow: product, growth, launch strategy
 | `data-analyst` | BI analyst with metrics frameworks + SQL patterns |
 | `startup-advisor` | Startup advisor with CEO review + launch planning |
 | `social-media-manager` | Social media manager — Twitter/X + Xiaohongshu posting |
+| `feishu-writer` | Feishu/Lark doc specialist — cloud docs, wikis, team notifications |
 
 Browse the **[full Catalog](./CATALOG.md)** or the **[Website](https://0xranx.github.io/agentbrief)** for details on each brief.
 

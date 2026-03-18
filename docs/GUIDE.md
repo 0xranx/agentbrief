@@ -63,6 +63,7 @@ These combine multiple briefs into one — best for getting started:
 | `data-analyst` | BI analyst with metrics frameworks + SQL patterns |
 | `startup-advisor` | Startup advisor with CEO review + launch planning |
 | `social-media-manager` | Social media manager with Twitter/X posting + content strategy |
+| `feishu-writer` | Feishu/Lark doc specialist — cloud docs, wikis, team notifications |
 
 ## Apply a Brief
 

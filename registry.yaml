@@ -90,6 +90,11 @@ social-media-manager:
   description: Social media manager — content creation, Twitter/X posting, audience growth
   trust: official
 
+feishu-writer:
+  source: github:0xranx/agentbrief/briefs/feishu-writer
+  description: Feishu/Lark document specialist — cloud docs, knowledge bases, team notifications
+  trust: official
+
 # ── Combo Packs ──────────────────────────────────────────
 
 fullstack-engineer:

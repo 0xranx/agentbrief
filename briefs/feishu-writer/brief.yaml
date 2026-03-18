@@ -1,0 +1,10 @@
+name: feishu-writer
+version: "1.0.0"
+description: "Feishu/Lark document specialist — read, write, edit cloud docs and knowledge bases"
+personality: personality.md
+knowledge:
+  - knowledge/
+skills:
+  - github:0xranx/agent-kit/skills/feishu-doc
+extends:
+  - base-agent

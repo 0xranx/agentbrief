@@ -84,6 +84,7 @@ agentbrief use startup-founder      # 增长：产品、运营、发布策略
 | `data-analyst` | 数据分析师，指标体系 + SQL + 数据叙事 |
 | `startup-advisor` | 创业顾问，CEO 审查 + 发布规划 |
 | `social-media-manager` | 社媒运营，Twitter/X + 小红书发布 |
+| `feishu-writer` | 飞书文档专家——云文档、知识库、团队通知 |
 
 查看 **[完整目录](./CATALOG.md)** 或 **[官网](https://0xranx.github.io/agentbrief/index.zh.html)** 了解每个职能包的详情。
 
