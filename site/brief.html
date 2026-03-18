@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brief — AgentBrief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#09090b;--surface:#18181b;--surface2:#27272a;--border:#3f3f46;--border-hover:#52525b;
+  --text:#fafafa;--muted:#a1a1aa;--dim:#71717a;
+  --accent:#3b82f6;--accent-hover:#60a5fa;--accent-dim:rgba(59,130,246,.1);
+  --green:#22c55e;--green-dim:rgba(34,197,94,.1);
+  --purple:#a78bfa;--purple-dim:rgba(167,139,250,.1);
+  --orange:#f59e0b;--orange-dim:rgba(245,158,11,.1);
+  --mono:'JetBrains Mono',SFMono-Regular,Consolas,monospace;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --max:880px;--radius:10px;
+}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--accent-hover)}
+::selection{background:var(--accent);color:#fff}
+
+nav{position:sticky;top:0;z-index:50;background:rgba(9,9,11,.8);backdrop-filter:blur(16px);border-bottom:1px solid rgba(63,63,70,.5)}
+nav .inner{max-width:1080px;margin:0 auto;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between}
+nav .logo{font-family:var(--mono);font-weight:700;font-size:16px;color:var(--text);letter-spacing:-.5px;text-decoration:none}
+nav .logo span{color:var(--accent)}
+nav .nav-links{display:flex;gap:20px;align-items:center;font-size:13px;font-weight:500}
+nav .nav-links a{color:var(--dim);text-decoration:none;transition:color .15s}
+nav .nav-links a:hover{color:var(--text)}
+
+.container{max-width:var(--max);margin:0 auto;padding:32px 24px}
+
+/* Hero */
+.brief-hero{padding-bottom:32px;border-bottom:1px solid var(--border);margin-bottom:32px}
+.breadcrumb{font-size:13px;color:var(--dim);margin-bottom:16px}
+.breadcrumb a{color:var(--dim)}
+.breadcrumb a:hover{color:var(--accent)}
+.brief-hero h1{font-family:var(--mono);font-size:28px;font-weight:700;letter-spacing:-.5px;margin-bottom:8px}
+.brief-hero .desc{font-size:16px;color:var(--muted);line-height:1.6;margin-bottom:16px}
+.meta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:20px}
+.meta-pill{font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;text-transform:uppercase;letter-spacing:.5px}
+.meta-pill.dev{background:var(--accent-dim);color:var(--accent)}
+.meta-pill.biz{background:var(--orange-dim);color:var(--orange)}
+.meta-pill.qa{background:var(--green-dim);color:var(--green)}
+.meta-pill.combo{background:var(--purple-dim);color:var(--purple)}
+.meta-pill.version{background:var(--surface2);color:var(--muted)}
+.meta-pill.license{background:var(--surface2);color:var(--muted)}
+
+/* Install box */
+.install-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.install-box code{font-family:var(--mono);font-size:14px;color:var(--green);background:none;padding:0}
+.install-box .copy-btn{background:none;border:1px solid var(--border);border-radius:4px;color:var(--dim);padding:4px 10px;font-size:12px;cursor:pointer;font-family:var(--sans);transition:all .15s}
+.install-box .copy-btn:hover{color:var(--text);border-color:var(--border-hover)}
+
+.source-link{font-size:13px;color:var(--dim)}
+.source-link a{color:var(--accent)}
+
+/* Sections */
+.detail-section{margin-bottom:32px}
+.detail-section h2{font-size:16px;font-weight:700;letter-spacing:-.3px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--surface2)}
+.detail-section h2 .count{font-weight:400;color:var(--dim);font-size:13px;margin-left:6px}
+
+/* Personality */
+.personality-content{font-size:14px;color:var(--muted);line-height:1.7}
+.personality-content h2{font-size:15px;font-weight:600;color:var(--text);margin:20px 0 8px;padding:0;border:none}
+.personality-content h3{font-size:14px;font-weight:600;color:var(--text);margin:16px 0 6px}
+.personality-content p{margin:0 0 12px}
+.personality-content strong{color:var(--text)}
+.personality-content ul,.personality-content ol{padding-left:20px;margin:0 0 12px}
+.personality-content li{margin-bottom:3px}
+.personality-content code{font-family:var(--mono);font-size:12px;background:var(--surface2);padding:2px 5px;border-radius:3px;color:var(--text)}
+.personality-content pre{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;margin:0 0 14px;overflow-x:auto}
+.personality-content pre code{background:none;padding:0;font-size:12px;line-height:1.5;color:var(--muted)}
+
+/* Knowledge & Skills lists */
+.item-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border-radius:var(--radius);overflow:hidden}
+.item-row{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:var(--surface)}
+.item-row .item-name{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--accent);white-space:nowrap;min-width:180px}
+.item-row .item-desc{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* Extends */
+.extends-list{display:flex;flex-wrap:wrap;gap:8px}
+.extends-pill{font-family:var(--mono);font-size:12px;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:4px 10px;color:var(--muted);text-decoration:none;transition:border-color .15s}
+.extends-pill:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+
+/* Loading */
+.loading{color:var(--dim);font-size:14px;padding:40px 0;text-align:center}
+
+footer{border-top:1px solid var(--border);padding:24px;text-align:center;color:var(--dim);font-size:12px;max-width:var(--max);margin:32px auto 0}
+footer a{color:var(--dim)}
+footer a:hover{color:var(--muted)}
+footer .links{margin-bottom:6px;display:flex;gap:16px;justify-content:center}
+
+@media(max-width:600px){
+  .item-row{flex-direction:column;gap:4px}
+  .item-row .item-name{min-width:auto}
+  .meta-row{gap:8px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="./" class="logo">agent<span>brief</span></a>
+    <div class="nav-links">
+      <a href="./#briefs">Briefs</a>
+      <a href="./#ecosystem">Ecosystem</a>
+      <a href="./docs.html">Docs</a>
+      <a href="https://github.com/0xranx/agentbrief">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container" id="content">
+  <div class="loading">Loading brief...</div>
+</div>
+
+<footer>
+  <div class="links">
+    <a href="https://github.com/0xranx/agentbrief">GitHub</a>
+    <a href="https://www.npmjs.com/package/agentbrief">npm</a>
+    <a href="./docs.html#CATALOG">Catalog</a>
+    <a href="https://github.com/0xranx/agentbrief/discussions">Community</a>
+  </div>
+  <div>MIT License · Built by <a href="https://github.com/0xranx">0xranx</a></div>
+</footer>
+
+<script>
+const BASE='https://raw.githubusercontent.com/0xranx/agentbrief/main/briefs/';
+const CATEGORIES={
+  'security-auditor':'dev','code-reviewer':'dev','typescript-strict':'dev',
+  'nextjs-fullstack':'dev','frontend-design':'dev','devops-sre':'dev',
+  'qa-engineer':'qa','tech-writer':'dev',
+  'product-manager':'biz','growth-engineer':'biz','data-analyst':'biz',
+  'startup-builder':'biz','fullstack-dev':'combo','startup-kit':'combo'
+};
+
+async function loadBrief(){
+  const params=new URLSearchParams(location.search);
+  const name=params.get('name');
+  if(!name){document.getElementById('content').innerHTML='<div class="loading">No brief specified. <a href="./#briefs">Browse briefs →</a></div>';return}
+
+  document.title=name+' — AgentBrief';
+  const cat=CATEGORIES[name]||'dev';
+
+  try{
+    const [yamlRes,personalityRes]=await Promise.all([
+      fetch(BASE+name+'/brief.yaml'),
+      fetch(BASE+name+'/personality.md')
+    ]);
+    if(!yamlRes.ok)throw new Error('Not found');
+
+    const yamlText=await yamlRes.text();
+    const personality=await personalityRes.text();
+
+    // Parse YAML manually (simple key extraction)
+    const get=(key)=>{const m=yamlText.match(new RegExp('^'+key+':\\s*["\']?(.+?)["\']?$','m'));return m?m[1]:''};
+    const desc=get('description');
+    const version=get('version');
+
+    // Parse extends
+    const extendsMatch=yamlText.match(/extends:\n((?:\s+-\s+.+\n?)*)/);
+    const extendsList=extendsMatch?extendsMatch[1].match(/- (.+)/g)?.map(m=>m.replace('- ','').trim())||[]:[];
+
+    // Parse knowledge entries
+    const knowledgeMatch=yamlText.match(/knowledge:\n((?:\s+-\s+.+\n?)*)/);
+    const knowledgeList=knowledgeMatch?knowledgeMatch[1].match(/- (.+)/g)?.map(m=>m.replace('- ','').trim())||[]:[];
+
+    // Parse skills entries
+    const skillsMatch=yamlText.match(/skills:\n((?:\s+-\s+.+\n?)*)/);
+    const skillsList=skillsMatch?skillsMatch[1].match(/- (.+)/g)?.map(m=>m.replace('- ','').trim())||[]:[];
+
+    // Try to load skill SKILL.md files for descriptions
+    let skillDetails=[];
+    if(skillsList.length>0){
+      // Try fetching skill dirs from the brief's skills/ directory
+      try{
+        // We'll try known skill names from the brief structure
+        const skillDirRes=await fetch('https://api.github.com/repos/0xranx/agentbrief/contents/briefs/'+name+'/skills');
+        if(skillDirRes.ok){
+          const dirs=await skillDirRes.json();
+          const skillDirs=dirs.filter(d=>d.type==='dir');
+          const skillFetches=skillDirs.map(async d=>{
+            try{
+              const r=await fetch(BASE+name+'/skills/'+d.name+'/SKILL.md');
+              if(!r.ok)return{name:d.name,description:''};
+              const text=await r.text();
+              const descM=text.match(/^description:\s*["']?(.+?)["']?\s*$/m);
+              return{name:d.name,description:descM?descM[1]:''};
+            }catch{return{name:d.name,description:''}}
+          });
+          skillDetails=await Promise.all(skillFetches);
+        }
+      }catch{}
+    }
+
+    // Strip HTML comments from personality
+    const cleanPersonality=personality.replace(/<!--[\s\S]*?-->/g,'').replace(/\n{3,}/g,'\n\n').trim();
+    const personalityHtml=marked.parse(cleanPersonality);
+
+    // Render page
+    document.getElementById('content').innerHTML=`
+      <div class="brief-hero">
+        <div class="breadcrumb"><a href="./#briefs">Briefs</a> / ${name}</div>
+        <h1>${name}</h1>
+        <p class="desc">${desc}</p>
+        <div class="meta-row">
+          <span class="meta-pill ${cat}">${cat}</span>
+          <span class="meta-pill version">v${version}</span>
+          <span class="meta-pill license">MIT</span>
+          ${extendsList.length?'<span class="meta-pill combo">extends '+extendsList.length+' briefs</span>':''}
+        </div>
+        <div class="install-box">
+          <code>$ agentbrief use ${name}</code>
+          <button class="copy-btn" onclick="navigator.clipboard.writeText('agentbrief use ${name}');this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1500)">Copy</button>
+        </div>
+        <div class="source-link">
+          Source: <a href="https://github.com/0xranx/agentbrief/tree/main/briefs/${name}">github.com/0xranx/agentbrief/briefs/${name}</a>
+        </div>
+      </div>
+
+      ${extendsList.length?`
+      <div class="detail-section">
+        <h2>Extends</h2>
+        <div class="extends-list">
+          ${extendsList.map(e=>`<a href="brief.html?name=${e}" class="extends-pill">${e}</a>`).join('')}
+        </div>
+      </div>`:''}
+
+      <div class="detail-section">
+        <h2>Personality</h2>
+        <div class="personality-content">${personalityHtml}</div>
+      </div>
+
+      ${skillDetails.length?`
+      <div class="detail-section">
+        <h2>Skills <span class="count">${skillDetails.length}</span></h2>
+        <div class="item-list">
+          ${skillDetails.map(s=>`
+            <div class="item-row">
+              <span class="item-name">${s.name}</span>
+              <span class="item-desc">${s.description||'—'}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>`:''}
+
+      ${knowledgeList.length?`
+      <div class="detail-section">
+        <h2>Knowledge <span class="count">${knowledgeList.length}</span></h2>
+        <div class="item-list">
+          ${knowledgeList.map(k=>`
+            <div class="item-row">
+              <span class="item-name">${k}</span>
+              <span class="item-desc">Reference material — read on demand by the agent</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>`:''}
+    `;
+  }catch(e){
+    document.getElementById('content').innerHTML=`
+      <div class="loading">
+        Brief "${name}" not found.<br><br>
+        <a href="./#briefs">← Browse all briefs</a>
+      </div>`;
+  }
+}
+
+loadBrief();
+</script>
+</body>
+</html>
