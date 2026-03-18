@@ -21,41 +21,35 @@ npx agentbrief use fullstack-dev
 AgentBrief compiles a **brief** (role definition + domain knowledge + executable skills) into the instruction files your AI agent reads — `CLAUDE.md`, `.cursorrules`, `AGENTS.md` — with content automatically adapted for each engine.
 
 <details>
-<summary><b>See it in action</b> — before vs after applying <code>security-auditor</code></summary>
+<summary><b>See it in action</b> — what happens when you run <code>agentbrief use fullstack-dev</code></summary>
 
-**Before** — your CLAUDE.md:
+Your `CLAUDE.md` gets this injected (existing content preserved):
+
 ```markdown
-# My Project
-```
-
-**After** — `agentbrief use security-auditor`:
-```markdown
-# My Project
-
-<!-- agentbrief:security-auditor:start -->
-# AgentBrief: security-auditor
-> OWASP/CWE security review specialist
+<!-- agentbrief:fullstack-dev:start -->
+# AgentBrief: fullstack-dev
 
 ## Role
-You are a senior application security auditor. You review code changes
-for security vulnerabilities using the OWASP Top 10 framework and CWE
-classification system.
+You are a senior full-stack TypeScript developer. You build production
+applications with Next.js 15, React 19, and Tailwind CSS. You enforce
+strict type safety and review your own code with principal-engineer rigor.
 
 ## Constraints
-- Never approve code containing known injection vectors
-- Flag all hardcoded credentials as Critical severity
-- Every finding must reference a CWE identifier
+- Never use `any` — always annotate return types on exports
+- Server Components by default — only add 'use client' when needed
+- WCAG 2.1 AA minimum — semantic HTML, keyboard navigation
 
 ## Skills
-When the described situation arises, read the skill file and follow its instructions.
-
-- **security-review** — USE WHEN: Reviewing code for security vulnerabilities
-- **systematic-debugging** — USE WHEN: Investigating a bug or unexpected behavior
-- **verification** — USE WHEN: About to claim work is complete
-<!-- agentbrief:security-auditor:end -->
+- **next-best-practices** — USE WHEN: Writing Next.js code
+- **typescript-advanced-types** — USE WHEN: Complex type logic
+- **architecture-review** — USE WHEN: Reviewing PRs
+- **design-review-checklist** — USE WHEN: Checking UI quality
+- **agent-browser** — USE WHEN: Visual verification needed
+  ...and 4 more
+<!-- agentbrief:fullstack-dev:end -->
 ```
 
-Your existing content is preserved. The brief is wrapped in markers and cleanly removable with `agentbrief eject`.
+Cleanly removable with `agentbrief eject fullstack-dev`.
 </details>
 
 - **One command to apply, one to remove** — `use` and `eject`
@@ -103,33 +97,36 @@ agentbrief init my-agent --template security
 
 ## Official Registry
 
-```bash
-agentbrief search
-```
+**⚡ Quick Start Packs** — best if you're not sure where to begin:
 
-```
-Available briefs:
+| Pack | What your agent gains |
+|------|----------------------|
+| `fullstack-dev` | Strict TypeScript + Next.js conventions + accessible UI + PR reviews (9 skills) |
+| `startup-kit` | Product specs + SEO audit + growth analytics + security review + launch strategy (12 skills) |
 
-  NAME               TRUST      DESCRIPTION
-  security-auditor   official   OWASP/CWE security review specialist
-  code-reviewer      official   Rigorous PR review — naming, tests, architecture
-  typescript-strict  official   TypeScript type safety guardian — zero any
-  nextjs-fullstack   official   Next.js 15 + App Router + React 19 + Tailwind
-  frontend-design    official   React + Tailwind + shadcn/ui design engineering
-  devops-sre         official   Infrastructure monitoring, incident response, IaC
-  tech-writer        official   Technical documentation with style guide adherence
-  growth-engineer    official   CRO, SEO, analytics, growth engineering
-  product-manager    official   PRD generation, user stories, prioritization
-  startup-builder    official   Idea validation → MVP → launch workflow
-  qa-engineer        official   Automated QA — find bugs, write tests, fix with atomic commits
-  data-analyst       official   Business intelligence — metrics, SQL, dashboards, data storytelling
-  fullstack-dev      official   Full-stack TypeScript developer — extends 4 briefs, 8 skills
-  startup-kit        official   Startup builder kit — extends 4 briefs, 9 skills
-```
+**Code Quality & Engineering:**
 
-Just type `agentbrief use <name>` — no need for full GitHub URLs.
+| Brief | Your agent becomes... |
+|-------|----------------------|
+| `security-auditor` | OWASP security reviewer who cites CWE numbers |
+| `code-reviewer` | Staff engineer who catches architecture + logic issues |
+| `qa-engineer` | QA who finds bugs, writes tests, fixes with atomic commits |
+| `typescript-strict` | Type safety enforcer — zero `any`, exhaustive checks |
+| `nextjs-fullstack` | Next.js 15 specialist (App Router, RSC, Tailwind) |
+| `frontend-design` | Design engineer with 80-item review checklist |
+| `devops-sre` | SRE who sets up CI/CD, monitoring, incident response |
+| `tech-writer` | Documentation specialist with API docs + release notes |
 
-Browse the **[full Catalog](./CATALOG.md)** for more roles across development, product, marketing, operations, finance, legal, and startup — with links to community resources.
+**Product, Growth & Business:**
+
+| Brief | Your agent becomes... |
+|-------|----------------------|
+| `product-manager` | PM who writes PRDs with RICE/ICE prioritization |
+| `growth-engineer` | Growth hacker with SEO audit + analytics + content strategy |
+| `data-analyst` | BI analyst with metrics frameworks + SQL patterns |
+| `startup-builder` | Startup advisor with CEO review + launch planning |
+
+Browse the **[full Catalog](./CATALOG.md)** or the **[Website](https://0xranx.github.io/agentbrief)** to see details for each brief.
 
 ## What's a Brief?
 
