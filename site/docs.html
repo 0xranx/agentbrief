@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Docs — AgentBrief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#09090b;--surface:#18181b;--surface2:#27272a;--border:#3f3f46;--border-hover:#52525b;
+  --text:#fafafa;--muted:#a1a1aa;--dim:#71717a;
+  --accent:#3b82f6;--accent-hover:#60a5fa;
+  --green:#22c55e;--purple:#a78bfa;--orange:#f59e0b;
+  --mono:'JetBrains Mono',SFMono-Regular,Consolas,monospace;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+a:hover{color:var(--accent-hover)}
+::selection{background:var(--accent);color:#fff}
+
+nav{position:sticky;top:0;z-index:50;background:rgba(9,9,11,.8);backdrop-filter:blur(16px);border-bottom:1px solid rgba(63,63,70,.5)}
+nav .inner{max-width:1080px;margin:0 auto;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between}
+nav .logo{font-family:var(--mono);font-weight:700;font-size:16px;color:var(--text);letter-spacing:-.5px;text-decoration:none}
+nav .logo span{color:var(--accent)}
+nav .nav-links{display:flex;gap:20px;align-items:center;font-size:13px;font-weight:500}
+nav .nav-links a{color:var(--dim);text-decoration:none;transition:color .15s}
+nav .nav-links a:hover{color:var(--text)}
+nav .nav-links a.active{color:var(--text)}
+
+.layout{display:flex;max-width:1080px;margin:0 auto;min-height:calc(100vh - 52px)}
+
+/* Sidebar */
+.sidebar{width:220px;flex-shrink:0;border-right:1px solid var(--border);padding:24px 16px;position:sticky;top:52px;height:calc(100vh - 52px);overflow-y:auto}
+.sidebar h4{font-size:11px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;margin:16px 0 8px;padding-left:8px}
+.sidebar h4:first-child{margin-top:0}
+.sidebar a{display:block;padding:6px 8px;font-size:13px;color:var(--muted);border-radius:6px;text-decoration:none;transition:all .1s;margin-bottom:1px}
+.sidebar a:hover{color:var(--text);background:var(--surface)}
+.sidebar a.active{color:var(--accent);background:var(--accent);background:rgba(59,130,246,.1)}
+
+/* Content */
+.content{flex:1;padding:32px 40px;max-width:100%;overflow-x:hidden}
+.content .loading{color:var(--dim);font-size:14px;padding:40px 0}
+
+/* Markdown rendered content */
+.md h1{font-size:28px;font-weight:700;letter-spacing:-.5px;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.md h2{font-size:22px;font-weight:700;letter-spacing:-.3px;margin:36px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--surface2)}
+.md h3{font-size:17px;font-weight:600;margin:28px 0 8px}
+.md h4{font-size:14px;font-weight:600;margin:20px 0 6px}
+.md p{margin:0 0 14px;color:var(--muted);font-size:14px;line-height:1.7}
+.md strong{color:var(--text);font-weight:600}
+.md ul,.md ol{margin:0 0 14px;padding-left:24px;color:var(--muted);font-size:14px}
+.md li{margin-bottom:4px;line-height:1.6}
+.md code{font-family:var(--mono);font-size:12px;background:var(--surface2);padding:2px 6px;border-radius:4px;color:var(--text)}
+.md pre{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;margin:0 0 16px;overflow-x:auto}
+.md pre code{background:none;padding:0;font-size:13px;line-height:1.6;color:var(--muted)}
+.md table{width:100%;border-collapse:collapse;margin:0 0 16px;font-size:13px}
+.md th{text-align:left;padding:8px 12px;border-bottom:2px solid var(--border);font-weight:600;font-size:12px;color:var(--dim)}
+.md td{padding:8px 12px;border-bottom:1px solid var(--surface2);color:var(--muted)}
+.md blockquote{border-left:3px solid var(--accent);padding:8px 16px;margin:0 0 14px;background:var(--surface);border-radius:0 8px 8px 0}
+.md blockquote p{color:var(--muted);margin:0}
+.md hr{border:none;border-top:1px solid var(--border);margin:24px 0}
+.md a{color:var(--accent)}
+
+@media(max-width:768px){
+  .sidebar{display:none}
+  .content{padding:24px 16px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="./" class="logo">agent<span>brief</span></a>
+    <div class="nav-links">
+      <a href="./#briefs">Briefs</a>
+      <a href="./#ecosystem">Ecosystem</a>
+      <a href="./docs.html" class="active">Docs</a>
+      <a href="https://github.com/0xranx/agentbrief">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar">
+    <h4>Getting Started</h4>
+    <a href="#" onclick="load('AUTHORING')" class="active" id="nav-AUTHORING">Authoring Guide</a>
+    <a href="#" onclick="load('VISION')" id="nav-VISION">Vision & Philosophy</a>
+    <a href="#" onclick="load('DESIGN')" id="nav-DESIGN">Design Decisions</a>
+    <h4>Reference</h4>
+    <a href="#" onclick="load('ENGINE-FORMATS')" id="nav-ENGINE-FORMATS">Engine Formats</a>
+    <a href="#" onclick="load('SKILL-ECOSYSTEM-RESEARCH')" id="nav-SKILL-ECOSYSTEM-RESEARCH">Skill Ecosystem</a>
+    <a href="#" onclick="load('CATALOG')" id="nav-CATALOG">Full Catalog</a>
+  </aside>
+
+  <main class="content">
+    <div id="md-content" class="md">
+      <div class="loading">Loading documentation...</div>
+    </div>
+  </main>
+</div>
+
+<script>
+const BASE = 'https://raw.githubusercontent.com/0xranx/agentbrief/main/';
+const paths = {
+  'AUTHORING': 'docs/AUTHORING.md',
+  'VISION': 'docs/VISION.md',
+  'DESIGN': 'docs/DESIGN.md',
+  'ENGINE-FORMATS': 'docs/ENGINE-FORMATS.md',
+  'SKILL-ECOSYSTEM-RESEARCH': 'docs/SKILL-ECOSYSTEM-RESEARCH.md',
+  'CATALOG': 'CATALOG.md',
+};
+
+let current = 'AUTHORING';
+
+async function load(key) {
+  current = key;
+  // Update active nav
+  document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
+  const navEl = document.getElementById('nav-' + key);
+  if (navEl) navEl.classList.add('active');
+
+  const container = document.getElementById('md-content');
+  container.innerHTML = '<div class="loading">Loading...</div>';
+
+  try {
+    const res = await fetch(BASE + paths[key]);
+    if (!res.ok) throw new Error('Failed to fetch');
+    const md = await res.text();
+    container.innerHTML = marked.parse(md);
+  } catch (e) {
+    container.innerHTML = '<p style="color:var(--dim)">Failed to load document. <a href="https://github.com/0xranx/agentbrief/blob/main/' + paths[key] + '">View on GitHub →</a></p>';
+  }
+
+  // Update URL hash
+  history.replaceState(null, '', '#' + key);
+  window.scrollTo(0, 0);
+}
+
+// Load from hash or default
+const hash = location.hash.replace('#', '');
+if (hash && paths[hash]) {
+  load(hash);
+} else {
+  load('AUTHORING');
+}
+</script>
+</body>
+</html>
