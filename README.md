@@ -1,5 +1,9 @@
 # AgentBrief
 
+[![CI](https://github.com/0xranx/agentbrief/actions/workflows/ci.yml/badge.svg)](https://github.com/0xranx/agentbrief/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/agentbrief)](https://www.npmjs.com/package/agentbrief)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+
 > Pluggable role definitions for AI coding agents.
 >
 > [Website](https://0xranx.github.io/agentbrief) · [Catalog](./CATALOG.md) · [npm](https://www.npmjs.com/package/agentbrief)
