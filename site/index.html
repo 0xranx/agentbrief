@@ -12,16 +12,24 @@
 :root{
   --bg:#09090b;--surface:#18181b;--surface2:#27272a;--border:#3f3f46;--border-hover:#52525b;
   --text:#fafafa;--muted:#a1a1aa;--dim:#71717a;
-  --accent:#3b82f6;--accent-hover:#60a5fa;--accent-dim:rgba(59,130,246,.1);
-  --green:#22c55e;--green-dim:rgba(34,197,94,.1);
-  --purple:#a78bfa;--purple-dim:rgba(167,139,250,.1);
-  --orange:#f59e0b;--orange-dim:rgba(245,158,11,.1);
+  --accent:#3b82f6;--accent-hover:#60a5fa;--accent-dim:rgba(59,130,246,.15);
+  --green:#22c55e;--green-dim:rgba(34,197,94,.15);
+  --purple:#a78bfa;--purple-dim:rgba(167,139,250,.15);
+  --orange:#f59e0b;--orange-dim:rgba(245,158,11,.15);
   --red:#ef4444;
   --mono:'JetBrains Mono',SFMono-Regular,Consolas,monospace;
   --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
   --max:1080px;--radius:10px;
 }
-body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+body{
+  font-family:var(--sans);
+  background-color:var(--bg);
+  background-image:radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size:24px 24px;
+  color:var(--text);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
 a{color:var(--accent);text-decoration:none}
 a:hover{color:var(--accent-hover)}
 code{font-family:var(--mono);font-size:.85em;background:var(--surface2);padding:2px 7px;border-radius:4px}
@@ -40,7 +48,15 @@ nav .nav-links a:hover{color:var(--text)}
 .gh-btn svg{flex-shrink:0}
 
 /* Hero */
-.hero{max-width:var(--max);margin:0 auto;padding:72px 24px 56px;text-align:center}
+.hero{position:relative;max-width:var(--max);margin:0 auto;padding:72px 24px 56px;text-align:center}
+.hero::before{
+  content:'';position:absolute;top:0;left:50%;width:120vw;height:100%;transform:translateX(-50%);
+  background:
+    radial-gradient(ellipse at 50% 30%, var(--accent-dim) 0%, transparent 50%),
+    radial-gradient(ellipse at 30% 60%, var(--purple-dim) 0%, transparent 40%),
+    radial-gradient(ellipse at 70% 50%, var(--green-dim) 0%, transparent 40%);
+  filter:blur(60px);z-index:-1;pointer-events:none;
+}
 .hero .pill{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:var(--muted);background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:5px 14px;margin-bottom:24px}
 .hero .pill .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
@@ -48,12 +64,12 @@ nav .nav-links a:hover{color:var(--text)}
 .hero h1 .highlight{background:linear-gradient(135deg,var(--accent) 0%,var(--purple) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .hero .sub{font-size:16px;color:var(--muted);max-width:480px;margin:0 auto 32px;line-height:1.7}
 .hero .ctas{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
-.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;transition:all .15s;cursor:pointer;border:none;text-decoration:none}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;transition:all .2s;cursor:pointer;border:none;text-decoration:none}
 .btn:hover{text-decoration:none}
 .btn-primary{background:var(--text);color:var(--bg)}
-.btn-primary:hover{opacity:.9}
+.btn-primary:hover{opacity:.9;box-shadow:0 0 16px rgba(250,250,250,0.25)}
 .btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border)}
-.btn-secondary:hover{border-color:var(--border-hover)}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 0 16px var(--accent-dim)}
 
 /* Install box */
 .install-box{max-width:520px;margin:0 auto}
@@ -72,15 +88,29 @@ nav .nav-links a:hover{color:var(--text)}
 .section-header h2{font-size:22px;font-weight:700;letter-spacing:-.5px;margin-bottom:6px}
 .section-header p{color:var(--muted);font-size:14px}
 
+/* CSS Scroll Animations */
+@supports (animation-timeline: view()) {
+  @keyframes reveal {
+    0% { opacity: 0; transform: translateY(30px) scale(0.98); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .section {
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 25%;
+  }
+}
+
 /* Search */
 .search-box{margin-bottom:20px;position:relative}
-.search-box input{width:100%;padding:10px 14px 10px 36px;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;font-family:var(--sans);outline:none;transition:border-color .15s}
-.search-box input:focus{border-color:var(--accent)}
+.search-box input{width:100%;padding:10px 14px 10px 36px;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;font-family:var(--sans);outline:none;transition:all .2s}
+.search-box input:focus{border-color:var(--accent);box-shadow:0 0 0 2px var(--bg), 0 0 16px var(--accent-dim)}
 .search-box input::placeholder{color:var(--dim)}
 .search-box .search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--dim);font-size:14px}
 
 /* Brief List */
-.brief-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border-radius:var(--radius);overflow:hidden}
+.brief-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border-radius:var(--radius);overflow:hidden;transition:all 0.3s ease}
+.glow-border{box-shadow:0 0 0 1px var(--purple), 0 0 24px var(--purple-dim) !important}
 .brief-item{display:grid;grid-template-columns:160px 1fr auto auto auto;gap:12px;align-items:center;padding:12px 16px;background:var(--surface);transition:background .1s;cursor:pointer}
 .brief-item:hover{background:var(--surface2)}
 
@@ -97,8 +127,8 @@ nav .nav-links a:hover{color:var(--text)}
 
 /* Sources */
 .sources{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
-.source-card{display:block;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;transition:border-color .15s}
-.source-card:hover{border-color:var(--border-hover);text-decoration:none}
+.source-card{display:block;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;transition:all .2s ease}
+.source-card:hover{border-color:var(--accent);box-shadow:0 6px 24px var(--accent-dim);transform:translateY(-2px);text-decoration:none}
 .source-card .sc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
 .source-card .sc-name{font-family:var(--mono);font-weight:600;font-size:14px;color:var(--text)}
 .source-card .sc-stars{font-family:var(--mono);font-size:11px;color:var(--dim)}
@@ -113,8 +143,8 @@ nav .nav-links a:hover{color:var(--text)}
 
 /* Docs */
 .docs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
-.doc-card{display:block;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;transition:border-color .15s}
-.doc-card:hover{border-color:var(--border-hover);text-decoration:none}
+.doc-card{display:block;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;transition:all .2s ease}
+.doc-card:hover{border-color:var(--accent);box-shadow:0 6px 24px var(--accent-dim);transform:translateY(-2px);text-decoration:none}
 .doc-card h4{font-size:14px;font-weight:600;margin-bottom:4px;color:var(--text)}
 .doc-card p{font-size:12px;color:var(--dim);line-height:1.5}
 
@@ -187,7 +217,7 @@ footer a:hover{color:var(--muted)}
   </div>
 
   <h3 style="font-size:14px;color:var(--purple);margin:20px 0 12px;font-weight:600">⚡ Quick Start Packs — best for getting started</h3>
-  <div class="brief-list" id="brief-list-combo">
+  <div class="brief-list glow-border" id="brief-list-combo">
     <div class="brief-item" onclick="openBrief(this)" data-name="fullstack-dev" data-cat="combo"><span class="bi-name">fullstack-dev</span><span class="bi-desc">Your agent enforces strict types, follows Next.js conventions, builds accessible UIs, and reviews PRs</span><span class="bi-tag combo">9 skills</span><span class="bi-layers">4 knowledge</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use fullstack-dev</span></div>
     <div class="brief-item" onclick="openBrief(this)" data-name="startup-kit" data-cat="combo"><span class="bi-name">startup-kit</span><span class="bi-desc">Your agent writes PRDs, runs SEO audits, catches security bugs, and plans your launch</span><span class="bi-tag combo">12 skills</span><span class="bi-layers">5 knowledge</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use startup-kit</span></div>
   </div>
