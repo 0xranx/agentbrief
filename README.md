@@ -52,6 +52,33 @@ strict type safety and review your own code with principal-engineer rigor.
 Cleanly removable with `agentbrief eject fullstack-dev`.
 </details>
 
+### Before vs After — real conversation difference
+
+```
+WITHOUT a brief:
+  You: "Review this code for issues"
+  Agent: "The code looks good overall. Consider adding error handling."
+
+WITH security-auditor brief:
+  You: "Review this code for issues"
+  Agent: "CWE-89 CRITICAL at line 23: SQL injection via string concatenation.
+         Attack vector: attacker injects arbitrary SQL through userId param.
+         Fix: const query = 'SELECT * FROM users WHERE id = $1';
+              await db.query(query, [userId]);"
+```
+
+### Built from the most trusted sources in the ecosystem
+
+Every official brief is curated from battle-tested, community-endorsed skills — not written from scratch:
+
+- [obra/superpowers](https://github.com/obra/superpowers) **(90.6k ★)** — TDD, systematic debugging, verification
+- [anthropics/skills](https://github.com/anthropics/skills) **(95.8k ★)** — Anthropic's official skill packages
+- [garrytan/gstack](https://github.com/garrytan/gstack) **(YC CEO)** — CEO review, design review, QA
+- [vercel-labs](https://github.com/vercel-labs/agent-browser) **(Vercel official)** — Next.js best practices, browser automation
+- [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) — SEO audit, launch strategy, analytics
+
+### Key features
+
 - **One command to apply, one to remove** — `use` and `eject`
 - **Non-invasive** — injected content is wrapped in markers, your existing files are untouched
 - **Stackable** — apply multiple briefs; later ones layer on top
