@@ -11,7 +11,11 @@
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/bash.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/yaml.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/typescript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/json.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/sql.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/markdown.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/python.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark-dimmed.min.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -145,7 +149,16 @@ async function load(key) {
     const md = await res.text();
     container.innerHTML = marked.parse(md);
     // Apply syntax highlighting to all code blocks
-    container.querySelectorAll('pre code').forEach(block => hljs.highlightElement(block));
+    container.querySelectorAll('pre code').forEach(block => {
+      // Auto-detect language for untagged code blocks
+      if (!block.className || block.className === 'hljs') {
+        const result = hljs.highlightAuto(block.textContent);
+        block.innerHTML = result.value;
+        block.classList.add('hljs', 'language-' + (result.language || 'plaintext'));
+      } else {
+        hljs.highlightElement(block);
+      }
+    });
   } catch (e) {
     container.innerHTML = '<p style="color:var(--dim)">Failed to load document. <a href="https://github.com/0xranx/agentbrief/blob/main/' + paths[key] + '">View on GitHub →</a></p>';
   }
