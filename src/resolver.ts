@@ -83,7 +83,11 @@ export function parseGitHubSource(source: string): ParsedGitHubRef {
 	};
 }
 
-export async function resolveGitHub(source: string): Promise<BriefSource> {
+/**
+ * Clone a GitHub repo (or use cache) and return the local path.
+ * Shared by both brief resolution and skill resolution.
+ */
+async function cloneGitHub(source: string): Promise<{ path: string; ref?: string; sha?: string }> {
 	const { owner, repo, ref, subdir } = parseGitHubSource(source);
 	const repoUrl = `https://github.com/${owner}/${repo}.git`;
 	const cacheKey = `${owner}/${repo}/${ref || "HEAD"}`;
@@ -92,13 +96,11 @@ export async function resolveGitHub(source: string): Promise<BriefSource> {
 	await mkdir(cacheDir, { recursive: true });
 
 	if (!existsSync(join(cacheDir, ".git"))) {
-		// Fresh clone
 		const args = ["git", "clone", "--depth", "1"];
 		if (ref) args.push("--branch", ref);
 		args.push(repoUrl, cacheDir);
 		execSync(args.join(" "), { stdio: "pipe" });
 	} else {
-		// Update existing cache
 		execSync("git fetch --depth 1 && git reset --hard FETCH_HEAD", {
 			cwd: cacheDir,
 			stdio: "pipe",
@@ -112,12 +114,28 @@ export async function resolveGitHub(source: string): Promise<BriefSource> {
 		// non-critical
 	}
 
-	const briefPath = subdir ? join(cacheDir, subdir) : cacheDir;
-	if (!existsSync(join(briefPath, "brief.yaml"))) {
-		throw new Error(`No brief.yaml found in ${source} (resolved to ${briefPath})`);
-	}
+	const targetPath = subdir ? join(cacheDir, subdir) : cacheDir;
+	return { path: targetPath, ref, sha };
+}
 
-	return { type: "github", path: briefPath, original: source, ref, sha };
+export async function resolveGitHub(source: string): Promise<BriefSource> {
+	const { path, ref, sha } = await cloneGitHub(source);
+	if (!existsSync(join(path, "brief.yaml"))) {
+		throw new Error(`No brief.yaml found in ${source} (resolved to ${path})`);
+	}
+	return { type: "github", path, original: source, ref, sha };
+}
+
+/**
+ * Resolve a remote GitHub skill reference — clones the repo and returns
+ * the local path. Unlike resolveGitHub, does NOT require brief.yaml.
+ */
+export async function resolveGitHubSkill(source: string): Promise<string> {
+	const { path } = await cloneGitHub(source);
+	if (!existsSync(path)) {
+		throw new Error(`Skill directory not found in ${source} (resolved to ${path})`);
+	}
+	return path;
 }
 
 // ── Registry ───────────────────────────────────────────

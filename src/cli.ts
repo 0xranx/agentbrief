@@ -4,7 +4,7 @@ import { eject, init, list, preview, search, show, update, use } from "./index.j
 
 const program = new Command();
 
-program.name("agentbrief").description("One command turns your AI coding agent into a domain specialist").version("0.2.1");
+program.name("agentbrief").description("One command turns your AI coding agent into a domain specialist").version("0.2.2");
 
 program.addHelpText(
 	"after",

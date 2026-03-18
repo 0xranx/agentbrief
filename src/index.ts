@@ -7,7 +7,7 @@ import { loadBrief, loadPersonality, loadSkillMetas } from "./brief.js";
 import { compile } from "./compiler.js";
 import { eject as ejectFromFiles, inject } from "./injector.js";
 import { addEntry, cleanBriefData, readLock, removeEntry } from "./lock.js";
-import { listRegistry, resolveGitHub, resolveSource } from "./resolver.js";
+import { listRegistry, parseGitHubSource, resolveGitHubSkill, resolveSource } from "./resolver.js";
 import type { BriefSpec, EngineTarget, LockEntry, TrustLevel } from "./types.js";
 import { FILE_ENGINES } from "./types.js";
 
@@ -15,7 +15,7 @@ export { loadBrief, loadPersonality, loadSkillMetas } from "./brief.js";
 export { compile } from "./compiler.js";
 export { eject as ejectFromFiles, inject } from "./injector.js";
 export { readLock } from "./lock.js";
-export { listRegistry, resolveSource } from "./resolver.js";
+export { listRegistry, resolveGitHubSkill, resolveSource } from "./resolver.js";
 export type { BriefSource, BriefSpec, LockEntry, LockFile, Registry, RegistryEntry, ScaleConfig } from "./types.js";
 export { ENGINE_FILES } from "./types.js";
 
@@ -114,9 +114,11 @@ export async function use(opts: UseOpts): Promise<UseResult> {
 		await mkdir(skillsDir, { recursive: true });
 		for (const s of spec.skills) {
 			if (s.startsWith("github:")) {
-				const resolvedSkill = await resolveGitHub(s);
-				const skillName = resolvedSkill.path.split("/").filter(Boolean).pop() || "skill";
-				await cp(resolvedSkill.path, join(skillsDir, skillName), { recursive: true });
+				const skillPath = await resolveGitHubSkill(s);
+				// Derive skill name from source (subdir last segment, or repo name)
+				const parsed = parseGitHubSource(s);
+				const skillName = parsed.subdir ? parsed.subdir.split("/").pop()! : parsed.repo;
+				await cp(skillPath, join(skillsDir, skillName), { recursive: true });
 			} else {
 				const src = join(resolved.path, s);
 				if (!existsSync(src) || !statSync(src).isDirectory()) continue;
