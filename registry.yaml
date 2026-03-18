@@ -85,6 +85,11 @@ data-analyst:
   description: Business intelligence — metrics, SQL, dashboards, data storytelling
   trust: official
 
+social-media-manager:
+  source: github:0xranx/agentbrief/briefs/social-media-manager
+  description: Social media manager — content creation, Twitter/X posting, audience growth
+  trust: official
+
 # ── Combo Packs ──────────────────────────────────────────
 
 fullstack-engineer:

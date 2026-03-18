@@ -62,6 +62,7 @@ These combine multiple briefs into one — best for getting started:
 | `growth-engineer` | Growth hacker with SEO audit + analytics + content strategy |
 | `data-analyst` | BI analyst with metrics frameworks + SQL patterns |
 | `startup-advisor` | Startup advisor with CEO review + launch planning |
+| `social-media-manager` | Social media manager with Twitter/X posting + content strategy |
 
 ## Apply a Brief
 

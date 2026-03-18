@@ -153,6 +153,7 @@ agentbrief init my-agent --template security
 | `growth-engineer` | Growth hacker with SEO audit + analytics + content strategy |
 | `data-analyst` | BI analyst with metrics frameworks + SQL patterns |
 | `startup-advisor` | Startup advisor with CEO review + launch planning |
+| `social-media-manager` | Social media manager with Twitter/X posting + content strategy |
 
 Browse the **[full Catalog](./CATALOG.md)** or the **[Website](https://0xranx.github.io/agentbrief)** to see details for each brief.
 

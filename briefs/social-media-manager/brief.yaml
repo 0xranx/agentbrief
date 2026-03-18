@@ -1,0 +1,11 @@
+name: social-media-manager
+version: "1.0.0"
+description: "Social media manager — content creation, scheduling, audience engagement, analytics"
+personality: personality.md
+knowledge:
+  - knowledge/
+skills:
+  - skills/
+  - github:jackwener/twitter-cli
+extends:
+  - base-agent
