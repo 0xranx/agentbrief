@@ -166,6 +166,9 @@ nav .nav-links a:hover{color:var(--text)}
 .brief-item .bi-name{font-family:var(--mono);font-size:18px;font-weight:700;color:var(--text);letter-spacing:-0.5px}
 .brief-item .bi-desc{font-size:15px;color:var(--muted);line-height:1.6;flex-grow:1;position:relative;z-index:2}
 .brief-item .bi-footer{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:20px;border-top:1px solid rgba(255,255,255,0.05);position:relative;z-index:2}
+.brief-item .bi-includes{font-size:13px;color:var(--dim);line-height:1.5;position:relative;z-index:2}
+.brief-item .bi-includes a{color:var(--muted);text-decoration:none;border-bottom:1px dashed rgba(255,255,255,.15);transition:all .15s}
+.brief-item .bi-includes a:hover{color:var(--accent-bright);border-bottom-color:var(--accent)}
 .brief-item .bi-layers{font-family:var(--mono);font-size:13px;color:var(--dim);display:flex;align-items:center;gap:6px}
 .brief-item .bi-cmd{font-family:var(--mono);font-size:13px;color:var(--text);background:rgba(255,255,255,0.05);padding:8px 16px;border-radius:8px;cursor:pointer;transition:all .2s;border:1px solid var(--border)}
 .brief-item .bi-cmd:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2)}
@@ -321,6 +324,7 @@ footer a:hover{color:var(--text)}
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="fullstack-dev" data-cat="combo">
       <div class="bi-header"><span class="bi-name">fullstack-dev</span><span class="bi-tag combo">9 skills</span></div>
       <span class="bi-desc">Enforces strict types, follows Next.js conventions, builds accessible UIs, and reviews PRs like a staff engineer.</span>
+      <div class="bi-includes">Combines: <a href="brief.html?name=typescript-strict">typescript-strict</a> + <a href="brief.html?name=nextjs-fullstack">nextjs-fullstack</a> + <a href="brief.html?name=frontend-design">frontend-design</a> + <a href="brief.html?name=code-reviewer">code-reviewer</a></div>
       <div class="bi-footer">
         <span class="bi-layers">4 knowledge</span>
         <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use fullstack-dev</button>
@@ -329,6 +333,7 @@ footer a:hover{color:var(--text)}
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="startup-kit" data-cat="combo">
       <div class="bi-header"><span class="bi-name">startup-kit</span><span class="bi-tag combo">12 skills</span></div>
       <span class="bi-desc">Writes PRDs, runs SEO audits, catches security bugs, and plans your launch with YC-level rigor.</span>
+      <div class="bi-includes">Combines: <a href="brief.html?name=startup-builder">startup-builder</a> + <a href="brief.html?name=product-manager">product-manager</a> + <a href="brief.html?name=growth-engineer">growth-engineer</a> + <a href="brief.html?name=security-auditor">security-auditor</a></div>
       <div class="bi-footer">
         <span class="bi-layers">5 knowledge</span>
         <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use startup-kit</button>

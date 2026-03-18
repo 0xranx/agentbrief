@@ -223,6 +223,60 @@ The skill directory must contain a `SKILL.md` file. Everything else in the direc
 
 Browse the full catalog at [skills.sh](https://skills.sh) or [CATALOG.md](../CATALOG.md).
 
+## Composing Briefs with `extends`
+
+You can create a **combo brief** that bundles multiple existing briefs into one. This is how `fullstack-dev` combines 4 briefs into a single 9-skill package:
+
+```yaml
+# fullstack-dev/brief.yaml
+name: fullstack-dev
+version: "1.0.0"
+description: Full-stack TypeScript developer with PR reviews and design QA
+extends:
+  - typescript-strict
+  - nextjs-fullstack
+  - frontend-design
+  - code-reviewer
+```
+
+When a user runs `agentbrief use fullstack-dev`, the compiler:
+
+1. **Loads all extended briefs** recursively (including their `extends`)
+2. **Uses only the combo's personality** — extended briefs' personalities are ignored
+3. **Deduplicates skills** by directory name — if 3 extended briefs include `verification`, it appears once
+4. **Merges knowledge** from all extended briefs
+
+### When to use extends
+
+- You want to offer a **one-command starter pack** for a common workflow
+- Individual briefs are useful alone, but even better together
+- You need a **unified personality** instead of 4 separate Role sections stacking
+
+### Combo brief structure
+
+A combo brief still has its own `personality.md` (the unified voice), but typically has no local `knowledge/` or `skills/` — everything comes from the extended briefs:
+
+```
+fullstack-dev/
+├── brief.yaml          # extends: [typescript-strict, nextjs-fullstack, ...]
+└── personality.md       # Unified personality for the combo
+```
+
+### Inheritance chain
+
+Every standalone brief extends `base-agent`, which provides cross-cutting skills like `agent-browser` (browser automation). The chain looks like:
+
+```
+base-agent (foundation)
+├── typescript-strict
+├── nextjs-fullstack
+├── frontend-design
+├── code-reviewer
+└── fullstack-dev (extends all 4 above)
+```
+
+All skills from the entire chain are collected, deduplicated, and deployed to the user's project.
+
 ## brief.yaml Reference
 
 ```yaml
@@ -233,6 +287,9 @@ version: "1.0.0"                  # Semver
 # Optional fields
 description: One-line description
 personality: personality.md       # Path to personality file (default: personality.md)
+extends:                          # Compose multiple briefs into one
+  - typescript-strict
+  - nextjs-fullstack
 knowledge:                        # Paths to knowledge files/directories
   - knowledge/
 skills:                           # Paths to skill files/directories
