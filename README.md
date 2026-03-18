@@ -6,7 +6,7 @@
 
 > One command turns your AI coding agent into a domain specialist.
 >
-> [Website](https://0xranx.github.io/agentbrief) · [Catalog](./CATALOG.md) · [npm](https://www.npmjs.com/package/agentbrief)
+> [Website](https://0xranx.github.io/agentbrief) · [Catalog](./CATALOG.md) · [npm](https://www.npmjs.com/package/agentbrief) · [中文](./README.zh-CN.md)
 
 Your Claude Code, Cursor, OpenCode, or Codex gives generic answers because it doesn't know your domain. AgentBrief fixes that — install a **brief** and your agent gains real expertise: security auditing, code review, product specs, growth hacking, and more.
 
