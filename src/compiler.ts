@@ -144,7 +144,10 @@ function buildHeader(spec: BriefSpec, mode: CompileMode): string {
 }
 
 function buildPersonality(personality: string, mode: CompileMode): string {
-	const trimmed = personality.trim();
+	// Strip HTML comments (used as authoring guides in templates)
+	const stripped = personality.replace(/<!--[\s\S]*?-->/g, "").trim();
+	// Collapse multiple blank lines left after stripping
+	const trimmed = stripped.replace(/\n{3,}/g, "\n\n").trim();
 	if (!trimmed) return "";
 
 	if (mode === "full") return trimmed;
