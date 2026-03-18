@@ -118,7 +118,7 @@ nav .nav-links a.active{color:var(--text)}
 
 <script>
 // Configure marked to add language class to code blocks
-marked.setOptions({ langPrefix: 'hljs language-' });
+marked.setOptions({ langPrefix: 'language-' });
 
 const BASE = 'https://raw.githubusercontent.com/0xranx/agentbrief/main/';
 const paths = {
@@ -151,7 +151,7 @@ async function load(key) {
     // Apply syntax highlighting to all code blocks
     container.querySelectorAll('pre code').forEach(block => {
       // Auto-detect language for untagged code blocks
-      if (!block.className || block.className === 'hljs') {
+      if (!block.className) {
         const result = hljs.highlightAuto(block.textContent);
         block.innerHTML = result.value;
         block.classList.add('hljs', 'language-' + (result.language || 'plaintext'));

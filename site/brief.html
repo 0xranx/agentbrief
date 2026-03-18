@@ -150,7 +150,7 @@ const CATEGORIES={
   'startup-builder':'biz','fullstack-dev':'combo','startup-kit':'combo'
 };
 
-marked.setOptions({ langPrefix: 'hljs language-' });
+marked.setOptions({ langPrefix: 'language-' });
 
 async function loadBrief(){
   const params=new URLSearchParams(location.search);
@@ -250,7 +250,7 @@ async function loadBrief(){
 
     // Apply syntax highlighting with auto-detection for untagged blocks
     document.querySelectorAll('pre code').forEach(block => {
-      if (!block.className || block.className === 'hljs') {
+      if (!block.className) {
         const result = hljs.highlightAuto(block.textContent);
         block.innerHTML = result.value;
         block.classList.add('hljs', 'language-' + (result.language || 'plaintext'));
