@@ -1,7 +1,0 @@
-version: 1
-briefs:
-  - name: startup-founder
-    source: github:0xranx/agentbrief/briefs/startup-founder
-    version: 1.0.0
-    sha: 4863085788e51809152e99f7e5914407ac97a9b6
-    applied_at: '2026-03-18T06:37:20.320Z'
