@@ -4,7 +4,7 @@ import { eject, init, list, preview, search, show, update, use } from "./index.j
 
 const program = new Command();
 
-program.name("agentbrief").description("Pluggable role definitions for AI coding agents").version("0.1.1");
+program.name("agentbrief").description("Pluggable role definitions for AI coding agents").version("0.1.2");
 
 program.addHelpText(
 	"after",
