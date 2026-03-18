@@ -7,9 +7,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/marked-highlight/lib/index.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/bash.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/yaml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/typescript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/markdown.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark-dimmed.min.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -110,14 +113,8 @@ nav .nav-links a.active{color:var(--text)}
 </div>
 
 <script>
-// Configure marked with highlight.js via markedHighlight extension
-marked.use(markedHighlight.markedHighlight({
-  langPrefix: 'hljs language-',
-  highlight(code, lang) {
-    if (lang && hljs.getLanguage(lang)) return hljs.highlight(code, { language: lang }).value;
-    return hljs.highlightAuto(code).value;
-  }
-}));
+// Configure marked to add language class to code blocks
+marked.setOptions({ langPrefix: 'hljs language-' });
 
 const BASE = 'https://raw.githubusercontent.com/0xranx/agentbrief/main/';
 const paths = {
@@ -147,6 +144,8 @@ async function load(key) {
     if (!res.ok) throw new Error('Failed to fetch');
     const md = await res.text();
     container.innerHTML = marked.parse(md);
+    // Apply syntax highlighting to all code blocks
+    container.querySelectorAll('pre code').forEach(block => hljs.highlightElement(block));
   } catch (e) {
     container.innerHTML = '<p style="color:var(--dim)">Failed to load document. <a href="https://github.com/0xranx/agentbrief/blob/main/' + paths[key] + '">View on GitHub →</a></p>';
   }
