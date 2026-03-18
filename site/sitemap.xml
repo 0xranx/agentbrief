@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://0xranx.github.io/agentbrief/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://0xranx.github.io/agentbrief/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://0xranx.github.io/agentbrief/index.zh.html"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://0xranx.github.io/agentbrief/index.zh.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://0xranx.github.io/agentbrief/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://0xranx.github.io/agentbrief/index.zh.html"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://0xranx.github.io/agentbrief/docs.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>
