@@ -15,7 +15,7 @@
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/json.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/python.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/markdown.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark-dimmed.min.css">
+<!-- theme handled inline for code blocks -->
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -83,14 +83,36 @@ nav .nav-links a:hover{color:var(--text)}
 .personality-content ul,.personality-content ol{padding-left:20px;margin:0 0 12px}
 .personality-content li{margin-bottom:3px}
 .personality-content code{font-family:var(--mono);font-size:12px;background:var(--surface2);padding:2px 5px;border-radius:3px;color:var(--text)}
-.personality-content pre{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;margin:0 0 14px;overflow-x:auto}
-.personality-content pre code{background:none;padding:0;font-size:12px;line-height:1.5;color:var(--muted)}
+.personality-content pre{background:none;border:none;border-radius:0;padding:0;margin:0;overflow:visible}
+.personality-content pre code{background:none;padding:0;font-size:12px;line-height:1.5;color:#e6edf3}
 
-/* Enhanced CLI highlighting */
-.cli-prompt{color:var(--dim);user-select:none}
-.cli-cmd{color:#79c0ff}
-.cli-flag{color:var(--orange)}
-.cli-arg{color:var(--green)}
+/* Code block container */
+.code-block{border-radius:8px;overflow:hidden;border:1px solid #30363d;background:#0d1117;margin:0 0 14px}
+.code-header{display:flex;align-items:center;justify-content:space-between;padding:0 12px;height:34px;background:#161b22;border-bottom:1px solid #30363d}
+.code-lang{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--dim);text-transform:lowercase;letter-spacing:.3px}
+.code-copy{background:none;border:1px solid transparent;border-radius:4px;color:var(--dim);padding:2px 8px;font-size:11px;font-family:var(--sans);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:4px}
+.code-copy:hover{color:var(--muted);border-color:#30363d;background:rgba(255,255,255,.04)}
+.code-copy.copied{color:var(--green);border-color:rgba(34,197,94,.3)}
+.code-copy svg{width:14px;height:14px}
+.code-block pre{margin:0;border:none;border-radius:0}
+.code-block pre code{display:block;padding:12px 14px;overflow-x:auto;font-size:12px;line-height:1.55}
+
+/* Syntax theme */
+.code-block .hljs{background:transparent;color:#e6edf3}
+.code-block .hljs-comment,.code-block .hljs-quote{color:#8b949e;font-style:italic}
+.code-block .hljs-keyword,.code-block .hljs-selector-tag{color:#ff7b72}
+.code-block .hljs-string,.code-block .hljs-attr{color:#a5d6ff}
+.code-block .hljs-number,.code-block .hljs-literal{color:#79c0ff}
+.code-block .hljs-built_in{color:#ffa657}
+.code-block .hljs-variable,.code-block .hljs-template-variable{color:#ffa657}
+.code-block .hljs-type,.code-block .hljs-title,.code-block .hljs-section{color:#d2a8ff}
+.code-block .hljs-name,.code-block .hljs-tag{color:#7ee787}
+.code-block .hljs-meta{color:#8b949e}
+
+/* CLI tokens */
+.cli-prompt{color:#8b949e;user-select:none}
+.cli-cmd{color:#79c0ff;font-weight:500}
+.cli-flag{color:#ffa657}
 
 /* Knowledge & Skills lists */
 .item-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border-radius:var(--radius);overflow:hidden}
@@ -157,6 +179,28 @@ const CATEGORIES={
 };
 
 marked.setOptions({ langPrefix: 'language-' });
+
+const LANG_LABELS={bash:'Bash',shell:'Shell',sh:'Shell',yaml:'YAML',yml:'YAML',typescript:'TypeScript',ts:'TypeScript',javascript:'JavaScript',js:'JavaScript',json:'JSON',python:'Python',py:'Python',markdown:'Markdown',md:'Markdown',html:'HTML',css:'CSS',text:'Text'};
+const COPY_ICON='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="7" height="7" rx="1.5"/><path d="M3.5 10.5V3a1.5 1.5 0 0 1 1.5-1.5H10.5"/></svg>';
+const CHECK_ICON='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8.5l3.5 3.5L13 4"/></svg>';
+
+function copyCode(btn){
+  const code=btn.closest('.code-block').querySelector('code');
+  navigator.clipboard.writeText(code.textContent).then(()=>{
+    btn.innerHTML=CHECK_ICON+'Copied';btn.classList.add('copied');
+    setTimeout(()=>{btn.innerHTML=COPY_ICON+'Copy';btn.classList.remove('copied')},2000);
+  });
+}
+function wrapCodeBlocks(container){
+  container.querySelectorAll('pre').forEach(pre=>{
+    const code=pre.querySelector('code');if(!code)return;
+    const langClass=(code.className.match(/language-(\w+)/)||[])[1]||'';
+    const label=LANG_LABELS[langClass]||langClass||'';
+    const wrapper=document.createElement('div');wrapper.className='code-block';
+    wrapper.innerHTML='<div class="code-header"><span class="code-lang">'+label+'</span><button class="code-copy" onclick="copyCode(this)">'+COPY_ICON+'Copy</button></div>';
+    pre.parentNode.insertBefore(wrapper,pre);wrapper.appendChild(pre);
+  });
+}
 
 function enhanceBash(html) {
   return html.split('\n').map(line => {
@@ -265,7 +309,7 @@ async function loadBrief(){
       </div>`:''}
     `;
 
-    // Apply syntax highlighting with auto-detection for untagged blocks
+    // Syntax highlight all code blocks
     document.querySelectorAll('pre code').forEach(block => {
       if (!block.className) {
         const result = hljs.highlightAuto(block.textContent);
@@ -278,6 +322,8 @@ async function loadBrief(){
         block.innerHTML = enhanceBash(block.innerHTML);
       }
     });
+    // Wrap code blocks with header + copy button
+    wrapCodeBlocks(document.getElementById('content'));
 
     // Async: load skill details after page is rendered
     if(skillsList.length>0){

@@ -16,7 +16,6 @@
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/sql.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/markdown.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/languages/python.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark-dimmed.min.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -26,6 +25,7 @@
   --green:#22c55e;--purple:#a78bfa;--orange:#f59e0b;
   --mono:'JetBrains Mono',SFMono-Regular,Consolas,monospace;
   --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --code-bg:#0d1117;--code-header:#161b22;
 }
 body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
 a{color:var(--accent)}
@@ -49,7 +49,7 @@ nav .nav-links a.active{color:var(--text)}
 .sidebar h4:first-child{margin-top:0}
 .sidebar a{display:block;padding:6px 8px;font-size:13px;color:var(--muted);border-radius:6px;text-decoration:none;transition:all .1s;margin-bottom:1px}
 .sidebar a:hover{color:var(--text);background:var(--surface)}
-.sidebar a.active{color:var(--accent);background:var(--accent);background:rgba(59,130,246,.1)}
+.sidebar a.active{color:var(--accent);background:rgba(59,130,246,.1)}
 
 /* Content */
 .content{flex:1;padding:32px 40px;max-width:100%;overflow-x:hidden}
@@ -65,8 +65,6 @@ nav .nav-links a.active{color:var(--text)}
 .md ul,.md ol{margin:0 0 14px;padding-left:24px;color:var(--muted);font-size:14px}
 .md li{margin-bottom:4px;line-height:1.6}
 .md code{font-family:var(--mono);font-size:12px;background:var(--surface2);padding:2px 6px;border-radius:4px;color:var(--text)}
-.md pre{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;margin:0 0 16px;overflow-x:auto}
-.md pre code{background:none;padding:0;font-size:13px;line-height:1.6;color:var(--muted)}
 .md table{width:100%;border-collapse:collapse;margin:0 0 16px;font-size:13px}
 .md th{text-align:left;padding:8px 12px;border-bottom:2px solid var(--border);font-weight:600;font-size:12px;color:var(--dim)}
 .md td{padding:8px 12px;border-bottom:1px solid var(--surface2);color:var(--muted)}
@@ -75,11 +73,38 @@ nav .nav-links a.active{color:var(--text)}
 .md hr{border:none;border-top:1px solid var(--border);margin:24px 0}
 .md a{color:var(--accent)}
 
-/* Enhanced CLI highlighting */
-.cli-prompt{color:var(--dim);user-select:none}
-.cli-cmd{color:#79c0ff}
-.cli-flag{color:var(--orange)}
-.cli-arg{color:var(--green)}
+/* Code blocks — wrapped in .code-block container */
+.md pre{background:none;border:none;border-radius:0;padding:0;margin:0 0 16px;overflow:visible}
+.md pre code{background:none;padding:0;font-size:13px;line-height:1.65;color:#e6edf3}
+.code-block{border-radius:8px;overflow:hidden;border:1px solid #30363d;background:var(--code-bg);margin:0 0 16px}
+.code-header{display:flex;align-items:center;justify-content:space-between;padding:0 12px;height:36px;background:var(--code-header);border-bottom:1px solid #30363d}
+.code-lang{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--dim);text-transform:lowercase;letter-spacing:.3px}
+.code-copy{background:none;border:1px solid transparent;border-radius:4px;color:var(--dim);padding:2px 8px;font-size:11px;font-family:var(--sans);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:4px}
+.code-copy:hover{color:var(--muted);border-color:#30363d;background:rgba(255,255,255,.04)}
+.code-copy.copied{color:var(--green);border-color:rgba(34,197,94,.3)}
+.code-copy svg{width:14px;height:14px}
+.code-block pre{margin:0;border:none;border-radius:0}
+.code-block pre code{display:block;padding:14px 16px;overflow-x:auto;font-size:13px;line-height:1.65}
+
+/* Syntax theme overrides — richer colors on dark bg */
+.code-block .hljs{background:transparent;color:#e6edf3}
+.code-block .hljs-comment,.code-block .hljs-quote{color:#8b949e;font-style:italic}
+.code-block .hljs-keyword,.code-block .hljs-selector-tag{color:#ff7b72}
+.code-block .hljs-string,.code-block .hljs-attr{color:#a5d6ff}
+.code-block .hljs-number,.code-block .hljs-literal{color:#79c0ff}
+.code-block .hljs-built_in{color:#ffa657}
+.code-block .hljs-symbol,.code-block .hljs-bullet{color:#f2cc60}
+.code-block .hljs-variable,.code-block .hljs-template-variable{color:#ffa657}
+.code-block .hljs-type,.code-block .hljs-title,.code-block .hljs-section{color:#d2a8ff}
+.code-block .hljs-name,.code-block .hljs-tag{color:#7ee787}
+.code-block .hljs-meta{color:#8b949e}
+.code-block .hljs-addition{color:#aff5b4;background:rgba(46,160,67,.15)}
+.code-block .hljs-deletion{color:#ffdcd7;background:rgba(248,81,73,.15)}
+
+/* CLI-specific tokens for bash blocks */
+.cli-prompt{color:#8b949e;user-select:none}
+.cli-cmd{color:#79c0ff;font-weight:500}
+.cli-flag{color:#ffa657}
 
 @media(max-width:768px){
   .sidebar{display:none}
@@ -125,21 +150,64 @@ nav .nav-links a.active{color:var(--text)}
 <script>
 marked.setOptions({ langPrefix: 'language-' });
 
-// Enhanced bash/shell highlighting for CLI-centric code blocks
-const CLI_CMDS = /^(npm|npx|pnpm|yarn|git|agentbrief|cd|cp|mkdir|rm|curl|node|docker|gh|brew)\b/;
+const LANG_LABELS = {
+  bash:'Bash', shell:'Shell', sh:'Shell',
+  yaml:'YAML', yml:'YAML',
+  typescript:'TypeScript', ts:'TypeScript',
+  javascript:'JavaScript', js:'JavaScript',
+  json:'JSON', python:'Python', py:'Python',
+  sql:'SQL', markdown:'Markdown', md:'Markdown',
+  html:'HTML', css:'CSS', text:'Text',
+};
+
+const COPY_ICON = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="7" height="7" rx="1.5"/><path d="M3.5 10.5V3a1.5 1.5 0 0 1 1.5-1.5H10.5"/></svg>';
+const CHECK_ICON = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8.5l3.5 3.5L13 4"/></svg>';
+
+// CLI-aware enhancement for bash blocks
 function enhanceBash(html) {
   return html.split('\n').map(line => {
-    // Skip lines already fully wrapped by hljs (e.g. comments)
     if (line.startsWith('<span class="hljs-')) return line;
-    // $ or # prompt at start of line
     line = line.replace(/^(\$\s)/, '<span class="cli-prompt">$1</span>');
-    // Flags: -x, --flag, --flag=val
     line = line.replace(/(\s)(--?\w[\w-]*)/g, '$1<span class="cli-flag">$2</span>');
-    // Known commands (first word or after prompt)
     line = line.replace(/^(<span class="cli-prompt">[^<]*<\/span>)?(\s*)(npm|npx|pnpm|yarn|git|agentbrief|cd|cp|mkdir|rm|curl|node|docker|gh|brew)\b/,
       (m, prompt, ws, cmd) => (prompt||'') + ws + '<span class="cli-cmd">' + cmd + '</span>');
     return line;
   }).join('\n');
+}
+
+function copyCode(btn) {
+  const code = btn.closest('.code-block').querySelector('code');
+  navigator.clipboard.writeText(code.textContent).then(() => {
+    btn.innerHTML = CHECK_ICON + 'Copied';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.innerHTML = COPY_ICON + 'Copy';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+// Wrap <pre> blocks in styled container with header + copy button
+function wrapCodeBlocks(container) {
+  container.querySelectorAll('pre').forEach(pre => {
+    const code = pre.querySelector('code');
+    if (!code) return;
+
+    // Determine language
+    const langClass = (code.className.match(/language-(\w+)/) || [])[1] || '';
+    const label = LANG_LABELS[langClass] || langClass || '';
+
+    // Build wrapper
+    const wrapper = document.createElement('div');
+    wrapper.className = 'code-block';
+    wrapper.innerHTML =
+      '<div class="code-header">' +
+        '<span class="code-lang">' + label + '</span>' +
+        '<button class="code-copy" onclick="copyCode(this)">' + COPY_ICON + 'Copy</button>' +
+      '</div>';
+    pre.parentNode.insertBefore(wrapper, pre);
+    wrapper.appendChild(pre);
+  });
 }
 
 const BASE = 'https://raw.githubusercontent.com/0xranx/agentbrief/main/';
@@ -157,7 +225,6 @@ let current = 'GUIDE';
 
 async function load(key) {
   current = key;
-  // Update active nav
   document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
   const navEl = document.getElementById('nav-' + key);
   if (navEl) navEl.classList.add('active');
@@ -170,7 +237,8 @@ async function load(key) {
     if (!res.ok) throw new Error('Failed to fetch');
     const md = await res.text();
     container.innerHTML = marked.parse(md);
-    // Apply syntax highlighting to all code blocks
+
+    // 1. Syntax highlight
     container.querySelectorAll('pre code').forEach(block => {
       if (!block.className) {
         const result = hljs.highlightAuto(block.textContent);
@@ -179,21 +247,22 @@ async function load(key) {
       } else {
         hljs.highlightElement(block);
       }
-      // Enhance bash/shell blocks with CLI-aware coloring
+      // CLI enhancement for bash
       if (block.className.match(/language-(bash|shell|sh)/)) {
         block.innerHTML = enhanceBash(block.innerHTML);
       }
     });
+
+    // 2. Wrap code blocks with header + copy button
+    wrapCodeBlocks(container);
   } catch (e) {
     container.innerHTML = '<p style="color:var(--dim)">Failed to load document. <a href="https://github.com/0xranx/agentbrief/blob/main/' + paths[key] + '">View on GitHub →</a></p>';
   }
 
-  // Update URL hash
   history.replaceState(null, '', '#' + key);
   window.scrollTo(0, 0);
 }
 
-// Load from hash or default
 const hash = location.hash.replace('#', '');
 if (hash && paths[hash]) {
   load(hash);
