@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AgentBrief — Pluggable role definitions for AI coding agents</title>
-<meta name="description" content="One command turns your Claude Code, Cursor, OpenCode, or Codex into a specialized professional. 14 official briefs covering dev, product, growth, and ops.">
+<title>AgentBrief — AI 编程 Agent 的可插拔职能定义</title>
+<meta name="description" content="一条命令，让你的 Claude Code、Cursor、OpenCode 或 Codex 变成专业人士。14 个官方职能包，覆盖开发、产品、增长和运维。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -18,7 +18,7 @@
   --text:#ffffff;
   --muted:#a1a1aa;
   --dim:#71717a;
-  
+
   --accent:#3b82f6;
   --accent-hover:#60a5fa;
   --accent-dim:rgba(59,130,246,.15);
@@ -26,7 +26,7 @@
   --green:#10b981;
   --purple:#8b5cf6;
   --orange:#f97316;
-  
+
   --mono:'JetBrains Mono',SFMono-Regular,Consolas,monospace;
   --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
   --max:1140px;
@@ -47,7 +47,7 @@ body{
   top: 0; left: 0; right: 0; bottom: 0;
   z-index: -1;
   pointer-events: none;
-  background-image: 
+  background-image:
     linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
   background-size: 32px 32px;
@@ -249,10 +249,10 @@ footer a:hover{color:var(--text)}
   <div class="inner">
     <a href="/" class="logo">agent<span>brief</span></a>
     <div class="nav-links">
-      <a href="#briefs">Briefs</a>
-      <a href="#ecosystem">Ecosystem</a>
-      <a href="./docs.html#AUTHORING">Docs</a>
-      <a href="./index.zh.html">中文</a>
+      <a href="#briefs">职能包</a>
+      <a href="#ecosystem">技能生态</a>
+      <a href="./docs.html#AUTHORING">文档</a>
+      <a href="./">English</a>
       <a href="https://github.com/0xranx/agentbrief" class="gh-btn">
         <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         Star
@@ -262,12 +262,12 @@ footer a:hover{color:var(--text)}
 </nav>
 
 <section class="hero">
-  <div class="pill"><span class="dot"></span> Skills from superpowers (90.6k★) · Anthropic · Vercel · YC CEO</div>
-  <h1>Make your AI agent<br><span class="highlight">actually good at its job</span></h1>
-  <p class="sub">Security reviews. Code quality. Product specs. Growth hacking. One command gives your Claude Code, Cursor, or Codex real expertise — not just generic answers.</p>
+  <div class="pill"><span class="dot"></span> 技能源自 superpowers (90.6k★) · Anthropic · Vercel · YC CEO</div>
+  <h1>让你的 AI Agent<br><span class="highlight">真正胜任工作</span></h1>
+  <p class="sub">安全审查、代码质量、产品规划、增长运营。一条命令让你的 Claude Code、Cursor 或 Codex 拥有真正的专业能力——而不只是泛泛的回答。</p>
   <div class="ctas">
-    <a href="#briefs" class="btn btn-primary">Browse Briefs</a>
-    <a href="./docs.html#AUTHORING" class="btn btn-secondary">Create Your Own →</a>
+    <a href="#briefs" class="btn btn-primary">浏览职能包</a>
+    <a href="./docs.html#AUTHORING" class="btn btn-secondary">创建你自己的 →</a>
   </div>
 
   <div class="install-box">
@@ -278,7 +278,7 @@ footer a:hover{color:var(--text)}
     </div>
     <div class="install-cmd">
       <div><span class="prompt">~</span> <span id="install-text">npm install -g agentbrief</span></div>
-      <button class="copy-btn" onclick="copyInstall()">Copy</button>
+      <button class="copy-btn" onclick="copyInstall()">复制</button>
     </div>
   </div>
 </section>
@@ -286,22 +286,22 @@ footer a:hover{color:var(--text)}
 <!-- Conversation diff -->
 <section class="section">
   <div class="section-header">
-    <h2>The Difference</h2>
-    <p>Same question, completely different answer.</p>
+    <h2>效果对比</h2>
+    <p>同样的问题，完全不同的回答。</p>
   </div>
   <div class="diff-container">
     <div class="diff-window">
-      <div class="diff-header muted">Without a brief</div>
+      <div class="diff-header muted">没有职能包</div>
       <div class="diff-body">
-        <div class="chat-bubble user">"Review this code for issues"</div>
-        <div class="chat-bubble agent-bad">"The code looks good overall. Consider adding some error handling and maybe a few more comments."</div>
+        <div class="chat-bubble user">"帮我审查一下这段代码"</div>
+        <div class="chat-bubble agent-bad">"代码整体看起来不错。建议加一些错误处理，可能再加几个注释。"</div>
       </div>
     </div>
     <div class="diff-window active">
-      <div class="diff-header active">With security-auditor brief</div>
+      <div class="diff-header active">使用 security-auditor 职能包</div>
       <div class="diff-body">
-        <div class="chat-bubble user">"Review this code for issues"</div>
-        <div class="chat-bubble agent-good">"<strong>CWE-89 CRITICAL</strong> at line 23: SQL injection via string concatenation. Attack vector: attacker injects arbitrary SQL through userId.<br><br><strong>Fix:</strong> <code>db.query('SELECT * FROM users WHERE id = $1', [userId])</code>"</div>
+        <div class="chat-bubble user">"帮我审查一下这段代码"</div>
+        <div class="chat-bubble agent-good">"<strong>CWE-89 严重</strong> 第23行：通过字符串拼接导致SQL注入。攻击向量：攻击者通过 userId 参数注入任意SQL。<br><br><strong>修复：</strong> <code>db.query('SELECT * FROM users WHERE id = $1', [userId])</code>"</div>
       </div>
     </div>
   </div>
@@ -309,22 +309,22 @@ footer a:hover{color:var(--text)}
 
 <section class="section" id="briefs">
   <div class="section-header">
-    <h2>Official Briefs</h2>
-    <p>Each brief bundles personality + domain knowledge + executable skills. All briefs inherit <strong>base-agent</strong> — a foundation layer with browser automation and cross-cutting capabilities.</p>
+    <h2>官方职能包</h2>
+    <p>每个职能包集成了人格定义 + 领域知识 + 可执行技能。所有职能包都继承 <strong>base-agent</strong> 基础层——提供浏览器自动化等通用能力。</p>
   </div>
 
   <div class="search-container">
     <div class="search-box">
       <span class="search-icon">⌕</span>
-      <input type="text" id="brief-search" placeholder="Filter by name, category, or description..." oninput="filterBriefs()">
+      <input type="text" id="brief-search" placeholder="按名称、分类或描述筛选..." oninput="filterBriefs()">
     </div>
   </div>
 
-  <h3 class="brief-category" style="color:var(--purple)">⚡ Quick Start Packs</h3>
+  <h3 class="brief-category" style="color:var(--purple)">⚡ 快速上手套装</h3>
   <div class="brief-list" id="brief-list-combo">
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="fullstack-engineer" data-cat="combo">
       <div class="bi-header"><span class="bi-name">fullstack-engineer</span><span class="bi-tag combo">9 skills</span></div>
-      <span class="bi-desc">Enforces strict types, follows Next.js conventions, builds accessible UIs, and reviews PRs like a staff engineer.</span>
+      <span class="bi-desc">严格类型约束、遵循 Next.js 规范、构建无障碍 UI、像 Staff 工程师一样审查 PR。</span>
       <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a> + <a href="brief.html?name=typescript-engineer" onclick="event.stopPropagation()">typescript-engineer</a> + <a href="brief.html?name=nextjs-developer" onclick="event.stopPropagation()">nextjs-developer</a> + <a href="brief.html?name=design-engineer" onclick="event.stopPropagation()">design-engineer</a> + <a href="brief.html?name=code-reviewer" onclick="event.stopPropagation()">code-reviewer</a></div>
       <div class="bi-footer">
         <span class="bi-layers">4 knowledge</span>
@@ -333,7 +333,7 @@ footer a:hover{color:var(--text)}
     </div>
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="startup-founder" data-cat="combo">
       <div class="bi-header"><span class="bi-name">startup-founder</span><span class="bi-tag combo">12 skills</span></div>
-      <span class="bi-desc">Writes PRDs, runs SEO audits, catches security bugs, and plans your launch with YC-level rigor.</span>
+      <span class="bi-desc">撰写 PRD、执行 SEO 审计、排查安全漏洞、以 YC 级别的严谨度规划产品发布。</span>
       <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a> + <a href="brief.html?name=startup-advisor" onclick="event.stopPropagation()">startup-advisor</a> + <a href="brief.html?name=product-manager" onclick="event.stopPropagation()">product-manager</a> + <a href="brief.html?name=growth-engineer" onclick="event.stopPropagation()">growth-engineer</a> + <a href="brief.html?name=security-auditor" onclick="event.stopPropagation()">security-auditor</a></div>
       <div class="bi-footer">
         <span class="bi-layers">5 knowledge</span>
@@ -342,7 +342,7 @@ footer a:hover{color:var(--text)}
     </div>
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="release-engineer" data-cat="combo">
       <div class="bi-header"><span class="bi-name">release-engineer</span><span class="bi-tag combo">~10 skills</span></div>
-      <span class="bi-desc">Tests thoroughly, reviews security, sets up CI/CD, and writes release documentation — your ship-to-production pipeline.</span>
+      <span class="bi-desc">全面测试、安全审查、搭建 CI/CD、撰写发布文档——你的上线全流程管道。</span>
       <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a> + <a href="brief.html?name=qa-engineer" onclick="event.stopPropagation()">qa-engineer</a> + <a href="brief.html?name=devops-sre" onclick="event.stopPropagation()">devops-sre</a> + <a href="brief.html?name=tech-writer" onclick="event.stopPropagation()">tech-writer</a> + <a href="brief.html?name=security-auditor" onclick="event.stopPropagation()">security-auditor</a></div>
       <div class="bi-footer">
         <span class="bi-layers">5 knowledge</span>
@@ -351,11 +351,11 @@ footer a:hover{color:var(--text)}
     </div>
   </div>
 
-  <h3 class="brief-category" style="color:var(--accent-bright)">Code Quality & Engineering</h3>
+  <h3 class="brief-category" style="color:var(--accent-bright)">代码质量与工程</h3>
   <div class="brief-list" id="brief-list-dev">
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="security-auditor" data-cat="dev">
       <div class="bi-header"><span class="bi-name">security-auditor</span><span class="bi-tag dev">4 skills</span></div>
-      <span class="bi-desc">OWASP/CWE security review specialist that catches vulnerabilities before they reach production.</span>
+      <span class="bi-desc">OWASP/CWE 安全审查专家，在代码上线前发现漏洞。</span>
       <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">2 knowledge</span>
@@ -364,7 +364,7 @@ footer a:hover{color:var(--text)}
     </div>
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="code-reviewer" data-cat="dev">
       <div class="bi-header"><span class="bi-name">code-reviewer</span><span class="bi-tag dev">4 skills</span></div>
-      <span class="bi-desc">Architecture review, naming conventions, test coverage analysis, and verification.</span>
+      <span class="bi-desc">架构审查、命名规范、测试覆盖分析和验证。</span>
       <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
@@ -373,7 +373,7 @@ footer a:hover{color:var(--text)}
     </div>
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="qa-engineer" data-cat="qa">
       <div class="bi-header"><span class="bi-name">qa-engineer</span><span class="bi-tag qa">3 skills</span></div>
-      <span class="bi-desc">Finds edge cases, writes comprehensive test suites, and fixes bugs with atomic commits.</span>
+      <span class="bi-desc">发现边界场景、编写全面测试、用原子提交修复 Bug。</span>
       <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
@@ -382,7 +382,7 @@ footer a:hover{color:var(--text)}
     </div>
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="typescript-engineer" data-cat="dev">
       <div class="bi-header"><span class="bi-name">typescript-engineer</span><span class="bi-tag dev">2 skills</span></div>
-      <span class="bi-desc">Type safety guardian — enforces zero any, exhaustive switch checks, and strict generic constraints.</span>
+      <span class="bi-desc">类型安全守卫——零 any、穷举检查、严格泛型约束。</span>
       <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
@@ -391,7 +391,7 @@ footer a:hover{color:var(--text)}
     </div>
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="nextjs-developer" data-cat="dev">
       <div class="bi-header"><span class="bi-name">nextjs-developer</span><span class="bi-tag dev">3 skills</span></div>
-      <span class="bi-desc">Next.js 15 App Router specialist. Understands RSCs, Server Actions, React 19, and Tailwind.</span>
+      <span class="bi-desc">Next.js 15 App Router 专家。精通 RSC、Server Actions、React 19 和 Tailwind。</span>
       <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
@@ -400,7 +400,7 @@ footer a:hover{color:var(--text)}
     </div>
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="design-engineer" data-cat="dev">
       <div class="bi-header"><span class="bi-name">design-engineer</span><span class="bi-tag dev">3 skills</span></div>
-      <span class="bi-desc">React + Tailwind + shadcn/ui expert with an 80-item visual and accessibility design review checklist.</span>
+      <span class="bi-desc">React + Tailwind + shadcn/ui 专家，附带 80 项视觉和无障碍设计审查清单。</span>
       <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
@@ -409,7 +409,7 @@ footer a:hover{color:var(--text)}
     </div>
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="devops-sre" data-cat="dev">
       <div class="bi-header"><span class="bi-name">devops-sre</span><span class="bi-tag dev">5 skills</span></div>
-      <span class="bi-desc">Site Reliability Engineer for CI/CD pipelines, monitoring setup, incident response, and IaC.</span>
+      <span class="bi-desc">SRE 工程师，负责 CI/CD 流水线、监控搭建、故障响应和基础设施即代码。</span>
       <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
@@ -418,7 +418,7 @@ footer a:hover{color:var(--text)}
     </div>
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="tech-writer" data-cat="dev">
       <div class="bi-header"><span class="bi-name">tech-writer</span><span class="bi-tag dev">4 skills</span></div>
-      <span class="bi-desc">Documentation expert focusing on clear API docs, readable release notes, and style guide adherence.</span>
+      <span class="bi-desc">文档专家，专注于清晰的 API 文档、可读的发布说明和风格指南遵循。</span>
       <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
@@ -427,11 +427,11 @@ footer a:hover{color:var(--text)}
     </div>
   </div>
 
-  <h3 class="brief-category" style="color:var(--orange)">Product, Growth & Business</h3>
+  <h3 class="brief-category" style="color:var(--orange)">产品、增长与商业</h3>
   <div class="brief-list" id="brief-list-biz">
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="product-manager" data-cat="biz">
       <div class="bi-header"><span class="bi-name">product-manager</span><span class="bi-tag biz">3 skills</span></div>
-      <span class="bi-desc">Drafts concise PRDs, writes user stories with acceptance criteria, and runs RICE/ICE prioritization.</span>
+      <span class="bi-desc">撰写简洁 PRD、编写带验收标准的用户故事、执行 RICE/ICE 优先级排序。</span>
       <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
@@ -440,7 +440,7 @@ footer a:hover{color:var(--text)}
     </div>
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="growth-engineer" data-cat="biz">
       <div class="bi-header"><span class="bi-name">growth-engineer</span><span class="bi-tag biz">5 skills</span></div>
-      <span class="bi-desc">Performs deep SEO audits, devises content strategies, sets up analytics, and improves CRO.</span>
+      <span class="bi-desc">执行深度 SEO 审计、制定内容策略、搭建数据分析、优化转化率。</span>
       <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
@@ -449,7 +449,7 @@ footer a:hover{color:var(--text)}
     </div>
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="data-analyst" data-cat="biz">
       <div class="bi-header"><span class="bi-name">data-analyst</span><span class="bi-tag biz">3 skills</span></div>
-      <span class="bi-desc">Designs metrics frameworks, crafts complex SQL queries, and surfaces actionable data storytelling.</span>
+      <span class="bi-desc">设计指标体系、编写复杂 SQL 查询、输出可操作的数据洞察。</span>
       <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
@@ -458,7 +458,7 @@ footer a:hover{color:var(--text)}
     </div>
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="social-media-manager" data-cat="biz">
       <div class="bi-header"><span class="bi-name">social-media-manager</span><span class="bi-tag biz">3 skills</span></div>
-      <span class="bi-desc">Drafts and publishes to Twitter/X and Xiaohongshu, plans content strategy, and grows your audience.</span>
+      <span class="bi-desc">在 Twitter/X 和小红书上起草并发布内容、规划内容策略、增长受众。</span>
       <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
@@ -467,7 +467,7 @@ footer a:hover{color:var(--text)}
     </div>
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="startup-advisor" data-cat="biz">
       <div class="bi-header"><span class="bi-name">startup-advisor</span><span class="bi-tag biz">5 skills</span></div>
-      <span class="bi-desc">Guides you from idea validation to MVP to launch, with built-in YC-style CEO feedback loops.</span>
+      <span class="bi-desc">从创意验证到 MVP 再到发布，内置 YC 风格的 CEO 反馈循环。</span>
       <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
@@ -479,86 +479,86 @@ footer a:hover{color:var(--text)}
 
 <section class="section" id="ecosystem">
   <div class="section-header">
-    <h2>Skill Ecosystem</h2>
-    <p>Skills adapted from the best open-source projects. Completely compatible with the <a href="https://skills.sh">skills.sh</a> format.</p>
+    <h2>技能生态</h2>
+    <p>技能源自最优秀的开源项目，完全兼容 <a href="https://skills.sh">skills.sh</a> 格式。</p>
   </div>
   <div class="cards-grid">
     <a href="https://github.com/obra/superpowers" class="card">
       <div class="card-top"><span class="card-mono-title">obra/superpowers</span><span class="card-badge">90.6k ★</span></div>
-      <div class="card-desc">TDD, systematic debugging, verification loops, brainstorming, and plan-and-execute workflows.</div>
+      <div class="card-desc">TDD、系统化调试、验证循环、头脑风暴、规划与执行工作流。</div>
     </a>
     <a href="https://github.com/garrytan/gstack" class="card">
       <div class="card-top"><span class="card-mono-title">garrytan/gstack</span><span class="card-badge">YC CEO</span></div>
-      <div class="card-desc">Tough CEO review (10-star rating), thorough design review (80-item checklist), and atomic commit QA.</div>
+      <div class="card-desc">严苛的 CEO 审查（10星评分）、全面的设计审查（80项清单）、原子提交 QA。</div>
     </a>
     <a href="https://github.com/vercel-labs/next-skills" class="card">
       <div class="card-top"><span class="card-mono-title">vercel-labs/next-skills</span><span class="card-badge">Vercel</span></div>
-      <div class="card-desc">Official Next.js best practices — RSCs, caching strategies, error handling, and 20+ reference files.</div>
+      <div class="card-desc">官方 Next.js 最佳实践——RSC、缓存策略、错误处理，20+ 参考文件。</div>
     </a>
     <a href="https://github.com/anthropics/skills" class="card">
       <div class="card-top"><span class="card-mono-title">anthropics/skills</span><span class="card-badge">95.8k ★</span></div>
-      <div class="card-desc">Anthropic's official skills repository for frontend design, robust webapp testing, and MCP builder generation.</div>
+      <div class="card-desc">Anthropic 官方技能仓库，涵盖前端设计、Web 应用测试、MCP 构建器生成。</div>
     </a>
     <a href="https://github.com/coreyhaines31/marketingskills" class="card">
       <div class="card-top"><span class="card-mono-title">marketingskills</span><span class="card-badge">32+ skills</span></div>
-      <div class="card-desc">Deep-dive marketing tactics: technical SEO audits, launch strategies, pricing models, and content workflows.</div>
+      <div class="card-desc">深度营销战术：技术 SEO 审计、发布策略、定价模型和内容工作流。</div>
     </a>
     <a href="https://github.com/akin-ozer/cc-devops-skills" class="card">
       <div class="card-top"><span class="card-mono-title">cc-devops-skills</span><span class="card-badge">31 skills</span></div>
-      <div class="card-desc">Extensive DevOps toolbelt covering Terraform, Docker, Kubernetes, Helm, and GitHub Actions templates.</div>
+      <div class="card-desc">全面的 DevOps 工具集，覆盖 Terraform、Docker、Kubernetes、Helm 和 GitHub Actions 模板。</div>
     </a>
   </div>
 </section>
 
 <section class="section">
   <div class="section-header">
-    <h2>Works With Every Agent</h2>
-    <p>One brief, compiled and intelligently optimized for each agent's context window automatically.</p>
+    <h2>兼容所有主流 Agent</h2>
+    <p>一份职能包，自动编译并智能适配每个 Agent 的上下文窗口。</p>
   </div>
   <div class="engines">
-    <div class="engine"><h3>Claude Code</h3><div class="file">CLAUDE.md</div><div class="mode">Full Compilation</div></div>
-    <div class="engine"><h3>Cursor</h3><div class="file">.cursorrules</div><div class="mode">Minimal Headings</div></div>
-    <div class="engine"><h3>OpenCode</h3><div class="file">AGENTS.md</div><div class="mode">Concise Summaries</div></div>
-    <div class="engine"><h3>Codex</h3><div class="file">AGENTS.md</div><div class="mode">Concise Summaries</div></div>
+    <div class="engine"><h3>Claude Code</h3><div class="file">CLAUDE.md</div><div class="mode">完整编译</div></div>
+    <div class="engine"><h3>Cursor</h3><div class="file">.cursorrules</div><div class="mode">精简标题</div></div>
+    <div class="engine"><h3>OpenCode</h3><div class="file">AGENTS.md</div><div class="mode">简洁摘要</div></div>
+    <div class="engine"><h3>Codex</h3><div class="file">AGENTS.md</div><div class="mode">简洁摘要</div></div>
   </div>
 </section>
 
 <section class="section" id="create">
   <div class="section-header">
-    <h2>Create & Publish</h2>
-    <p>Package your domain expertise into a reusable brief and share it with the developer community.</p>
+    <h2>创建与发布</h2>
+    <p>将你的专业经验封装成可复用的职能包，分享给开发者社区。</p>
   </div>
   <div class="steps-grid">
     <div class="card" style="cursor:default">
-      <div class="card-top"><span class="card-mono-title">1. Scaffold</span></div>
+      <div class="card-top"><span class="card-mono-title">1. 脚手架</span></div>
       <div class="card-desc" style="font-family:var(--mono);font-size:13px;color:var(--accent-bright);background:rgba(255,255,255,0.05);padding:6px 10px;border-radius:6px;display:inline-block;margin-top:4px;border:1px solid rgba(255,255,255,0.05)">agentbrief init</div>
     </div>
     <div class="card" style="cursor:default">
-      <div class="card-top"><span class="card-mono-title">2. Customize</span></div>
-      <div class="card-desc">Edit <code style="background:transparent;padding:0;border:none">personality.md</code>, add markdown files to <code style="background:transparent;padding:0;border:none">knowledge/</code> and dirs to <code style="background:transparent;padding:0;border:none">skills/</code></div>
+      <div class="card-top"><span class="card-mono-title">2. 自定义</span></div>
+      <div class="card-desc">编辑 <code style="background:transparent;padding:0;border:none">personality.md</code>，添加 markdown 文件到 <code style="background:transparent;padding:0;border:none">knowledge/</code>，添加目录到 <code style="background:transparent;padding:0;border:none">skills/</code></div>
     </div>
     <div class="card" style="cursor:default">
-      <div class="card-top"><span class="card-mono-title">3. Preview</span></div>
+      <div class="card-top"><span class="card-mono-title">3. 预览</span></div>
       <div class="card-desc" style="font-family:var(--mono);font-size:13px;color:var(--accent-bright);background:rgba(255,255,255,0.05);padding:6px 10px;border-radius:6px;display:inline-block;margin-top:4px;border:1px solid rgba(255,255,255,0.05)">agentbrief preview</div>
     </div>
     <div class="card" style="cursor:default">
-      <div class="card-top"><span class="card-mono-title">4. Publish</span></div>
-      <div class="card-desc">Push your repo to GitHub → submit a PR to the <a href="https://github.com/0xranx/agentbrief/blob/main/CONTRIBUTING.md" style="text-decoration:underline">official registry</a></div>
+      <div class="card-top"><span class="card-mono-title">4. 发布</span></div>
+      <div class="card-desc">推送到 GitHub → 向<a href="https://github.com/0xranx/agentbrief/blob/main/CONTRIBUTING.md" style="text-decoration:underline">官方 registry</a> 提交 PR</div>
     </div>
   </div>
-  <p style="color:var(--dim);font-size:15px;margin-top:48px;text-align:center"><a href="./docs.html#AUTHORING" class="btn btn-secondary">Read the Authoring Guide →</a></p>
+  <p style="color:var(--dim);font-size:15px;margin-top:48px;text-align:center"><a href="./docs.html#AUTHORING" class="btn btn-secondary">阅读创作指南 →</a></p>
 </section>
 
 <section class="section">
   <div class="section-header">
-    <h2>Documentation</h2>
-    <p>Learn how to craft powerful briefs, integrate ecosystem skills, and contribute back.</p>
+    <h2>文档</h2>
+    <p>学习如何创建强大的职能包、集成生态技能、回馈社区。</p>
   </div>
   <div class="cards-grid">
-    <a href="./docs.html#AUTHORING" class="card"><div class="card-title">Authoring Guide</div><div class="card-desc">Learn to create your own briefs with tailored personality, knowledge, and actionable skills.</div></a>
-    <a href="./docs.html#CATALOG" class="card"><div class="card-title">Full Catalog</div><div class="card-desc">Browse all official roles and skill sources across 7 different business domains.</div></a>
-    <a href="./docs.html#DESIGN" class="card"><div class="card-title">Design Decisions</div><div class="card-desc">Understand why we built it this way — 8 key architectural and user experience choices.</div></a>
-    <a href="./docs.html#VISION" class="card"><div class="card-title">Vision</div><div class="card-desc">Read about our philosophy: creating the eslint-config-airbnb for AI agent behavior.</div></a>
+    <a href="./docs.html#AUTHORING" class="card"><div class="card-title">创作指南</div><div class="card-desc">学习创建你自己的职能包——定制人格、知识和可执行技能。</div></a>
+    <a href="./docs.html#CATALOG" class="card"><div class="card-title">完整目录</div><div class="card-desc">浏览所有官方角色和技能来源，覆盖 7 个不同业务领域。</div></a>
+    <a href="./docs.html#DESIGN" class="card"><div class="card-title">设计决策</div><div class="card-desc">了解我们为什么这样设计——8 个关键的架构和用户体验决策。</div></a>
+    <a href="./docs.html#VISION" class="card"><div class="card-title">愿景</div><div class="card-desc">了解我们的理念：为 AI Agent 行为创建 eslint-config-airbnb。</div></a>
   </div>
 </section>
 
@@ -566,9 +566,9 @@ footer a:hover{color:var(--text)}
   <div class="links">
     <a href="https://github.com/0xranx/agentbrief">GitHub</a>
     <a href="https://www.npmjs.com/package/agentbrief">npm</a>
-    <a href="./docs.html#CATALOG">Catalog</a>
-    <a href="./docs.html#AUTHORING">Docs</a>
-    <a href="https://github.com/0xranx/agentbrief/discussions">Community Discussions</a>
+    <a href="./docs.html#CATALOG">目录</a>
+    <a href="./docs.html#AUTHORING">文档</a>
+    <a href="https://github.com/0xranx/agentbrief/discussions">社区讨论</a>
   </div>
   <div>MIT License · Built by <a href="https://github.com/0xranx">0xranx</a></div>
 </footer>
@@ -581,12 +581,12 @@ function setInstaller(t){
 }
 function copyInstall(){
   navigator.clipboard.writeText(document.getElementById('install-text').textContent);
-  const b=document.querySelector('.copy-btn');b.textContent='Copied!';setTimeout(()=>b.textContent='Copy',1500);
+  const b=document.querySelector('.copy-btn');b.textContent='已复制!';setTimeout(()=>b.textContent='复制',1500);
 }
 function copyCmd(el){
   navigator.clipboard.writeText('agentbrief '+el.textContent.replace('use ', 'use '));
   const o=el.textContent;
-  el.textContent='Copied!';
+  el.textContent='已复制!';
   el.style.color='#10b981';
   el.style.borderColor='rgba(16,185,129,0.3)';
   setTimeout(()=>{
