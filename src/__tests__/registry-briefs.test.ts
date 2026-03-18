@@ -7,14 +7,14 @@ import { eject, search, use } from "../index.js";
 const OFFICIAL_BRIEFS = [
 	"security-auditor",
 	"code-reviewer",
-	"typescript-strict",
-	"nextjs-fullstack",
-	"frontend-design",
+	"typescript-engineer",
+	"nextjs-developer",
+	"design-engineer",
 	"devops-sre",
 	"tech-writer",
 	"growth-engineer",
 	"product-manager",
-	"startup-builder",
+	"startup-advisor",
 ];
 
 describe("official registry briefs", () => {

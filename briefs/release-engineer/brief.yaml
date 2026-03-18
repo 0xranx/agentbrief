@@ -1,0 +1,10 @@
+name: release-engineer
+version: "1.0.0"
+description: "Production release engineer — QA, security review, CI/CD, and documentation in one"
+personality: personality.md
+extends:
+  - base-agent
+  - qa-engineer
+  - devops-sre
+  - tech-writer
+  - security-auditor

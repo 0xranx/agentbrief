@@ -113,7 +113,7 @@ agentbrief use react-specialist    # Layer: React-specific knowledge
 Or use `extends` to compose multiple briefs into one with automatic skill deduplication:
 
 ```bash
-agentbrief use fullstack-dev       # Combines 4 briefs → 8 skills, 1 personality
+agentbrief use fullstack-engineer   # Combines 4 briefs → 9 skills, 1 personality
 ```
 
 ### 4. Non-invasive
@@ -134,7 +134,7 @@ Users can always see what a brief injected. Open `CLAUDE.md` and read it. Use `a
 |----------|-------------|--------|
 | **Team standardization** | `agentbrief use @company/standards` | New hires' agents automatically follow coding standards, PR norms, architecture constraints |
 | **Security audit** | `agentbrief use security-auditor` | Agent reviews code as an OWASP security expert before release |
-| **Domain development** | `agentbrief use nextjs-fullstack` | Agent knows Next.js 15 App Router conventions, Tailwind patterns |
+| **Domain development** | `agentbrief use nextjs-developer` | Agent knows Next.js 15 App Router conventions, Tailwind patterns |
 | **Documentation** | `agentbrief use tech-writer` | Agent writes docs following the style guide with proper structure |
-| **Startup** | `agentbrief use startup-kit` | Agent combines product, growth, security, and startup builder skills |
+| **Startup** | `agentbrief use startup-cto` | Agent combines product, growth, security, and startup advisor skills |
 | **Open source** | `agentbrief use my-project-conventions` | Contributors' agents understand your architecture and contribution guidelines |

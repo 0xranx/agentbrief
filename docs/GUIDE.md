@@ -18,7 +18,7 @@ Requires Node.js 18+.
 
 ```bash
 # Apply a brief to your project
-agentbrief use fullstack-dev
+agentbrief use fullstack-engineer
 
 # That's it. Open a new conversation with your AI agent.
 ```
@@ -42,8 +42,9 @@ These combine multiple briefs into one — best for getting started:
 
 | Pack | What your agent gains | Skills |
 |------|----------------------|--------|
-| `fullstack-dev` | Strict TypeScript + Next.js + accessible UI + PR reviews + browser testing | 9 |
-| `startup-kit` | Product specs + SEO + growth analytics + security + launch planning | 12 |
+| `fullstack-engineer` | Strict TypeScript + Next.js + accessible UI + PR reviews + browser testing | 9 |
+| `startup-cto` | Product specs + SEO + growth analytics + security + launch planning | 12 |
+| `release-engineer` | QA testing + security review + CI/CD + release documentation | 10 |
 
 ### Individual Briefs
 
@@ -52,15 +53,15 @@ These combine multiple briefs into one — best for getting started:
 | `security-auditor` | OWASP security reviewer who cites CWE numbers |
 | `code-reviewer` | Staff engineer who catches architecture + logic issues |
 | `qa-engineer` | QA who finds bugs, writes tests, fixes with atomic commits |
-| `typescript-strict` | Type safety enforcer — zero `any`, exhaustive checks |
-| `nextjs-fullstack` | Next.js 15 specialist (App Router, RSC, Tailwind) |
-| `frontend-design` | Design engineer with 80-item review checklist |
+| `typescript-engineer` | Type safety enforcer — zero `any`, exhaustive checks |
+| `nextjs-developer` | Next.js 15 specialist (App Router, RSC, Tailwind) |
+| `design-engineer` | Design engineer with 80-item review checklist |
 | `devops-sre` | SRE who sets up CI/CD, monitoring, incident response |
 | `tech-writer` | Documentation specialist with API docs + release notes |
 | `product-manager` | PM who writes PRDs with RICE/ICE prioritization |
 | `growth-engineer` | Growth hacker with SEO audit + analytics + content strategy |
 | `data-analyst` | BI analyst with metrics frameworks + SQL patterns |
-| `startup-builder` | Startup advisor with CEO review + launch planning |
+| `startup-advisor` | Startup advisor with CEO review + launch planning |
 
 ## Apply a Brief
 
@@ -68,7 +69,7 @@ These combine multiple briefs into one — best for getting started:
 
 ```bash
 agentbrief use security-auditor
-agentbrief use fullstack-dev
+agentbrief use fullstack-engineer
 ```
 
 ### From a GitHub repository
@@ -109,8 +110,8 @@ Output:
 ```
 Applied briefs:
 
-  NAME              VERSION  SOURCE
-  fullstack-dev     v1.0.0   fullstack-dev
+  NAME                VERSION  SOURCE
+  fullstack-engineer  v1.0.0   fullstack-engineer
   security-auditor  v1.0.0   security-auditor
 ```
 
@@ -118,7 +119,7 @@ Applied briefs:
 
 ```bash
 # Show what was injected into CLAUDE.md
-agentbrief show fullstack-dev
+agentbrief show fullstack-engineer
 ```
 
 ### Preview without applying
@@ -166,13 +167,13 @@ If you're applying 3+ briefs, consider a combo pack instead:
 
 ```bash
 # Instead of:
-agentbrief use typescript-strict
-agentbrief use nextjs-fullstack
-agentbrief use frontend-design
+agentbrief use typescript-engineer
+agentbrief use nextjs-developer
+agentbrief use design-engineer
 agentbrief use code-reviewer
 
 # Use the combo:
-agentbrief use fullstack-dev
+agentbrief use fullstack-engineer
 ```
 
 Combo packs (`extends`) produce a single marker block with:

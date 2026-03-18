@@ -225,21 +225,21 @@ Browse the full catalog at [skills.sh](https://skills.sh) or [CATALOG.md](../CAT
 
 ## Composing Briefs with `extends`
 
-You can create a **combo brief** that bundles multiple existing briefs into one. This is how `fullstack-dev` combines 4 briefs into a single 9-skill package:
+You can create a **combo brief** that bundles multiple existing briefs into one. This is how `fullstack-engineer` combines 4 briefs into a single 9-skill package:
 
 ```yaml
-# fullstack-dev/brief.yaml
-name: fullstack-dev
+# fullstack-engineer/brief.yaml
+name: fullstack-engineer
 version: "1.0.0"
 description: Full-stack TypeScript developer with PR reviews and design QA
 extends:
-  - typescript-strict
-  - nextjs-fullstack
-  - frontend-design
+  - typescript-engineer
+  - nextjs-developer
+  - design-engineer
   - code-reviewer
 ```
 
-When a user runs `agentbrief use fullstack-dev`, the compiler:
+When a user runs `agentbrief use fullstack-engineer`, the compiler:
 
 1. **Loads all extended briefs** recursively (including their `extends`)
 2. **Uses only the combo's personality** — extended briefs' personalities are ignored
@@ -257,8 +257,8 @@ When a user runs `agentbrief use fullstack-dev`, the compiler:
 A combo brief still has its own `personality.md` (the unified voice), but typically has no local `knowledge/` or `skills/` — everything comes from the extended briefs:
 
 ```
-fullstack-dev/
-├── brief.yaml          # extends: [typescript-strict, nextjs-fullstack, ...]
+fullstack-engineer/
+├── brief.yaml          # extends: [typescript-engineer, nextjs-developer, ...]
 └── personality.md       # Unified personality for the combo
 ```
 
@@ -268,11 +268,17 @@ Every standalone brief extends `base-agent`, which provides cross-cutting skills
 
 ```
 base-agent (foundation)
-├── typescript-strict
-├── nextjs-fullstack
-├── frontend-design
+├── typescript-engineer
+├── nextjs-developer
+├── design-engineer
 ├── code-reviewer
-└── fullstack-dev (extends all 4 above)
+├── fullstack-engineer (extends all 4 above)
+│
+├── qa-engineer
+├── security-auditor
+├── devops-sre
+├── tech-writer
+└── release-engineer (extends all 4 above)
 ```
 
 All skills from the entire chain are collected, deduplicated, and deployed to the user's project.
@@ -288,8 +294,8 @@ version: "1.0.0"                  # Semver
 description: One-line description
 personality: personality.md       # Path to personality file (default: personality.md)
 extends:                          # Compose multiple briefs into one
-  - typescript-strict
-  - nextjs-fullstack
+  - typescript-engineer
+  - nextjs-developer
 knowledge:                        # Paths to knowledge files/directories
   - knowledge/
 skills:                           # Paths to skill files/directories

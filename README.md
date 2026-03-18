@@ -11,9 +11,9 @@
 One command turns your Claude Code / Cursor / OpenCode / Codex from a generic assistant into a specialized professional.
 
 ```bash
-npx agentbrief use fullstack-dev
+npx agentbrief use fullstack-engineer
 # Your agent now enforces strict TypeScript, follows Next.js conventions,
-# builds accessible UIs, and reviews PRs like a staff engineer — 8 skills in 1 command
+# builds accessible UIs, and reviews PRs like a staff engineer — 9 skills in 1 command
 ```
 
 ## What It Does
@@ -21,13 +21,13 @@ npx agentbrief use fullstack-dev
 AgentBrief compiles a **brief** (role definition + domain knowledge + executable skills) into the instruction files your AI agent reads — `CLAUDE.md`, `.cursorrules`, `AGENTS.md` — with content automatically adapted for each engine.
 
 <details>
-<summary><b>See it in action</b> — what happens when you run <code>agentbrief use fullstack-dev</code></summary>
+<summary><b>See it in action</b> — what happens when you run <code>agentbrief use fullstack-engineer</code></summary>
 
 Your `CLAUDE.md` gets this injected (existing content preserved):
 
 ```markdown
-<!-- agentbrief:fullstack-dev:start -->
-# AgentBrief: fullstack-dev
+<!-- agentbrief:fullstack-engineer:start -->
+# AgentBrief: fullstack-engineer
 
 ## Role
 You are a senior full-stack TypeScript developer. You build production
@@ -46,10 +46,10 @@ strict type safety and review your own code with principal-engineer rigor.
 - **design-review-checklist** — USE WHEN: Checking UI quality
 - **agent-browser** — USE WHEN: Visual verification needed
   ...and 4 more
-<!-- agentbrief:fullstack-dev:end -->
+<!-- agentbrief:fullstack-engineer:end -->
 ```
 
-Cleanly removable with `agentbrief eject fullstack-dev`.
+Cleanly removable with `agentbrief eject fullstack-engineer`.
 </details>
 
 ### Before vs After — real conversation difference
@@ -97,8 +97,8 @@ pnpm add -g agentbrief
 ```bash
 # Apply from the official registry (short name)
 agentbrief use security-auditor
-agentbrief use nextjs-fullstack
-agentbrief use typescript-strict
+agentbrief use nextjs-developer
+agentbrief use typescript-engineer
 
 # Apply from GitHub
 agentbrief use github:owner/repo
@@ -128,8 +128,9 @@ agentbrief init my-agent --template security
 
 | Pack | What your agent gains |
 |------|----------------------|
-| `fullstack-dev` | Strict TypeScript + Next.js conventions + accessible UI + PR reviews (9 skills) |
-| `startup-kit` | Product specs + SEO audit + growth analytics + security review + launch strategy (12 skills) |
+| `fullstack-engineer` | Strict TypeScript + Next.js conventions + accessible UI + PR reviews (9 skills) |
+| `startup-cto` | Product specs + SEO audit + growth analytics + security review + launch strategy (12 skills) |
+| `release-engineer` | QA testing + security review + CI/CD + release documentation (10 skills) |
 
 **Code Quality & Engineering:**
 
@@ -138,9 +139,9 @@ agentbrief init my-agent --template security
 | `security-auditor` | OWASP security reviewer who cites CWE numbers |
 | `code-reviewer` | Staff engineer who catches architecture + logic issues |
 | `qa-engineer` | QA who finds bugs, writes tests, fixes with atomic commits |
-| `typescript-strict` | Type safety enforcer — zero `any`, exhaustive checks |
-| `nextjs-fullstack` | Next.js 15 specialist (App Router, RSC, Tailwind) |
-| `frontend-design` | Design engineer with 80-item review checklist |
+| `typescript-engineer` | Type safety enforcer — zero `any`, exhaustive checks |
+| `nextjs-developer` | Next.js 15 specialist (App Router, RSC, Tailwind) |
+| `design-engineer` | Design engineer with 80-item review checklist |
 | `devops-sre` | SRE who sets up CI/CD, monitoring, incident response |
 | `tech-writer` | Documentation specialist with API docs + release notes |
 
@@ -151,7 +152,7 @@ agentbrief init my-agent --template security
 | `product-manager` | PM who writes PRDs with RICE/ICE prioritization |
 | `growth-engineer` | Growth hacker with SEO audit + analytics + content strategy |
 | `data-analyst` | BI analyst with metrics frameworks + SQL patterns |
-| `startup-builder` | Startup advisor with CEO review + launch planning |
+| `startup-advisor` | Startup advisor with CEO review + launch planning |
 
 Browse the **[full Catalog](./CATALOG.md)** or the **[Website](https://0xranx.github.io/agentbrief)** to see details for each brief.
 

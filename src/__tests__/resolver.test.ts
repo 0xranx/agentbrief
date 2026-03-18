@@ -94,9 +94,9 @@ describe("registry", () => {
 		const names = Object.keys(registry);
 		expect(names).toContain("security-auditor");
 		expect(names).toContain("code-reviewer");
-		expect(names).toContain("typescript-strict");
-		expect(names).toContain("nextjs-fullstack");
-		expect(names).toContain("frontend-design");
+		expect(names).toContain("typescript-engineer");
+		expect(names).toContain("nextjs-developer");
+		expect(names).toContain("design-engineer");
 	});
 
 	it("search() should return all entries with no query", async () => {

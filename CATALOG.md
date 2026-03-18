@@ -45,7 +45,7 @@ Items marked with source links are **references and inspiration** — community 
 | Role | Description | Source / Inspiration |
 |------|-------------|---------------------|
 | DevOps / SRE | Monitoring, diagnostics, incident response, IaC | [Azure SRE Agent](https://azure.microsoft.com/en-us/products/sre-agent), [fuzzylabs/sre-agent](https://github.com/fuzzylabs/sre-agent) |
-| Frontend Design | React + Tailwind + shadcn/ui design engineering | [anthropics/skills](https://github.com/anthropics/skills) (Official) |
+| Design Engineer | React + Tailwind + shadcn/ui design engineering | [anthropics/skills](https://github.com/anthropics/skills) (Official) |
 | MCP Builder | Model Context Protocol server development guide | [anthropics/skills](https://github.com/anthropics/skills) (Official) |
 | Tech Writer | Technical documentation with style guide adherence | [Fern](https://buildwithfern.com/), [Document360](https://document360.com/) |
 | Monorepo | Turborepo + pnpm workspaces conventions | [cursor.directory/monorepo](https://cursor.directory/rules/monorepo) |
@@ -57,16 +57,16 @@ Skills are **bundled into each role brief's `skills/` directory** — not instal
 | Skill | Bundled Into | Inspired By |
 |-------|-------------|-------------|
 | Architecture Review | code-reviewer | gstack /plan-eng-review |
-| Design Review Checklist (80 items + AI Slop Score) | frontend-design | gstack /plan-design-review |
-| CEO / Founder Review (10-star framework) | startup-builder | gstack /plan-ceo-review |
+| Design Review Checklist (80 items + AI Slop Score) | design-engineer | gstack /plan-design-review |
+| CEO / Founder Review (10-star framework) | startup-advisor | gstack /plan-ceo-review |
 | CI/CD GitHub Actions | devops-sre | cc-devops-skills |
 | Specification (PRD, RICE/ICE) | product-manager | the-startup /specify |
 | Release Notes | tech-writer | gstack /document-release |
 | Content Strategy | growth-engineer | — |
 | Analytics Setup | growth-engineer | — |
 | Systematic Debugging | security-auditor, devops-sre | obra/superpowers |
-| Verification | security-auditor, code-reviewer, devops-sre, startup-builder | obra/superpowers |
-| TDD | nextjs-fullstack, startup-builder | obra/superpowers |
+| Verification | security-auditor, code-reviewer, devops-sre, startup-advisor | obra/superpowers |
+| TDD | nextjs-developer, startup-advisor | obra/superpowers |
 | Brainstorming | product-manager, growth-engineer | obra/superpowers |
 | QA Test & Fix (3 tiers) | qa-engineer | gstack /qa |
 | Regression Testing | qa-engineer | — |
@@ -119,14 +119,15 @@ Skills are **bundled into each role brief's `skills/` directory** — not instal
 
 | Role | Description | Source / Inspiration |
 |------|-------------|---------------------|
-| Startup Builder | Idea validation → MVP → launch + CEO review (10-star framework) | **Included:** `agentbrief use startup-builder` — [garrytan/gstack](https://github.com/garrytan/gstack), [rameerez](https://github.com/rameerez/claude-code-startup-skills) |
+| Startup Advisor | Idea validation → MVP → launch + CEO review (10-star framework) | **Included:** `agentbrief use startup-advisor` — [garrytan/gstack](https://github.com/garrytan/gstack), [rameerez](https://github.com/rameerez/claude-code-startup-skills) |
 
 ### Combo Packs
 
 | Role | Extends | Skills Count |
 |------|---------|-------------|
-| Full-Stack Dev | typescript-strict + nextjs + frontend-design + code-reviewer | 8 skills |
-| Startup Kit | startup-builder + product-manager + growth-engineer + security-auditor | 9 skills |
+| Full-Stack Engineer | typescript-engineer + nextjs-developer + design-engineer + code-reviewer | 9 skills |
+| Startup CTO | startup-advisor + product-manager + growth-engineer + security-auditor | 12 skills |
+| Release Engineer | qa-engineer + security-auditor + devops-sre + tech-writer | 10 skills |
 
 ---
 

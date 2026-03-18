@@ -31,19 +31,19 @@ code-reviewer:
   description: Rigorous PR review — naming, tests, architecture
   trust: official
 
-typescript-strict:
-  source: github:0xranx/agentbrief/briefs/typescript-strict
-  description: TypeScript type safety guardian — zero any
+typescript-engineer:
+  source: github:0xranx/agentbrief/briefs/typescript-engineer
+  description: TypeScript type safety engineer — zero any
   trust: official
 
-nextjs-fullstack:
-  source: github:0xranx/agentbrief/briefs/nextjs-fullstack
-  description: Next.js 15 + App Router + React 19 + Tailwind
+nextjs-developer:
+  source: github:0xranx/agentbrief/briefs/nextjs-developer
+  description: Next.js 15 + App Router + React 19 + Tailwind developer
   trust: official
 
-frontend-design:
-  source: github:0xranx/agentbrief/briefs/frontend-design
-  description: React + Tailwind + shadcn/ui design engineering
+design-engineer:
+  source: github:0xranx/agentbrief/briefs/design-engineer
+  description: React + Tailwind + shadcn/ui design engineer
   trust: official
 
 # ── Operations ───────────────────────────────────────────
@@ -70,9 +70,9 @@ product-manager:
   description: PRD generation, user stories, prioritization
   trust: official
 
-startup-builder:
-  source: github:0xranx/agentbrief/briefs/startup-builder
-  description: Idea validation → MVP → launch workflow
+startup-advisor:
+  source: github:0xranx/agentbrief/briefs/startup-advisor
+  description: Idea validation → MVP → launch advisor
   trust: official
 
 qa-engineer:
@@ -87,12 +87,17 @@ data-analyst:
 
 # ── Combo Packs ──────────────────────────────────────────
 
-fullstack-dev:
-  source: github:0xranx/agentbrief/briefs/fullstack-dev
-  description: Full-stack TypeScript developer — extends typescript-strict + nextjs + design + review
+fullstack-engineer:
+  source: github:0xranx/agentbrief/briefs/fullstack-engineer
+  description: Full-stack TypeScript engineer — extends typescript-engineer + nextjs + design + review
   trust: official
 
-startup-kit:
-  source: github:0xranx/agentbrief/briefs/startup-kit
-  description: Startup builder kit — extends startup + product + growth + security
+startup-cto:
+  source: github:0xranx/agentbrief/briefs/startup-cto
+  description: Startup CTO kit — extends startup + product + growth + security
+  trust: official
+
+release-engineer:
+  source: github:0xranx/agentbrief/briefs/release-engineer
+  description: Production release engineer — QA, security, CI/CD, and documentation in one
   trust: official

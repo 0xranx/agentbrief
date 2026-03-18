@@ -180,11 +180,11 @@ A project can apply multiple briefs simultaneously. Each brief has independent m
 For complex combinations, `extends` composes multiple briefs into one:
 
 ```yaml
-# fullstack-dev/brief.yaml
+# fullstack-engineer/brief.yaml
 extends:
-  - typescript-strict
-  - nextjs-fullstack
-  - frontend-design
+  - typescript-engineer
+  - nextjs-developer
+  - design-engineer
   - code-reviewer
 ```
 

@@ -1,4 +1,4 @@
-name: startup-builder
+name: startup-advisor
 version: "1.0.0"
 description: "Startup builder — idea validation, MVP planning, go-to-market, fundraising"
 personality: personality.md

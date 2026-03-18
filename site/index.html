@@ -321,22 +321,31 @@ footer a:hover{color:var(--text)}
 
   <h3 class="brief-category" style="color:var(--purple)">⚡ Quick Start Packs</h3>
   <div class="brief-list" id="brief-list-combo">
-    <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="fullstack-dev" data-cat="combo">
-      <div class="bi-header"><span class="bi-name">fullstack-dev</span><span class="bi-tag combo">9 skills</span></div>
+    <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="fullstack-engineer" data-cat="combo">
+      <div class="bi-header"><span class="bi-name">fullstack-engineer</span><span class="bi-tag combo">9 skills</span></div>
       <span class="bi-desc">Enforces strict types, follows Next.js conventions, builds accessible UIs, and reviews PRs like a staff engineer.</span>
-      <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a> + <a href="brief.html?name=typescript-strict" onclick="event.stopPropagation()">typescript-strict</a> + <a href="brief.html?name=nextjs-fullstack" onclick="event.stopPropagation()">nextjs-fullstack</a> + <a href="brief.html?name=frontend-design" onclick="event.stopPropagation()">frontend-design</a> + <a href="brief.html?name=code-reviewer" onclick="event.stopPropagation()">code-reviewer</a></div>
+      <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a> + <a href="brief.html?name=typescript-engineer" onclick="event.stopPropagation()">typescript-engineer</a> + <a href="brief.html?name=nextjs-developer" onclick="event.stopPropagation()">nextjs-developer</a> + <a href="brief.html?name=design-engineer" onclick="event.stopPropagation()">design-engineer</a> + <a href="brief.html?name=code-reviewer" onclick="event.stopPropagation()">code-reviewer</a></div>
       <div class="bi-footer">
         <span class="bi-layers">4 knowledge</span>
-        <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use fullstack-dev</button>
+        <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use fullstack-engineer</button>
       </div>
     </div>
-    <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="startup-kit" data-cat="combo">
-      <div class="bi-header"><span class="bi-name">startup-kit</span><span class="bi-tag combo">12 skills</span></div>
+    <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="startup-cto" data-cat="combo">
+      <div class="bi-header"><span class="bi-name">startup-cto</span><span class="bi-tag combo">12 skills</span></div>
       <span class="bi-desc">Writes PRDs, runs SEO audits, catches security bugs, and plans your launch with YC-level rigor.</span>
-      <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a> + <a href="brief.html?name=startup-builder" onclick="event.stopPropagation()">startup-builder</a> + <a href="brief.html?name=product-manager" onclick="event.stopPropagation()">product-manager</a> + <a href="brief.html?name=growth-engineer" onclick="event.stopPropagation()">growth-engineer</a> + <a href="brief.html?name=security-auditor" onclick="event.stopPropagation()">security-auditor</a></div>
+      <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a> + <a href="brief.html?name=startup-advisor" onclick="event.stopPropagation()">startup-advisor</a> + <a href="brief.html?name=product-manager" onclick="event.stopPropagation()">product-manager</a> + <a href="brief.html?name=growth-engineer" onclick="event.stopPropagation()">growth-engineer</a> + <a href="brief.html?name=security-auditor" onclick="event.stopPropagation()">security-auditor</a></div>
       <div class="bi-footer">
         <span class="bi-layers">5 knowledge</span>
-        <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use startup-kit</button>
+        <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use startup-cto</button>
+      </div>
+    </div>
+    <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="release-engineer" data-cat="combo">
+      <div class="bi-header"><span class="bi-name">release-engineer</span><span class="bi-tag combo">~10 skills</span></div>
+      <span class="bi-desc">Tests thoroughly, reviews security, sets up CI/CD, and writes release documentation — your ship-to-production pipeline.</span>
+      <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a> + <a href="brief.html?name=qa-engineer" onclick="event.stopPropagation()">qa-engineer</a> + <a href="brief.html?name=devops-sre" onclick="event.stopPropagation()">devops-sre</a> + <a href="brief.html?name=tech-writer" onclick="event.stopPropagation()">tech-writer</a> + <a href="brief.html?name=security-auditor" onclick="event.stopPropagation()">security-auditor</a></div>
+      <div class="bi-footer">
+        <span class="bi-layers">5 knowledge</span>
+        <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use release-engineer</button>
       </div>
     </div>
   </div>
@@ -370,31 +379,31 @@ footer a:hover{color:var(--text)}
         <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use qa-engineer</button>
       </div>
     </div>
-    <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="typescript-strict" data-cat="dev">
-      <div class="bi-header"><span class="bi-name">typescript-strict</span><span class="bi-tag dev">2 skills</span></div>
+    <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="typescript-engineer" data-cat="dev">
+      <div class="bi-header"><span class="bi-name">typescript-engineer</span><span class="bi-tag dev">2 skills</span></div>
       <span class="bi-desc">Type safety guardian — enforces zero any, exhaustive switch checks, and strict generic constraints.</span>
       <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
-        <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use typescript-strict</button>
+        <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use typescript-engineer</button>
       </div>
     </div>
-    <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="nextjs-fullstack" data-cat="dev">
-      <div class="bi-header"><span class="bi-name">nextjs-fullstack</span><span class="bi-tag dev">3 skills</span></div>
+    <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="nextjs-developer" data-cat="dev">
+      <div class="bi-header"><span class="bi-name">nextjs-developer</span><span class="bi-tag dev">3 skills</span></div>
       <span class="bi-desc">Next.js 15 App Router specialist. Understands RSCs, Server Actions, React 19, and Tailwind.</span>
       <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
-        <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use nextjs-fullstack</button>
+        <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use nextjs-developer</button>
       </div>
     </div>
-    <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="frontend-design" data-cat="dev">
-      <div class="bi-header"><span class="bi-name">frontend-design</span><span class="bi-tag dev">3 skills</span></div>
+    <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="design-engineer" data-cat="dev">
+      <div class="bi-header"><span class="bi-name">design-engineer</span><span class="bi-tag dev">3 skills</span></div>
       <span class="bi-desc">React + Tailwind + shadcn/ui expert with an 80-item visual and accessibility design review checklist.</span>
       <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
-        <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use frontend-design</button>
+        <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use design-engineer</button>
       </div>
     </div>
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="devops-sre" data-cat="dev">
@@ -446,13 +455,13 @@ footer a:hover{color:var(--text)}
         <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use data-analyst</button>
       </div>
     </div>
-    <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="startup-builder" data-cat="biz">
-      <div class="bi-header"><span class="bi-name">startup-builder</span><span class="bi-tag biz">5 skills</span></div>
+    <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="startup-advisor" data-cat="biz">
+      <div class="bi-header"><span class="bi-name">startup-advisor</span><span class="bi-tag biz">5 skills</span></div>
       <span class="bi-desc">Guides you from idea validation to MVP to launch, with built-in YC-style CEO feedback loops.</span>
       <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
-        <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use startup-builder</button>
+        <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use startup-advisor</button>
       </div>
     </div>
   </div>
@@ -555,7 +564,7 @@ footer a:hover{color:var(--text)}
 </footer>
 
 <script>
-const cmds={npm:'npm install -g agentbrief',pnpm:'pnpm add -g agentbrief',npx:'npx agentbrief use fullstack-dev'};
+const cmds={npm:'npm install -g agentbrief',pnpm:'pnpm add -g agentbrief',npx:'npx agentbrief use fullstack-engineer'};
 function setInstaller(t){
   document.getElementById('install-text').textContent=cmds[t];
   document.querySelectorAll('.install-tab').forEach(b=>b.classList.toggle('active',b.textContent.toLowerCase().includes(t)));

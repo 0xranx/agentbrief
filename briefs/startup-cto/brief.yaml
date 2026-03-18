@@ -1,0 +1,10 @@
+name: startup-cto
+version: "1.0.0"
+description: Startup CTO — product strategy + growth engineering + launch planning + security
+personality: personality.md
+extends:
+  - base-agent
+  - startup-advisor
+  - product-manager
+  - growth-engineer
+  - security-auditor

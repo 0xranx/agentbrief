@@ -30,10 +30,10 @@ The most opinionated and highest-signal skill set. Each skill embodies a specifi
 
 | Skill | Role | What It Does | AgentBrief Relevance |
 |-------|------|-------------|---------------------|
-| `/plan-ceo-review` | Founder/CEO | Rethinks problems for "10-star product"; applies founder taste | **HIGH** — startup-builder lacks metacognitive founder layer |
+| `/plan-ceo-review` | Founder/CEO | Rethinks problems for "10-star product"; applies founder taste | **HIGH** — startup-advisor lacks metacognitive founder layer |
 | `/plan-eng-review` | Eng Manager | Architecture, data flow, edge cases, diagrams, tests | **HIGH** — code-reviewer lacks architecture-first review |
-| `/plan-design-review` | Sr Designer | 80-item checklist, "AI Slop Score" (10 anti-patterns), design system inference | **HIGH** — frontend-design is too generic |
-| `/design-consultation` | Design Partner | Builds complete design systems from scratch with research | **MED** — could enhance frontend-design |
+| `/plan-design-review` | Sr Designer | 80-item checklist, "AI Slop Score" (10 anti-patterns), design system inference | **HIGH** — design-engineer is too generic |
+| `/design-consultation` | Design Partner | Builds complete design systems from scratch with research | **MED** — could enhance design-engineer |
 | `/review` | Staff Engineer | Finds production-breaking bugs that pass CI (race conditions, trust boundaries) | **HIGH** — code-reviewer could absorb this |
 | `/ship` | Release Engineer | Sync main → run tests → push branch → open PR | **HIGH** — we have zero shipping workflow |
 | `/browse` | QA Engineer | Headless browser visual feedback; logs in and navigates | **MED** — requires Bun runtime |
@@ -62,7 +62,7 @@ The most opinionated and highest-signal skill set. Each skill embodies a specifi
 | claude-api | Development | LOW — niche |
 | doc-coauthoring | Productivity | MED |
 | docx | MS Office | **HIGH** — investors want Word docs |
-| frontend-design | Development | Already adapted |
+| design-engineer | Development | Already adapted |
 | internal-comms | Communication | MED |
 | mcp-builder | Development | LOW — niche |
 | pdf | MS Office | **HIGH** — contracts, reports |
@@ -122,14 +122,14 @@ Most valuable for enhancing devops-sre:
 |-------|-------------|---------|
 | security-auditor | 3 (security-review, systematic-debugging, verification) | Good |
 | code-reviewer | 2 (review-process, verification) | Needs enhancement |
-| typescript-strict | 1 (typescript-advanced-types) | Good |
-| nextjs-fullstack | 2 (next-best-practices with 20 refs, tdd) | Excellent |
-| frontend-design | 1 (web-design-guidelines) | Needs enhancement |
+| typescript-engineer | 1 (typescript-advanced-types) | Good |
+| nextjs-developer | 2 (next-best-practices with 20 refs, tdd) | Excellent |
+| design-engineer | 1 (web-design-guidelines) | Needs enhancement |
 | devops-sre | 3 (monitoring-observability, systematic-debugging, verification) | Needs CI/CD |
 | tech-writer | 2 (api-documentation, plan-and-execute) | Good |
 | growth-engineer | 2 (brainstorming, seo-audit) | Good |
 | product-manager | 1 (brainstorming) | Needs more skills |
-| startup-builder | 3 (launch-strategy, tdd, verification) | Needs founder layer |
+| startup-advisor | 3 (launch-strategy, tdd, verification) | Needs founder layer |
 
 ### Critical Gaps (from real entrepreneur's daily workflow):
 
@@ -162,7 +162,7 @@ Most valuable for enhancing devops-sre:
 - `architecture-review` (from gstack eng-review concept)
 - `differential-review` (security-focused diff, Trail of Bits concept)
 
-### frontend-design — Add:
+### design-engineer — Add:
 - `design-review-checklist` (from gstack's 80-item checklist + AI slop detection)
 - `design-system-builder` (from gstack's design consultation)
 
@@ -171,7 +171,7 @@ Most valuable for enhancing devops-sre:
 - `dockerfile-best-practices` (from cc-devops-skills)
 - `k8s-troubleshooting` (from cc-devops-skills)
 
-### startup-builder — Add:
+### startup-advisor — Add:
 - `ceo-review` (from gstack's founder taste approach)
 - `customer-empathy` (from rameerez, expanded)
 - `competitive-analysis` (new)

@@ -1,0 +1,10 @@
+name: fullstack-engineer
+version: "1.0.0"
+description: Full-stack TypeScript engineer — Next.js + strict types + design + code review
+personality: personality.md
+extends:
+  - base-agent
+  - typescript-engineer
+  - nextjs-developer
+  - design-engineer
+  - code-reviewer
