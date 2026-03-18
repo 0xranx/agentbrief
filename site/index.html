@@ -166,9 +166,9 @@ nav .nav-links a:hover{color:var(--text)}
 .brief-item .bi-name{font-family:var(--mono);font-size:18px;font-weight:700;color:var(--text);letter-spacing:-0.5px}
 .brief-item .bi-desc{font-size:15px;color:var(--muted);line-height:1.6;flex-grow:1;position:relative;z-index:2}
 .brief-item .bi-footer{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:20px;border-top:1px solid rgba(255,255,255,0.05);position:relative;z-index:2}
-.brief-item .bi-includes{font-size:13px;color:var(--dim);line-height:1.5;position:relative;z-index:2}
-.brief-item .bi-includes a{color:var(--muted);text-decoration:none;border-bottom:1px dashed rgba(255,255,255,.15);transition:all .15s}
-.brief-item .bi-includes a:hover{color:var(--accent-bright);border-bottom-color:var(--accent)}
+.brief-item .bi-extends{font-size:12px;color:var(--dim);line-height:1.5;position:relative;z-index:2;font-family:var(--mono)}
+.brief-item .bi-extends a{color:var(--muted);text-decoration:none;border-bottom:1px dashed rgba(255,255,255,.15);transition:all .15s}
+.brief-item .bi-extends a:hover{color:var(--accent-bright);border-bottom-color:var(--accent)}
 .brief-item .bi-layers{font-family:var(--mono);font-size:13px;color:var(--dim);display:flex;align-items:center;gap:6px}
 .brief-item .bi-cmd{font-family:var(--mono);font-size:13px;color:var(--text);background:rgba(255,255,255,0.05);padding:8px 16px;border-radius:8px;cursor:pointer;transition:all .2s;border:1px solid var(--border)}
 .brief-item .bi-cmd:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2)}
@@ -324,7 +324,7 @@ footer a:hover{color:var(--text)}
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="fullstack-dev" data-cat="combo">
       <div class="bi-header"><span class="bi-name">fullstack-dev</span><span class="bi-tag combo">9 skills</span></div>
       <span class="bi-desc">Enforces strict types, follows Next.js conventions, builds accessible UIs, and reviews PRs like a staff engineer.</span>
-      <div class="bi-includes">Combines: <a href="brief.html?name=typescript-strict">typescript-strict</a> + <a href="brief.html?name=nextjs-fullstack">nextjs-fullstack</a> + <a href="brief.html?name=frontend-design">frontend-design</a> + <a href="brief.html?name=code-reviewer">code-reviewer</a></div>
+      <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a> + <a href="brief.html?name=typescript-strict" onclick="event.stopPropagation()">typescript-strict</a> + <a href="brief.html?name=nextjs-fullstack" onclick="event.stopPropagation()">nextjs-fullstack</a> + <a href="brief.html?name=frontend-design" onclick="event.stopPropagation()">frontend-design</a> + <a href="brief.html?name=code-reviewer" onclick="event.stopPropagation()">code-reviewer</a></div>
       <div class="bi-footer">
         <span class="bi-layers">4 knowledge</span>
         <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use fullstack-dev</button>
@@ -333,7 +333,7 @@ footer a:hover{color:var(--text)}
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="startup-kit" data-cat="combo">
       <div class="bi-header"><span class="bi-name">startup-kit</span><span class="bi-tag combo">12 skills</span></div>
       <span class="bi-desc">Writes PRDs, runs SEO audits, catches security bugs, and plans your launch with YC-level rigor.</span>
-      <div class="bi-includes">Combines: <a href="brief.html?name=startup-builder">startup-builder</a> + <a href="brief.html?name=product-manager">product-manager</a> + <a href="brief.html?name=growth-engineer">growth-engineer</a> + <a href="brief.html?name=security-auditor">security-auditor</a></div>
+      <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a> + <a href="brief.html?name=startup-builder" onclick="event.stopPropagation()">startup-builder</a> + <a href="brief.html?name=product-manager" onclick="event.stopPropagation()">product-manager</a> + <a href="brief.html?name=growth-engineer" onclick="event.stopPropagation()">growth-engineer</a> + <a href="brief.html?name=security-auditor" onclick="event.stopPropagation()">security-auditor</a></div>
       <div class="bi-footer">
         <span class="bi-layers">5 knowledge</span>
         <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use startup-kit</button>
@@ -346,6 +346,7 @@ footer a:hover{color:var(--text)}
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="security-auditor" data-cat="dev">
       <div class="bi-header"><span class="bi-name">security-auditor</span><span class="bi-tag dev">4 skills</span></div>
       <span class="bi-desc">OWASP/CWE security review specialist that catches vulnerabilities before they reach production.</span>
+      <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">2 knowledge</span>
         <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use security-auditor</button>
@@ -354,6 +355,7 @@ footer a:hover{color:var(--text)}
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="code-reviewer" data-cat="dev">
       <div class="bi-header"><span class="bi-name">code-reviewer</span><span class="bi-tag dev">4 skills</span></div>
       <span class="bi-desc">Architecture review, naming conventions, test coverage analysis, and verification.</span>
+      <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
         <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use code-reviewer</button>
@@ -362,6 +364,7 @@ footer a:hover{color:var(--text)}
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="qa-engineer" data-cat="qa">
       <div class="bi-header"><span class="bi-name">qa-engineer</span><span class="bi-tag qa">3 skills</span></div>
       <span class="bi-desc">Finds edge cases, writes comprehensive test suites, and fixes bugs with atomic commits.</span>
+      <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
         <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use qa-engineer</button>
@@ -370,6 +373,7 @@ footer a:hover{color:var(--text)}
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="typescript-strict" data-cat="dev">
       <div class="bi-header"><span class="bi-name">typescript-strict</span><span class="bi-tag dev">2 skills</span></div>
       <span class="bi-desc">Type safety guardian — enforces zero any, exhaustive switch checks, and strict generic constraints.</span>
+      <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
         <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use typescript-strict</button>
@@ -378,6 +382,7 @@ footer a:hover{color:var(--text)}
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="nextjs-fullstack" data-cat="dev">
       <div class="bi-header"><span class="bi-name">nextjs-fullstack</span><span class="bi-tag dev">3 skills</span></div>
       <span class="bi-desc">Next.js 15 App Router specialist. Understands RSCs, Server Actions, React 19, and Tailwind.</span>
+      <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
         <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use nextjs-fullstack</button>
@@ -386,6 +391,7 @@ footer a:hover{color:var(--text)}
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="frontend-design" data-cat="dev">
       <div class="bi-header"><span class="bi-name">frontend-design</span><span class="bi-tag dev">3 skills</span></div>
       <span class="bi-desc">React + Tailwind + shadcn/ui expert with an 80-item visual and accessibility design review checklist.</span>
+      <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
         <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use frontend-design</button>
@@ -394,6 +400,7 @@ footer a:hover{color:var(--text)}
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="devops-sre" data-cat="dev">
       <div class="bi-header"><span class="bi-name">devops-sre</span><span class="bi-tag dev">5 skills</span></div>
       <span class="bi-desc">Site Reliability Engineer for CI/CD pipelines, monitoring setup, incident response, and IaC.</span>
+      <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
         <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use devops-sre</button>
@@ -402,6 +409,7 @@ footer a:hover{color:var(--text)}
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="tech-writer" data-cat="dev">
       <div class="bi-header"><span class="bi-name">tech-writer</span><span class="bi-tag dev">4 skills</span></div>
       <span class="bi-desc">Documentation expert focusing on clear API docs, readable release notes, and style guide adherence.</span>
+      <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
         <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use tech-writer</button>
@@ -414,6 +422,7 @@ footer a:hover{color:var(--text)}
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="product-manager" data-cat="biz">
       <div class="bi-header"><span class="bi-name">product-manager</span><span class="bi-tag biz">3 skills</span></div>
       <span class="bi-desc">Drafts concise PRDs, writes user stories with acceptance criteria, and runs RICE/ICE prioritization.</span>
+      <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
         <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use product-manager</button>
@@ -422,6 +431,7 @@ footer a:hover{color:var(--text)}
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="growth-engineer" data-cat="biz">
       <div class="bi-header"><span class="bi-name">growth-engineer</span><span class="bi-tag biz">5 skills</span></div>
       <span class="bi-desc">Performs deep SEO audits, devises content strategies, sets up analytics, and improves CRO.</span>
+      <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
         <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use growth-engineer</button>
@@ -430,6 +440,7 @@ footer a:hover{color:var(--text)}
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="data-analyst" data-cat="biz">
       <div class="bi-header"><span class="bi-name">data-analyst</span><span class="bi-tag biz">3 skills</span></div>
       <span class="bi-desc">Designs metrics frameworks, crafts complex SQL queries, and surfaces actionable data storytelling.</span>
+      <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
         <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use data-analyst</button>
@@ -438,6 +449,7 @@ footer a:hover{color:var(--text)}
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="startup-builder" data-cat="biz">
       <div class="bi-header"><span class="bi-name">startup-builder</span><span class="bi-tag biz">5 skills</span></div>
       <span class="bi-desc">Guides you from idea validation to MVP to launch, with built-in YC-style CEO feedback loops.</span>
+      <div class="bi-extends">Extends: <a href="brief.html?name=base-agent" onclick="event.stopPropagation()">base-agent</a></div>
       <div class="bi-footer">
         <span class="bi-layers">1 knowledge</span>
         <button class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use startup-builder</button>
