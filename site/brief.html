@@ -7,6 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -140,6 +142,13 @@ const CATEGORIES={
   'product-manager':'biz','growth-engineer':'biz','data-analyst':'biz',
   'startup-builder':'biz','fullstack-dev':'combo','startup-kit':'combo'
 };
+
+marked.setOptions({
+  highlight: function(code, lang) {
+    if (lang && hljs.getLanguage(lang)) return hljs.highlight(code, { language: lang }).value;
+    return hljs.highlightAuto(code).value;
+  }
+});
 
 async function loadBrief(){
   const params=new URLSearchParams(location.search);
