@@ -136,5 +136,5 @@ Users can always see what a brief injected. Open `CLAUDE.md` and read it. Use `a
 | **Security audit** | `agentbrief use security-auditor` | Agent reviews code as an OWASP security expert before release |
 | **Domain development** | `agentbrief use nextjs-developer` | Agent knows Next.js 15 App Router conventions, Tailwind patterns |
 | **Documentation** | `agentbrief use tech-writer` | Agent writes docs following the style guide with proper structure |
-| **Startup** | `agentbrief use startup-cto` | Agent combines product, growth, security, and startup advisor skills |
+| **Startup** | `agentbrief use startup-founder` | Agent combines product, growth, security, and startup advisor skills |
 | **Open source** | `agentbrief use my-project-conventions` | Contributors' agents understand your architecture and contribution guidelines |

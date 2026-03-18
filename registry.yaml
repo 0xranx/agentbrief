@@ -92,8 +92,8 @@ fullstack-engineer:
   description: Full-stack TypeScript engineer — extends typescript-engineer + nextjs + design + review
   trust: official
 
-startup-cto:
-  source: github:0xranx/agentbrief/briefs/startup-cto
+startup-founder:
+  source: github:0xranx/agentbrief/briefs/startup-founder
   description: Startup CTO kit — extends startup + product + growth + security
   trust: official
 

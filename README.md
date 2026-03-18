@@ -129,7 +129,7 @@ agentbrief init my-agent --template security
 | Pack | What your agent gains |
 |------|----------------------|
 | `fullstack-engineer` | Strict TypeScript + Next.js conventions + accessible UI + PR reviews (9 skills) |
-| `startup-cto` | Product specs + SEO audit + growth analytics + security review + launch strategy (12 skills) |
+| `startup-founder` | Product specs + SEO audit + growth analytics + security review + launch strategy (12 skills) |
 | `release-engineer` | QA testing + security review + CI/CD + release documentation (10 skills) |
 
 **Code Quality & Engineering:**

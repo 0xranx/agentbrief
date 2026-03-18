@@ -43,7 +43,7 @@ These combine multiple briefs into one — best for getting started:
 | Pack | What your agent gains | Skills |
 |------|----------------------|--------|
 | `fullstack-engineer` | Strict TypeScript + Next.js + accessible UI + PR reviews + browser testing | 9 |
-| `startup-cto` | Product specs + SEO + growth analytics + security + launch planning | 12 |
+| `startup-founder` | Product specs + SEO + growth analytics + security + launch planning | 12 |
 | `release-engineer` | QA testing + security review + CI/CD + release documentation | 10 |
 
 ### Individual Briefs
