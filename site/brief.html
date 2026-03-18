@@ -297,14 +297,9 @@ async function loadBrief(){
 
       ${knowledgeList.length?`
       <div class="detail-section">
-        <h2>Knowledge <span class="count">${knowledgeList.length}</span></h2>
-        <div class="item-list">
-          ${knowledgeList.map(k=>`
-            <div class="item-row">
-              <span class="item-name">${k}</span>
-              <span class="item-desc">Reference material — read on demand by the agent</span>
-            </div>
-          `).join('')}
+        <h2>Knowledge <span class="count" id="knowledge-count">...</span></h2>
+        <div class="item-list" id="knowledge-list">
+          <div class="item-row"><span class="item-desc" style="color:var(--dim)">Loading knowledge files...</span></div>
         </div>
       </div>`:''}
     `;
@@ -325,7 +320,7 @@ async function loadBrief(){
     // Wrap code blocks with header + copy button
     wrapCodeBlocks(document.getElementById('content'));
 
-    // Async: load skill details after page is rendered
+    // Async: load skill details
     if(skillsList.length>0){
       try{
         const skillDirRes=await fetch('https://api.github.com/repos/0xranx/agentbrief/contents/briefs/'+name+'/skills');
@@ -343,6 +338,32 @@ async function loadBrief(){
           const el=document.getElementById('skill-list');
           const countEl=document.getElementById('skill-count');
           if(el){el.innerHTML=details.map(s=>`<div class="item-row"><span class="item-name">${s.name}</span><span class="item-desc">${s.description||'—'}</span></div>`).join('')}
+          if(countEl){countEl.textContent=details.length}
+        }
+      }catch{}
+    }
+
+    // Async: load knowledge file details
+    if(knowledgeList.length>0){
+      try{
+        const knRes=await fetch('https://api.github.com/repos/0xranx/agentbrief/contents/briefs/'+name+'/knowledge');
+        if(knRes.ok){
+          const files=(await knRes.json()).filter(f=>f.type==='file'&&f.name.endsWith('.md'));
+          const details=await Promise.all(files.map(async f=>{
+            try{
+              const r=await fetch(BASE+name+'/knowledge/'+f.name);
+              if(!r.ok)return{name:f.name,description:''};
+              const text=await r.text();
+              // Extract first heading or first non-empty line as description
+              const heading=text.match(/^#\s+(.+)$/m);
+              if(heading)return{name:f.name.replace(/\.md$/,''),description:heading[1]};
+              const firstLine=text.split('\n').find(l=>l.trim()&&!l.startsWith('#'));
+              return{name:f.name.replace(/\.md$/,''),description:firstLine?firstLine.trim().substring(0,100):''};
+            }catch{return{name:f.name.replace(/\.md$/,''),description:''}}
+          }));
+          const el=document.getElementById('knowledge-list');
+          const countEl=document.getElementById('knowledge-count');
+          if(el){el.innerHTML=details.map(k=>`<div class="item-row"><span class="item-name">${k.name}</span><span class="item-desc">${k.description||'Domain reference material'}</span></div>`).join('')}
           if(countEl){countEl.textContent=details.length}
         }
       }catch{}
