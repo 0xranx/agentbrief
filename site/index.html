@@ -188,8 +188,8 @@ footer a:hover{color:var(--muted)}
 
   <h3 style="font-size:14px;color:var(--purple);margin:20px 0 12px;font-weight:600">⚡ Quick Start Packs — best for getting started</h3>
   <div class="brief-list" id="brief-list-combo">
-    <div class="brief-item" onclick="openBrief(this)" data-name="fullstack-dev" data-cat="combo"><span class="bi-name">fullstack-dev</span><span class="bi-desc">TypeScript + Next.js + design + code review — 4 briefs in 1</span><span class="bi-tag combo">8 skills</span><span class="bi-layers">4 knowledge</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use fullstack-dev</span></div>
-    <div class="brief-item" onclick="openBrief(this)" data-name="startup-kit" data-cat="combo"><span class="bi-name">startup-kit</span><span class="bi-desc">Product + growth + security + startup — everything to launch</span><span class="bi-tag combo">11 skills</span><span class="bi-layers">5 knowledge</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use startup-kit</span></div>
+    <div class="brief-item" onclick="openBrief(this)" data-name="fullstack-dev" data-cat="combo"><span class="bi-name">fullstack-dev</span><span class="bi-desc">Your agent enforces strict types, follows Next.js conventions, builds accessible UIs, and reviews PRs</span><span class="bi-tag combo">8 skills</span><span class="bi-layers">4 knowledge</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use fullstack-dev</span></div>
+    <div class="brief-item" onclick="openBrief(this)" data-name="startup-kit" data-cat="combo"><span class="bi-name">startup-kit</span><span class="bi-desc">Your agent writes PRDs, runs SEO audits, catches security bugs, and plans your launch</span><span class="bi-tag combo">11 skills</span><span class="bi-layers">5 knowledge</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use startup-kit</span></div>
   </div>
 
   <h3 style="font-size:14px;color:var(--accent);margin:24px 0 12px;font-weight:600">Code Quality & Engineering</h3>
@@ -292,7 +292,7 @@ footer a:hover{color:var(--muted)}
 </footer>
 
 <script>
-const cmds={npm:'npm install -g agentbrief',pnpm:'pnpm add -g agentbrief',npx:'npx agentbrief use security-auditor'};
+const cmds={npm:'npm install -g agentbrief',pnpm:'pnpm add -g agentbrief',npx:'npx agentbrief use fullstack-dev'};
 function setInstaller(t){
   document.getElementById('install-text').textContent=cmds[t];
   document.querySelectorAll('.install-tab').forEach(b=>b.classList.toggle('active',b.textContent.toLowerCase().includes(t)));

@@ -11,8 +11,9 @@
 One command turns your Claude Code / Cursor / OpenCode / Codex from a generic assistant into a specialized professional.
 
 ```bash
-npx agentbrief use security-auditor
-# Your AI coding agent is now an OWASP security auditor
+npx agentbrief use fullstack-dev
+# Your agent now enforces strict TypeScript, follows Next.js conventions,
+# builds accessible UIs, and reviews PRs like a staff engineer — 8 skills in 1 command
 ```
 
 ## What It Does

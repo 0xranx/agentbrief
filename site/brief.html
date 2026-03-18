@@ -227,7 +227,8 @@ async function loadBrief(){
 
       ${extendsList.length?`
       <div class="detail-section">
-        <h2>Extends</h2>
+        <h2>What You Get</h2>
+        <p style="font-size:14px;color:var(--muted);margin-bottom:12px">This combo pack bundles ${extendsList.length} specialized briefs into one. After applying, your agent gains all their skills and knowledge — with one command.</p>
         <div class="extends-list">
           ${extendsList.map(e=>`<a href="brief.html?name=${e}" class="extends-pill">${e}</a>`).join('')}
         </div>
