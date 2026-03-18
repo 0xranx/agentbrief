@@ -292,3 +292,125 @@ Run `agentbrief eject <name>` again. If content remains, manually delete the mar
 agentbrief update        # Updates all applied briefs
 agentbrief update <name> # Updates a specific brief
 ```
+
+## CLI Reference
+
+Complete reference for all commands and options.
+
+### `use <source>`
+
+Apply a brief to the current project.
+
+```bash
+agentbrief use security-auditor              # From the official registry
+agentbrief use github:owner/repo             # From GitHub
+agentbrief use github:owner/repo@v1.0        # From GitHub at a specific tag
+agentbrief use github:owner/repo/subdir      # Subdirectory in a GitHub repo
+agentbrief use ./path/to/my-brief            # From a local directory
+agentbrief use fullstack-engineer --dir /path/to/project  # Apply to a different directory
+```
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `-d, --dir <path>` | Target project directory | `.` (current directory) |
+
+### `eject <name>`
+
+Remove a brief from the current project. Cleans injected content from engine files, deletes copied knowledge/skills, and updates the lock file.
+
+```bash
+agentbrief eject security-auditor
+agentbrief eject security-auditor --dir /path/to/project
+```
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `-d, --dir <path>` | Target project directory | `.` |
+
+### `list`
+
+Show all briefs currently applied to the project.
+
+```bash
+agentbrief list
+agentbrief list --dir /path/to/project
+```
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `-d, --dir <path>` | Target project directory | `.` |
+
+### `show <name>`
+
+Print the compiled content that was injected into `CLAUDE.md` for a specific brief.
+
+```bash
+agentbrief show security-auditor
+```
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `-d, --dir <path>` | Target project directory | `.` |
+
+### `update [name]`
+
+Re-apply briefs from their original sources, fetching the latest version.
+
+```bash
+agentbrief update                  # Update all applied briefs
+agentbrief update security-auditor # Update a specific brief
+```
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `-d, --dir <path>` | Target project directory | `.` |
+
+### `preview <source>`
+
+Preview the compiled output for a brief without applying it. Useful for brief creators to see what gets injected.
+
+```bash
+agentbrief preview security-auditor                  # CLAUDE.md output (full)
+agentbrief preview security-auditor --engine cursor   # .cursorrules output (minimal)
+agentbrief preview ./my-brief --engine opencode       # AGENTS.md output (concise)
+```
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `-e, --engine <engine>` | Target engine: `claude-code`, `cursor`, `opencode`, `codex` | `claude-code` |
+
+### `search [query]`
+
+Browse available briefs from the official registry. Optionally filter by keyword.
+
+```bash
+agentbrief search              # List all briefs
+agentbrief search security     # Filter by keyword
+agentbrief search startup      # Filter by keyword
+```
+
+### `init <name>`
+
+Scaffold a new brief with the standard directory structure. Creates `brief.yaml`, `personality.md`, and `knowledge/` directory.
+
+```bash
+agentbrief init my-agent                          # Create in ./my-agent/
+agentbrief init my-agent --dir /path/to/dir       # Create in a specific directory
+agentbrief init my-agent --description "My agent" # Set the description
+agentbrief init my-agent --template security      # Start from a template
+```
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `-d, --dir <path>` | Target directory | `./<name>` |
+| `--description <text>` | Brief description | `<name> agent brief` |
+| `-t, --template <name>` | Use a template (e.g., `security`) | none |
+
+Generated structure:
+
+```
+my-agent/
+├── brief.yaml          # name, version, description, knowledge ref
+├── personality.md       # Role / Tone / Constraints (with guide comments)
+└── knowledge/           # Add your domain reference materials here
+```
