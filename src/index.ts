@@ -227,13 +227,12 @@ export async function init(opts: InitOpts): Promise<string> {
 	}
 
 	// Default scaffolding (no template)
-	const spec: BriefSpec = {
+	const spec: Record<string, unknown> = {
 		name: opts.name,
 		version: "0.1.0",
 		description: opts.description || `${opts.name} agent brief`,
 		personality: "personality.md",
 		knowledge: ["knowledge/"],
-		skills: [],
 	};
 
 	await writeFile(join(targetDir, "brief.yaml"), yaml.dump(spec, { lineWidth: 120 }), "utf-8");
@@ -241,20 +240,20 @@ export async function init(opts: InitOpts): Promise<string> {
 	await writeFile(
 		join(targetDir, "personality.md"),
 		[
-			`# ${opts.name}`,
-			"",
 			"## Role",
 			"",
-			"Describe the role and responsibilities of this agent.",
+			`<!-- Write 1-2 sentences: Who is this agent? What does it do? -->`,
+			`<!-- Example: You are a senior security auditor who reviews code for vulnerabilities. -->`,
 			"",
-			"## Tone & Style",
+			"## Tone",
 			"",
-			"Describe the communication style, tone, and language preferences.",
+			`<!-- How does this agent communicate? List 2-3 style rules. -->`,
+			`<!-- Example: - Direct and specific — cite exact issues with line numbers -->`,
 			"",
 			"## Constraints",
 			"",
-			"- List behavioral constraints here",
-			"- Things the agent must not do",
+			`<!-- What must this agent NEVER do? List hard rules. -->`,
+			`<!-- Example: - Never approve code with known injection vectors -->`,
 			"",
 		].join("\n"),
 		"utf-8",
@@ -285,6 +284,20 @@ export async function show(name: string, projectDir?: string): Promise<string | 
 	if (startIdx === -1 || endIdx === -1) return null;
 
 	return content.slice(startIdx + startMarker.length, endIdx).trim();
+}
+
+// ── preview ─────────────────────────────────────────────
+
+export async function preview(source: string, engine?: import("./types.js").EngineTarget): Promise<string> {
+	const resolved = await resolveSource(source);
+	const spec = await loadBrief(resolved.path);
+	const personality = await loadPersonality(resolved.path, spec);
+
+	// Load skill metas from source directory
+	const skillMetas = await loadSkillMetas(resolved.path, spec);
+
+	const targetEngine = engine || "claude-code";
+	return compile({ spec, personality, engine: targetEngine, skillMetas });
 }
 
 // ── update ──────────────────────────────────────────────

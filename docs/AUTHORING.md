@@ -284,10 +284,21 @@ agentbrief use github:you/my-briefs/security-auditor
 
 ### 4. Get listed in the official registry
 
-Submit a PR to [0xranx/agentbrief](https://github.com/0xranx/agentbrief) adding your brief to `registry.yaml`. Once merged, users can install with just the name:
+Submit a PR to [0xranx/agentbrief](https://github.com/0xranx/agentbrief) adding your brief to `registry.yaml`. See the **[Contributing Guide](https://github.com/0xranx/agentbrief/blob/main/CONTRIBUTING.md)** for requirements, trust levels, and the review process.
+
+Once merged, users can install with just the name:
 
 ```bash
 agentbrief use my-agent
+```
+
+### 5. Preview before publishing
+
+Use `agentbrief preview` to see exactly what gets injected — without creating any files:
+
+```bash
+agentbrief preview ./my-agent                # CLAUDE.md output (full)
+agentbrief preview ./my-agent --engine cursor # .cursorrules output (minimal)
 ```
 
 ## Best Practices

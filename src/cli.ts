@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { Command } from "commander";
-import { eject, init, list, search, show, update, use } from "./index.js";
+import { eject, init, list, preview, search, show, update, use } from "./index.js";
 
 const program = new Command();
 
@@ -144,6 +144,22 @@ program
 		}
 	});
 
+// ── preview ─────────────────────────────────────────────
+
+program
+	.command("preview <source>")
+	.description("Preview compiled output without applying (for brief creators)")
+	.option("-e, --engine <engine>", "Target engine (claude-code, cursor, opencode, codex)", "claude-code")
+	.action(async (source: string, opts: { engine: string }) => {
+		try {
+			const content = await preview(source, opts.engine as "claude-code" | "cursor" | "opencode" | "codex");
+			console.log(content);
+		} catch (err) {
+			console.error(`Error: ${(err as Error).message}`);
+			process.exit(1);
+		}
+	});
+
 // ── search ──────────────────────────────────────────────
 
 program
@@ -183,7 +199,15 @@ program
 			const dir = opts.dir || `./${name}`;
 			const result = await init({ name, dir, description: opts.description, template: opts.template });
 			console.log(`✓ Created brief "${name}" at ${result}`);
-			console.log("  Edit brief.yaml and personality.md to define your agent role.");
+			console.log("");
+			console.log("  Next steps:");
+			console.log("  1. Edit personality.md — define Role, Tone, and Constraints");
+			console.log("  2. Add domain knowledge to knowledge/");
+			console.log("  3. Add skills to skills/ (each skill = directory with SKILL.md)");
+			console.log(`  4. Test locally: agentbrief use ./${name}`);
+			console.log(`  5. Publish: git push → others use github:you/${name}`);
+			console.log("");
+			console.log("  Docs: https://0xranx.github.io/agentbrief/docs.html#AUTHORING");
 		} catch (err) {
 			console.error(`Error: ${(err as Error).message}`);
 			process.exit(1);

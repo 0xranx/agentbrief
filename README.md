@@ -146,7 +146,19 @@ my-brief/
         └── ...         #   any supporting files
 ```
 
-See `examples/security-auditor/` for a complete example. Read the **[Authoring Guide](./docs/AUTHORING.md)** to create your own.
+See `examples/security-auditor/` for a complete example.
+
+## Create & Publish Your Own
+
+Share your expertise as a reusable brief:
+
+1. **Scaffold** — `agentbrief init my-agent` (or `--template security`)
+2. **Customize** — Edit `personality.md`, add `knowledge/` and `skills/`
+3. **Test** — `agentbrief use ./my-agent` in a temp directory
+4. **Preview** — `agentbrief preview ./my-agent` to see compiled output
+5. **Publish** — Push to GitHub → `agentbrief use github:you/my-agent`
+
+Want it in the official registry? [Submit a PR](./CONTRIBUTING.md). Read the full **[Authoring Guide](https://0xranx.github.io/agentbrief/docs.html#AUTHORING)**.
 
 ## Supported Engines
 
@@ -167,6 +179,11 @@ AgentBrief compiles each brief with optimizations for the target engine:
 ```
 
 Commit the engine instruction files (`CLAUDE.md`, `.cursorrules`, `AGENTS.md`) so your team shares the same agent behavior.
+
+## Community
+
+- [GitHub Discussions](https://github.com/0xranx/agentbrief/discussions) — Questions, showcase your briefs, feature ideas
+- [Contributing Guide](./CONTRIBUTING.md) — How to submit briefs to the registry
 
 ## License
 
