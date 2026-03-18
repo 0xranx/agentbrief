@@ -86,6 +86,12 @@ nav .nav-links a:hover{color:var(--text)}
 .personality-content pre{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;margin:0 0 14px;overflow-x:auto}
 .personality-content pre code{background:none;padding:0;font-size:12px;line-height:1.5;color:var(--muted)}
 
+/* Enhanced CLI highlighting */
+.cli-prompt{color:var(--dim);user-select:none}
+.cli-cmd{color:#79c0ff}
+.cli-flag{color:var(--orange)}
+.cli-arg{color:var(--green)}
+
 /* Knowledge & Skills lists */
 .item-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border-radius:var(--radius);overflow:hidden}
 .item-row{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:var(--surface)}
@@ -151,6 +157,17 @@ const CATEGORIES={
 };
 
 marked.setOptions({ langPrefix: 'language-' });
+
+function enhanceBash(html) {
+  return html.split('\n').map(line => {
+    if (line.startsWith('<span class="hljs-')) return line;
+    line = line.replace(/^(\$\s)/, '<span class="cli-prompt">$1</span>');
+    line = line.replace(/(\s)(--?\w[\w-]*)/g, '$1<span class="cli-flag">$2</span>');
+    line = line.replace(/^(<span class="cli-prompt">[^<]*<\/span>)?(\s*)(npm|npx|pnpm|yarn|git|agentbrief|cd|cp|mkdir|rm|curl|node|docker|gh|brew)\b/,
+      (m, prompt, ws, cmd) => (prompt||'') + ws + '<span class="cli-cmd">' + cmd + '</span>');
+    return line;
+  }).join('\n');
+}
 
 async function loadBrief(){
   const params=new URLSearchParams(location.search);
@@ -256,6 +273,9 @@ async function loadBrief(){
         block.classList.add('hljs', 'language-' + (result.language || 'plaintext'));
       } else {
         hljs.highlightElement(block);
+      }
+      if (block.className.match(/language-(bash|shell|sh)/)) {
+        block.innerHTML = enhanceBash(block.innerHTML);
       }
     });
 

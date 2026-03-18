@@ -75,6 +75,12 @@ nav .nav-links a.active{color:var(--text)}
 .md hr{border:none;border-top:1px solid var(--border);margin:24px 0}
 .md a{color:var(--accent)}
 
+/* Enhanced CLI highlighting */
+.cli-prompt{color:var(--dim);user-select:none}
+.cli-cmd{color:#79c0ff}
+.cli-flag{color:var(--orange)}
+.cli-arg{color:var(--green)}
+
 @media(max-width:768px){
   .sidebar{display:none}
   .content{padding:24px 16px}
@@ -117,8 +123,24 @@ nav .nav-links a.active{color:var(--text)}
 </div>
 
 <script>
-// Configure marked to add language class to code blocks
 marked.setOptions({ langPrefix: 'language-' });
+
+// Enhanced bash/shell highlighting for CLI-centric code blocks
+const CLI_CMDS = /^(npm|npx|pnpm|yarn|git|agentbrief|cd|cp|mkdir|rm|curl|node|docker|gh|brew)\b/;
+function enhanceBash(html) {
+  return html.split('\n').map(line => {
+    // Skip lines already fully wrapped by hljs (e.g. comments)
+    if (line.startsWith('<span class="hljs-')) return line;
+    // $ or # prompt at start of line
+    line = line.replace(/^(\$\s)/, '<span class="cli-prompt">$1</span>');
+    // Flags: -x, --flag, --flag=val
+    line = line.replace(/(\s)(--?\w[\w-]*)/g, '$1<span class="cli-flag">$2</span>');
+    // Known commands (first word or after prompt)
+    line = line.replace(/^(<span class="cli-prompt">[^<]*<\/span>)?(\s*)(npm|npx|pnpm|yarn|git|agentbrief|cd|cp|mkdir|rm|curl|node|docker|gh|brew)\b/,
+      (m, prompt, ws, cmd) => (prompt||'') + ws + '<span class="cli-cmd">' + cmd + '</span>');
+    return line;
+  }).join('\n');
+}
 
 const BASE = 'https://raw.githubusercontent.com/0xranx/agentbrief/main/';
 const paths = {
@@ -150,13 +172,16 @@ async function load(key) {
     container.innerHTML = marked.parse(md);
     // Apply syntax highlighting to all code blocks
     container.querySelectorAll('pre code').forEach(block => {
-      // Auto-detect language for untagged code blocks
       if (!block.className) {
         const result = hljs.highlightAuto(block.textContent);
         block.innerHTML = result.value;
         block.classList.add('hljs', 'language-' + (result.language || 'plaintext'));
       } else {
         hljs.highlightElement(block);
+      }
+      // Enhance bash/shell blocks with CLI-aware coloring
+      if (block.className.match(/language-(bash|shell|sh)/)) {
+        block.innerHTML = enhanceBash(block.innerHTML);
       }
     });
   } catch (e) {
