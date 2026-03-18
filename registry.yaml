@@ -12,6 +12,13 @@
 #   verified  — Community briefs reviewed and approved via PR
 #   community — Listed but not reviewed (shown with warning)
 
+# ── Foundation ────────────────────────────────────────────
+
+base-agent:
+  source: github:0xranx/agentbrief/briefs/base-agent
+  description: Foundation layer — browser automation and cross-cutting skills
+  trust: official
+
 # ── Development ──────────────────────────────────────────
 
 security-auditor:

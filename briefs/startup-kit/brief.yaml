@@ -3,6 +3,7 @@ version: "1.0.0"
 description: Startup builder kit — product + growth + launch + security
 personality: personality.md
 extends:
+  - base-agent
   - startup-builder
   - product-manager
   - growth-engineer

@@ -1,0 +1,6 @@
+name: base-agent
+version: "1.0.0"
+description: Foundation layer — cross-cutting skills every AI coding agent should have
+personality: personality.md
+skills:
+  - skills/

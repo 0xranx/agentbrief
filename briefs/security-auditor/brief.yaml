@@ -6,6 +6,8 @@ knowledge:
   - knowledge/
 skills:
   - skills/
+extends:
+  - base-agent
 scale:
   timeout: 120
   engine: claude-code

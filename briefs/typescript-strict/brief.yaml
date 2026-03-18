@@ -6,3 +6,5 @@ knowledge:
   - knowledge/
 skills:
   - skills/
+extends:
+  - base-agent
