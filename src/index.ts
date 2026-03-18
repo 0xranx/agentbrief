@@ -158,12 +158,18 @@ export async function use(opts: UseOpts): Promise<UseResult> {
 	const claudeMdPath = join(projectDir, "CLAUDE.md");
 	const claudeLines = existsSync(claudeMdPath) ? (await readFile(claudeMdPath, "utf-8")).split("\n").length : 0;
 
+	// Count actual deployed files (not brief.yaml entries — extends may add more)
+	const deployedKnowledgeDir = join(briefDataDir, "knowledge");
+	const deployedKnowledge = existsSync(deployedKnowledgeDir)
+		? readdirSync(deployedKnowledgeDir).filter((f) => !f.startsWith(".")).length
+		: 0;
+
 	return {
 		name: spec.name,
 		version: spec.version,
 		description: spec.description,
-		knowledgeCount: spec.knowledge?.length ?? 0,
-		skillsCount: spec.skills?.length ?? 0,
+		knowledgeCount: deployedKnowledge,
+		skillsCount: skillMetas.length,
 		files: injectedFiles,
 		claudeLines,
 	};

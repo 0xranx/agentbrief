@@ -38,9 +38,9 @@ program
 				console.log(`  Skills:       ${result.skillsCount} ${result.skillsCount === 1 ? "entry" : "entries"}`);
 			}
 			console.log("");
-			console.log(`  Injected into: ${result.files.join(", ")}`);
+			console.log(`  Injected into: ${result.files.join(", ")} (${result.claudeLines} lines in CLAUDE.md)`);
 			console.log("");
-			console.log("  Start a new conversation with your AI coding agent to see the effect.");
+			console.log("  Open a new conversation with your AI coding agent to see the difference.");
 			if (result.claudeLines > 500) {
 				console.log("");
 				console.log(
