@@ -96,7 +96,13 @@ export async function use(opts: UseOpts): Promise<UseResult> {
 		await mkdir(knowledgeDir, { recursive: true });
 		for (const k of spec.knowledge) {
 			const src = join(resolved.path, k);
-			if (existsSync(src)) {
+			if (!existsSync(src)) continue;
+			if (statSync(src).isDirectory()) {
+				// Copy directory contents (not the directory itself) to avoid double-nesting
+				for (const child of readdirSync(src)) {
+					await cp(join(src, child), join(knowledgeDir, child), { recursive: true });
+				}
+			} else {
 				await cp(src, join(knowledgeDir, k), { recursive: true });
 			}
 		}

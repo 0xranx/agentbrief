@@ -20,18 +20,21 @@ function resolveMode(engine?: EngineTarget): CompileMode {
 // ── Text reduction helpers ─────────────────────────────
 
 /**
- * Aggressive reduction for Cursor: keep headings, lists, and code blocks only.
- * Drops prose paragraphs entirely.
+ * Reduction for Cursor: keep headings, first prose paragraph after each heading,
+ * lists, and code blocks. Drops subsequent prose paragraphs.
  */
 export function condense(text: string): string {
 	const lines = text.split("\n");
 	const result: string[] = [];
 	let inCodeBlock = false;
+	let justSawHeading = false;
+	let keptProseAfterHeading = false;
 
 	for (const line of lines) {
 		if (line.trimStart().startsWith("```")) {
 			inCodeBlock = !inCodeBlock;
 			result.push(line);
+			justSawHeading = false;
 			continue;
 		}
 		if (inCodeBlock) {
@@ -41,18 +44,36 @@ export function condense(text: string): string {
 		// Keep headings
 		if (/^#{1,6}\s/.test(line)) {
 			result.push(line);
+			justSawHeading = true;
+			keptProseAfterHeading = false;
 			continue;
 		}
 		// Keep list items (-, *, numbered)
 		if (/^\s*[-*]\s/.test(line) || /^\s*\d+\.\s/.test(line)) {
 			result.push(line);
+			justSawHeading = false;
 			continue;
 		}
 		// Keep empty lines (preserve structure)
 		if (line.trim() === "") {
 			result.push(line);
+			// Empty line after heading prose means we're done with that paragraph
+			if (keptProseAfterHeading) {
+				justSawHeading = false;
+			}
+			continue;
 		}
-		// Drop prose paragraphs
+		// Keep first prose paragraph after a heading (the identity/context statement)
+		if (justSawHeading && !keptProseAfterHeading) {
+			result.push(line);
+			keptProseAfterHeading = true;
+			continue;
+		}
+		if (keptProseAfterHeading && justSawHeading) {
+			// Still in the first paragraph after heading (no blank line yet)
+			result.push(line);
+		}
+		// Drop other prose paragraphs
 	}
 
 	// Collapse 3+ consecutive empty lines into 2
@@ -150,7 +171,14 @@ function buildKnowledge(spec: BriefSpec, mode: CompileMode): string {
 	}
 
 	for (const k of spec.knowledge) {
-		lines.push(`- \`.agentbrief/${spec.name}/knowledge/${k}\``);
+		// Strip trailing slash for directory entries to avoid double-nesting in path display
+		const cleanK = k.replace(/\/$/, "");
+		// If the entry is a directory reference (e.g. "knowledge/"), point to the flattened dir
+		if (cleanK === "knowledge" || k.endsWith("/")) {
+			lines.push(`- \`.agentbrief/${spec.name}/knowledge/\``);
+		} else {
+			lines.push(`- \`.agentbrief/${spec.name}/knowledge/${cleanK}\``);
+		}
 	}
 
 	return lines.join("\n");

@@ -69,9 +69,8 @@ describe("examples/security-auditor", () => {
 		expect(cursor).toContain("## Constraints");
 		expect(cursor).toContain("- Never approve code containing known injection vectors");
 
-		// Prose dropped
-		expect(cursor).not.toContain("You are a senior application security auditor");
-		expect(cursor).not.toContain("Do not soften critical findings");
+		// First paragraph after heading IS kept (identity statement)
+		expect(cursor).toContain("You are a senior application security auditor");
 
 		// No knowledge or scale
 		expect(cursor).not.toContain("Knowledge");
@@ -96,14 +95,8 @@ describe("examples/security-auditor", () => {
 
 	it("should copy knowledge files", async () => {
 		await use({ source: briefDir, projectDir });
-		const knowledgePath = join(
-			projectDir,
-			".agentbrief",
-			"security-auditor",
-			"knowledge",
-			"knowledge",
-			"owasp-cheatsheet.md",
-		);
+		// Knowledge directory contents are flattened (no double-nesting)
+		const knowledgePath = join(projectDir, ".agentbrief", "security-auditor", "knowledge", "owasp-cheatsheet.md");
 		expect(existsSync(knowledgePath)).toBe(true);
 		const content = await readFile(knowledgePath, "utf-8");
 		expect(content).toContain("OWASP Top 10");

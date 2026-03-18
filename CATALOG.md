@@ -36,9 +36,9 @@ Items marked with source links are **references and inspiration** — community 
 
 | Role | Description | Source / Inspiration |
 |------|-------------|---------------------|
-| Security Auditor | OWASP/CWE security review specialist | **Included:** `examples/security-auditor/` |
-| Code Reviewer | Rigorous PR review — naming, tests, architecture, maintainability | [steipete/agent-rules](https://github.com/steipete/agent-rules), [cursor.directory](https://cursor.directory/) |
-| Testing & QA | Jest/Vitest/Playwright test strategy and patterns | [cursor.directory/testing](https://cursor.directory/rules/testing) |
+| Security Auditor | OWASP/CWE security review specialist | **Included:** `agentbrief use security-auditor` |
+| Code Reviewer | Rigorous PR review — architecture review, naming, tests | **Included:** `agentbrief use code-reviewer` — [garrytan/gstack](https://github.com/garrytan/gstack) |
+| QA Engineer | Automated QA — find bugs, write tests, fix with atomic commits | **Included:** `agentbrief use qa-engineer` — [garrytan/gstack](https://github.com/garrytan/gstack) |
 
 ### Toolchain
 
@@ -50,17 +50,28 @@ Items marked with source links are **references and inspiration** — community 
 | Tech Writer | Technical documentation with style guide adherence | [Fern](https://buildwithfern.com/), [Document360](https://document360.com/) |
 | Monorepo | Turborepo + pnpm workspaces conventions | [cursor.directory/monorepo](https://cursor.directory/rules/monorepo) |
 
-### Methodology (bundled into role briefs)
+### Skills (bundled into role briefs)
 
-Methodology skills from [obra/superpowers](https://github.com/obra/superpowers) (90.6k★) are **bundled into each role brief's `skills/` directory** — not installed separately. For example, `security-auditor` includes systematic debugging and verification; `nextjs-fullstack` includes TDD.
+Skills are **bundled into each role brief's `skills/` directory** — not installed separately. Sources include [obra/superpowers](https://github.com/obra/superpowers) (90.6k★), [garrytan/gstack](https://github.com/garrytan/gstack) (YC), [trailofbits/skills](https://github.com/trailofbits/skills), and [cc-devops-skills](https://github.com/akin-ozer/cc-devops-skills).
 
-| Methodology | Bundled Into |
-|-------------|-------------|
-| Systematic Debugging | security-auditor, devops-sre |
-| Verification | security-auditor, code-reviewer, devops-sre, startup-builder |
-| TDD | nextjs-fullstack, startup-builder |
-| Plan & Execute | tech-writer |
-| Brainstorming | product-manager, growth-engineer |
+| Skill | Bundled Into | Inspired By |
+|-------|-------------|-------------|
+| Architecture Review | code-reviewer | gstack /plan-eng-review |
+| Design Review Checklist (80 items + AI Slop Score) | frontend-design | gstack /plan-design-review |
+| CEO / Founder Review (10-star framework) | startup-builder | gstack /plan-ceo-review |
+| CI/CD GitHub Actions | devops-sre | cc-devops-skills |
+| Specification (PRD, RICE/ICE) | product-manager | the-startup /specify |
+| Release Notes | tech-writer | gstack /document-release |
+| Content Strategy | growth-engineer | — |
+| Analytics Setup | growth-engineer | — |
+| Systematic Debugging | security-auditor, devops-sre | obra/superpowers |
+| Verification | security-auditor, code-reviewer, devops-sre, startup-builder | obra/superpowers |
+| TDD | nextjs-fullstack, startup-builder | obra/superpowers |
+| Brainstorming | product-manager, growth-engineer | obra/superpowers |
+| QA Test & Fix (3 tiers) | qa-engineer | gstack /qa |
+| Regression Testing | qa-engineer | — |
+| SQL Query Builder | data-analyst | — |
+| Metrics Framework | data-analyst | — |
 
 ---
 
@@ -68,9 +79,9 @@ Methodology skills from [obra/superpowers](https://github.com/obra/superpowers) 
 
 | Role | Description | Source / Inspiration |
 |------|-------------|---------------------|
-| Product Manager | PRD generation, user stories, technical specs, prioritization | [deanpeters/product-manager-prompts](https://github.com/deanpeters/product-manager-prompts), [ChatPRD](https://www.chatprd.ai/) (100k+ PMs) |
+| Product Manager | PRD generation, user stories, specs, prioritization (RICE/ICE) | **Included:** `agentbrief use product-manager` — [ChatPRD](https://www.chatprd.ai/) |
+| Data Analyst | Metrics framework, SQL queries, dashboards, data storytelling | **Included:** `agentbrief use data-analyst` |
 | UX Designer | User experience design, prototyping, usability heuristics | [Figma Make](https://www.figma.com/make/), [Figr](https://figr.design/) |
-| Data Analyst | Business intelligence, metrics analysis, dashboard design | [BestPromptsDB](https://www.bestpromptsdb.com/business-analysis/), [Solutions Review](https://solutionsreview.com/business-intelligence/the-best-ai-agents-for-data-analysis/) |
 
 ---
 
@@ -108,7 +119,14 @@ Methodology skills from [obra/superpowers](https://github.com/obra/superpowers) 
 
 | Role | Description | Source / Inspiration |
 |------|-------------|---------------------|
-| Startup Builder | Idea validation → MVP → launch — full startup workflow | [rameerez/claude-code-startup-skills](https://github.com/rameerez/claude-code-startup-skills), [rsmdt/the-startup](https://github.com/rsmdt/the-startup) |
+| Startup Builder | Idea validation → MVP → launch + CEO review (10-star framework) | **Included:** `agentbrief use startup-builder` — [garrytan/gstack](https://github.com/garrytan/gstack), [rameerez](https://github.com/rameerez/claude-code-startup-skills) |
+
+### Combo Packs
+
+| Role | Extends | Skills Count |
+|------|---------|-------------|
+| Full-Stack Dev | typescript-strict + nextjs + frontend-design + code-reviewer | 8 skills |
+| Startup Kit | startup-builder + product-manager + growth-engineer + security-auditor | 9 skills |
 
 ---
 
@@ -118,10 +136,13 @@ Large curated collections you can browse for additional roles:
 
 | Collection | Scale | Source |
 |-----------|-------|--------|
-| Anthropic Official Skills | Official skill packages | [anthropics/skills](https://github.com/anthropics/skills) |
-| Awesome Claude Skills | Curated selection | [travisvn/awesome-claude-skills](https://github.com/travisvn/awesome-claude-skills) |
-| VoltAgent Skills | 500+ skills (Anthropic, Google, Vercel, Stripe, Cloudflare...) | [VoltAgent/awesome-agent-skills](https://github.com/VoltAgent/awesome-agent-skills) |
-| Antigravity Skills | 1000+ battle-tested skills | [sickn33/antigravity-awesome-skills](https://github.com/sickn33/antigravity-awesome-skills) |
+| Anthropic Official Skills | 17 official skills (MS Office suite, design, MCP) | [anthropics/skills](https://github.com/anthropics/skills) (95.8k★) |
+| gstack (Garry Tan / YC) | 13 opinionated workflow skills (CEO review, QA, ship, design) | [garrytan/gstack](https://github.com/garrytan/gstack) |
+| obra/superpowers | 14 software methodology skills (TDD, debugging, git worktrees) | [obra/superpowers](https://github.com/obra/superpowers) (90.6k★) |
+| Trail of Bits Security | 22 professional security skills (Semgrep, supply chain, variants) | [trailofbits/skills](https://github.com/trailofbits/skills) |
+| DevOps Skills | 31 IaC skills (Terraform, Docker, K8s, CI/CD for 4 platforms) | [akin-ozer/cc-devops-skills](https://github.com/akin-ozer/cc-devops-skills) |
+| Scientific Skills | 170 skills for research, bioinformatics, chemistry | [K-Dense-AI/claude-scientific-skills](https://github.com/K-Dense-AI/claude-scientific-skills) |
+| Awesome Claude Code | Master index of 500+ tools, skills, and workflows | [hesreallyhim/awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) |
 | Awesome Cursorrules | 38.5k★ collection across 13 categories | [PatrickJS/awesome-cursorrules](https://github.com/PatrickJS/awesome-cursorrules) |
 | Cursor Directory | Community hub with voting and AI rule generator | [cursor.directory](https://cursor.directory/) |
 

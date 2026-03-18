@@ -68,6 +68,16 @@ startup-builder:
   description: Idea validation → MVP → launch workflow
   trust: official
 
+qa-engineer:
+  source: github:0xranx/agentbrief/briefs/qa-engineer
+  description: Automated QA — find bugs, write tests, fix with atomic commits
+  trust: official
+
+data-analyst:
+  source: github:0xranx/agentbrief/briefs/data-analyst
+  description: Business intelligence — metrics, SQL, dashboards, data storytelling
+  trust: official
+
 # ── Combo Packs ──────────────────────────────────────────
 
 fullstack-dev:

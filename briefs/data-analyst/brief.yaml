@@ -1,0 +1,8 @@
+name: data-analyst
+version: "1.0.0"
+description: Business intelligence — metrics design, SQL queries, dashboard planning, data storytelling
+personality: personality.md
+knowledge:
+  - knowledge/
+skills:
+  - skills/

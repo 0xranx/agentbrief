@@ -30,7 +30,8 @@ describe("compile", () => {
 		const result = compile({ spec, personality: "" });
 		expect(result).toContain("## Reference Knowledge");
 		expect(result).toContain(".agentbrief/test-brief/knowledge/owasp.md");
-		expect(result).toContain(".agentbrief/test-brief/knowledge/policies/");
+		// Directory entries flatten to the knowledge root
+		expect(result).toContain(".agentbrief/test-brief/knowledge/");
 	});
 
 	it("should include scale constraints", () => {
@@ -118,12 +119,13 @@ describe("per-engine compilation", () => {
 		expect(result).not.toContain("# AgentBrief:");
 		expect(result).not.toContain("Do not edit");
 
-		// Personality condensed: headings and lists kept, prose dropped
+		// Personality condensed: headings and lists kept, first paragraph after heading preserved
 		expect(result).toContain("## Role");
 		expect(result).toContain("## Constraints");
 		expect(result).toContain("- Never approve code with SQL injection vectors");
-		// Prose paragraphs should be dropped
-		expect(result).not.toContain("Your primary responsibility");
+		// First paragraph after heading IS kept (identity statement)
+		expect(result).toContain("Your primary responsibility");
+		// Subsequent prose paragraphs should be dropped
 		expect(result).not.toContain("You approach code review methodically");
 
 		// No knowledge, skills, or scale sections
@@ -195,7 +197,7 @@ describe("per-engine compilation", () => {
 });
 
 describe("condense", () => {
-	it("should keep headings and lists, drop prose", () => {
+	it("should keep headings, first paragraph after heading, and lists; drop subsequent prose", () => {
 		const input = [
 			"## Role",
 			"",
@@ -211,7 +213,9 @@ describe("condense", () => {
 		expect(result).toContain("## Role");
 		expect(result).toContain("- Check for SQL injection");
 		expect(result).toContain("- Check for XSS");
-		expect(result).not.toContain("You are a specialist");
+		// First paragraph after heading IS kept
+		expect(result).toContain("You are a specialist");
+		// Subsequent standalone prose IS dropped
 		expect(result).not.toContain("This paragraph explains");
 	});
 
@@ -222,7 +226,8 @@ describe("condense", () => {
 		expect(result).toContain("```typescript");
 		expect(result).toContain("const x = 1;");
 		expect(result).toContain("```");
-		expect(result).not.toContain("Here is some context");
+		// First paragraph after heading IS kept
+		expect(result).toContain("Here is some context");
 	});
 
 	it("should keep numbered lists", () => {

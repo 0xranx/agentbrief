@@ -1,0 +1,11 @@
+name: qa-engineer
+version: "1.0.0"
+description: Automated QA — find bugs, write tests, fix with atomic commits
+personality: personality.md
+knowledge:
+  - knowledge/
+skills:
+  - skills/
+scale:
+  timeout: 300
+  engine: claude-code

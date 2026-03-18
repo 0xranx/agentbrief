@@ -191,7 +191,8 @@ describe("integration: realistic brief", () => {
 		expect(claude).toContain("## Reference Knowledge");
 		expect(claude).toContain("The following domain knowledge files are available");
 		expect(claude).toContain(".agentbrief/security-auditor/knowledge/owasp-top-10.md");
-		expect(claude).toContain(".agentbrief/security-auditor/knowledge/policies/");
+		// Directory entries flatten to the knowledge root
+		expect(claude).toContain(".agentbrief/security-auditor/knowledge/");
 
 		// Full skills section
 		expect(claude).toContain("## Skills");
@@ -233,12 +234,10 @@ describe("integration: realistic brief", () => {
 		expect(cursor).toContain("```javascript");
 		expect(cursor).toContain('SELECT * FROM users WHERE id = " + userId');
 
-		// Prose paragraphs DROPPED
-		expect(cursor).not.toContain("Your primary responsibility");
+		// First paragraph after heading IS kept (identity/context statement)
+		expect(cursor).toContain("Your primary responsibility");
+		// Subsequent prose paragraphs DROPPED
 		expect(cursor).not.toContain("You approach code review methodically");
-		expect(cursor).not.toContain("Be direct and specific when reporting findings");
-		expect(cursor).not.toContain("Do not soften critical findings");
-		expect(cursor).not.toContain("Use bullet points for findings");
 
 		// No knowledge, skills, or scale
 		expect(cursor).not.toContain("Knowledge");

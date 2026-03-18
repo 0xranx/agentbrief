@@ -84,6 +84,10 @@ Available briefs:
   growth-engineer    official   CRO, SEO, analytics, growth engineering
   product-manager    official   PRD generation, user stories, prioritization
   startup-builder    official   Idea validation → MVP → launch workflow
+  qa-engineer        official   Automated QA — find bugs, write tests, fix with atomic commits
+  data-analyst       official   Business intelligence — metrics, SQL, dashboards, data storytelling
+  fullstack-dev      official   Full-stack TypeScript developer — extends 4 briefs, 8 skills
+  startup-kit        official   Startup builder kit — extends 4 briefs, 9 skills
 ```
 
 Just type `agentbrief use <name>` — no need for full GitHub URLs.
@@ -115,7 +119,7 @@ AgentBrief compiles each brief with optimizations for the target engine:
 | Engine | File | Compilation |
 |--------|------|------------|
 | Claude Code | `CLAUDE.md` | Full — all sections, verbose knowledge refs |
-| Cursor | `.cursorrules` | Minimal — headings + lists only, no knowledge/scale |
+| Cursor | `.cursorrules` | Minimal — headings + first paragraph + lists, no knowledge/scale |
 | OpenCode | `AGENTS.md` | Concise — first sentence per paragraph, compact refs |
 | Codex | `AGENTS.md` | Concise — same as OpenCode |
 
