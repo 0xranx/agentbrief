@@ -81,8 +81,24 @@ nav .nav-links a:hover{color:var(--text)}
 
 /* Brief List */
 .brief-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border-radius:var(--radius);overflow:hidden}
-.brief-item{display:grid;grid-template-columns:160px 1fr auto auto auto;gap:12px;align-items:center;padding:12px 16px;background:var(--surface);transition:background .1s;cursor:default}
+.brief-item{display:grid;grid-template-columns:160px 1fr auto auto auto;gap:12px;align-items:center;padding:12px 16px;background:var(--surface);transition:background .1s;cursor:pointer}
 .brief-item:hover{background:var(--surface2)}
+.brief-item.active{background:var(--surface2);border-bottom:none}
+
+/* Detail Panel */
+.brief-detail{display:none;background:var(--surface2);padding:0 20px;overflow:hidden;max-height:0;transition:max-height .3s ease,padding .3s ease}
+.brief-detail.open{display:block;padding:16px 20px 20px;max-height:800px}
+.brief-detail .bd-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.brief-detail .bd-section h4{font-size:12px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.brief-detail .bd-personality{font-size:13px;color:var(--muted);line-height:1.6;white-space:pre-wrap}
+.brief-detail .bd-personality h2,.brief-detail .bd-personality h3{font-size:13px;font-weight:600;color:var(--text);margin:8px 0 4px}
+.brief-detail .bd-skill-item{font-family:var(--mono);font-size:12px;color:var(--muted);padding:4px 0;border-bottom:1px solid var(--border)}
+.brief-detail .bd-skill-name{color:var(--accent);font-weight:500}
+.brief-detail .bd-skill-desc{color:var(--dim);font-size:11px;margin-left:8px}
+.brief-detail .bd-install{margin-top:12px;font-family:var(--mono);font-size:12px;background:var(--bg);padding:8px 12px;border-radius:6px;color:var(--green);display:inline-block}
+.brief-detail .bd-links{margin-top:12px;display:flex;gap:12px;font-size:12px}
+.brief-detail .bd-meta{font-size:11px;color:var(--dim);margin-bottom:8px}
+@media(max-width:768px){.brief-detail .bd-grid{grid-template-columns:1fr}}
 .brief-item .bi-name{font-family:var(--mono);font-size:13px;font-weight:500;white-space:nowrap}
 .brief-item .bi-desc{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .brief-item .bi-tag{font-size:10px;font-weight:600;padding:3px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
@@ -186,20 +202,34 @@ footer a:hover{color:var(--muted)}
   </div>
 
   <div class="brief-list" id="brief-list">
-    <div class="brief-item" data-name="security-auditor" data-cat="dev"><span class="bi-name">security-auditor</span><span class="bi-desc">OWASP/CWE security review specialist</span><span class="bi-tag dev">dev</span><span class="bi-layers">2 knowledge · 3 skills</span><span class="bi-cmd" onclick="copyCmd(this)">use security-auditor</span></div>
-    <div class="brief-item" data-name="code-reviewer" data-cat="dev"><span class="bi-name">code-reviewer</span><span class="bi-desc">Rigorous PR review — architecture, naming, tests</span><span class="bi-tag dev">dev</span><span class="bi-layers">1 knowledge · 3 skills</span><span class="bi-cmd" onclick="copyCmd(this)">use code-reviewer</span></div>
-    <div class="brief-item" data-name="typescript-strict" data-cat="dev"><span class="bi-name">typescript-strict</span><span class="bi-desc">TypeScript type safety guardian — zero any</span><span class="bi-tag dev">dev</span><span class="bi-layers">1 knowledge · 1 skill</span><span class="bi-cmd" onclick="copyCmd(this)">use typescript-strict</span></div>
-    <div class="brief-item" data-name="nextjs-fullstack" data-cat="dev"><span class="bi-name">nextjs-fullstack</span><span class="bi-desc">Next.js 15 + App Router + React 19 + Tailwind</span><span class="bi-tag dev">dev</span><span class="bi-layers">1 knowledge · 2 skills</span><span class="bi-cmd" onclick="copyCmd(this)">use nextjs-fullstack</span></div>
-    <div class="brief-item" data-name="frontend-design" data-cat="dev"><span class="bi-name">frontend-design</span><span class="bi-desc">React + Tailwind + shadcn/ui design engineering</span><span class="bi-tag dev">dev</span><span class="bi-layers">1 knowledge · 2 skills</span><span class="bi-cmd" onclick="copyCmd(this)">use frontend-design</span></div>
-    <div class="brief-item" data-name="devops-sre" data-cat="dev"><span class="bi-name">devops-sre</span><span class="bi-desc">Infrastructure, monitoring, CI/CD, incident response</span><span class="bi-tag dev">dev</span><span class="bi-layers">1 knowledge · 4 skills</span><span class="bi-cmd" onclick="copyCmd(this)">use devops-sre</span></div>
-    <div class="brief-item" data-name="qa-engineer" data-cat="qa"><span class="bi-name">qa-engineer</span><span class="bi-desc">Automated QA — find bugs, write tests, atomic fixes</span><span class="bi-tag qa">qa</span><span class="bi-layers">1 knowledge · 2 skills</span><span class="bi-cmd" onclick="copyCmd(this)">use qa-engineer</span></div>
-    <div class="brief-item" data-name="tech-writer" data-cat="dev"><span class="bi-name">tech-writer</span><span class="bi-desc">Technical documentation with style guide adherence</span><span class="bi-tag dev">dev</span><span class="bi-layers">1 knowledge · 3 skills</span><span class="bi-cmd" onclick="copyCmd(this)">use tech-writer</span></div>
-    <div class="brief-item" data-name="product-manager" data-cat="biz"><span class="bi-name">product-manager</span><span class="bi-desc">PRD generation, user stories, prioritization (RICE/ICE)</span><span class="bi-tag biz">biz</span><span class="bi-layers">1 knowledge · 2 skills</span><span class="bi-cmd" onclick="copyCmd(this)">use product-manager</span></div>
-    <div class="brief-item" data-name="growth-engineer" data-cat="biz"><span class="bi-name">growth-engineer</span><span class="bi-desc">CRO, SEO, analytics, content strategy</span><span class="bi-tag biz">biz</span><span class="bi-layers">1 knowledge · 4 skills</span><span class="bi-cmd" onclick="copyCmd(this)">use growth-engineer</span></div>
-    <div class="brief-item" data-name="data-analyst" data-cat="biz"><span class="bi-name">data-analyst</span><span class="bi-desc">Metrics framework, SQL queries, data storytelling</span><span class="bi-tag biz">biz</span><span class="bi-layers">1 knowledge · 2 skills</span><span class="bi-cmd" onclick="copyCmd(this)">use data-analyst</span></div>
-    <div class="brief-item" data-name="startup-builder" data-cat="biz"><span class="bi-name">startup-builder</span><span class="bi-desc">Idea validation → MVP → launch + CEO review</span><span class="bi-tag biz">biz</span><span class="bi-layers">1 knowledge · 4 skills</span><span class="bi-cmd" onclick="copyCmd(this)">use startup-builder</span></div>
-    <div class="brief-item" data-name="fullstack-dev" data-cat="combo"><span class="bi-name">fullstack-dev</span><span class="bi-desc">Extends typescript-strict + nextjs + design + reviewer</span><span class="bi-tag combo">combo</span><span class="bi-layers">4 knowledge · 8 skills</span><span class="bi-cmd" onclick="copyCmd(this)">use fullstack-dev</span></div>
-    <div class="brief-item" data-name="startup-kit" data-cat="combo"><span class="bi-name">startup-kit</span><span class="bi-desc">Extends startup + product + growth + security</span><span class="bi-tag combo">combo</span><span class="bi-layers">5 knowledge · 11 skills</span><span class="bi-cmd" onclick="copyCmd(this)">use startup-kit</span></div>
+    <div class="brief-item" onclick="toggleDetail(this)" data-name="security-auditor" data-cat="dev"><span class="bi-name">security-auditor</span><span class="bi-desc">OWASP/CWE security review specialist</span><span class="bi-tag dev">dev</span><span class="bi-layers">2 knowledge · 3 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use security-auditor</span></div>
+    <div class="brief-detail" id="detail-security-auditor"></div>
+    <div class="brief-item" onclick="toggleDetail(this)" data-name="code-reviewer" data-cat="dev"><span class="bi-name">code-reviewer</span><span class="bi-desc">Rigorous PR review — architecture, naming, tests</span><span class="bi-tag dev">dev</span><span class="bi-layers">1 knowledge · 3 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use code-reviewer</span></div>
+    <div class="brief-detail" id="detail-code-reviewer"></div>
+    <div class="brief-item" onclick="toggleDetail(this)" data-name="typescript-strict" data-cat="dev"><span class="bi-name">typescript-strict</span><span class="bi-desc">TypeScript type safety guardian — zero any</span><span class="bi-tag dev">dev</span><span class="bi-layers">1 knowledge · 1 skill</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use typescript-strict</span></div>
+    <div class="brief-detail" id="detail-typescript-strict"></div>
+    <div class="brief-item" onclick="toggleDetail(this)" data-name="nextjs-fullstack" data-cat="dev"><span class="bi-name">nextjs-fullstack</span><span class="bi-desc">Next.js 15 + App Router + React 19 + Tailwind</span><span class="bi-tag dev">dev</span><span class="bi-layers">1 knowledge · 2 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use nextjs-fullstack</span></div>
+    <div class="brief-detail" id="detail-nextjs-fullstack"></div>
+    <div class="brief-item" onclick="toggleDetail(this)" data-name="frontend-design" data-cat="dev"><span class="bi-name">frontend-design</span><span class="bi-desc">React + Tailwind + shadcn/ui design engineering</span><span class="bi-tag dev">dev</span><span class="bi-layers">1 knowledge · 2 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use frontend-design</span></div>
+    <div class="brief-detail" id="detail-frontend-design"></div>
+    <div class="brief-item" onclick="toggleDetail(this)" data-name="devops-sre" data-cat="dev"><span class="bi-name">devops-sre</span><span class="bi-desc">Infrastructure, monitoring, CI/CD, incident response</span><span class="bi-tag dev">dev</span><span class="bi-layers">1 knowledge · 4 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use devops-sre</span></div>
+    <div class="brief-detail" id="detail-devops-sre"></div>
+    <div class="brief-item" onclick="toggleDetail(this)" data-name="qa-engineer" data-cat="qa"><span class="bi-name">qa-engineer</span><span class="bi-desc">Automated QA — find bugs, write tests, atomic fixes</span><span class="bi-tag qa">qa</span><span class="bi-layers">1 knowledge · 2 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use qa-engineer</span></div>
+    <div class="brief-detail" id="detail-qa-engineer"></div>
+    <div class="brief-item" onclick="toggleDetail(this)" data-name="tech-writer" data-cat="dev"><span class="bi-name">tech-writer</span><span class="bi-desc">Technical documentation with style guide adherence</span><span class="bi-tag dev">dev</span><span class="bi-layers">1 knowledge · 3 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use tech-writer</span></div>
+    <div class="brief-detail" id="detail-tech-writer"></div>
+    <div class="brief-item" onclick="toggleDetail(this)" data-name="product-manager" data-cat="biz"><span class="bi-name">product-manager</span><span class="bi-desc">PRD generation, user stories, prioritization (RICE/ICE)</span><span class="bi-tag biz">biz</span><span class="bi-layers">1 knowledge · 2 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use product-manager</span></div>
+    <div class="brief-detail" id="detail-product-manager"></div>
+    <div class="brief-item" onclick="toggleDetail(this)" data-name="growth-engineer" data-cat="biz"><span class="bi-name">growth-engineer</span><span class="bi-desc">CRO, SEO, analytics, content strategy</span><span class="bi-tag biz">biz</span><span class="bi-layers">1 knowledge · 4 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use growth-engineer</span></div>
+    <div class="brief-detail" id="detail-growth-engineer"></div>
+    <div class="brief-item" onclick="toggleDetail(this)" data-name="data-analyst" data-cat="biz"><span class="bi-name">data-analyst</span><span class="bi-desc">Metrics framework, SQL queries, data storytelling</span><span class="bi-tag biz">biz</span><span class="bi-layers">1 knowledge · 2 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use data-analyst</span></div>
+    <div class="brief-detail" id="detail-data-analyst"></div>
+    <div class="brief-item" onclick="toggleDetail(this)" data-name="startup-builder" data-cat="biz"><span class="bi-name">startup-builder</span><span class="bi-desc">Idea validation → MVP → launch + CEO review</span><span class="bi-tag biz">biz</span><span class="bi-layers">1 knowledge · 4 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use startup-builder</span></div>
+    <div class="brief-detail" id="detail-startup-builder"></div>
+    <div class="brief-item" onclick="toggleDetail(this)" data-name="fullstack-dev" data-cat="combo"><span class="bi-name">fullstack-dev</span><span class="bi-desc">Extends typescript-strict + nextjs + design + reviewer</span><span class="bi-tag combo">combo</span><span class="bi-layers">4 knowledge · 8 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use fullstack-dev</span></div>
+    <div class="brief-detail" id="detail-fullstack-dev"></div>
+    <div class="brief-item" onclick="toggleDetail(this)" data-name="startup-kit" data-cat="combo"><span class="bi-name">startup-kit</span><span class="bi-desc">Extends startup + product + growth + security</span><span class="bi-tag combo">combo</span><span class="bi-layers">5 knowledge · 11 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use startup-kit</span></div>
+    <div class="brief-detail" id="detail-startup-kit"></div>
   </div>
 </section>
 
@@ -301,8 +331,85 @@ function filterBriefs(){
   document.querySelectorAll('.brief-item').forEach(el=>{
     const match=el.dataset.name.includes(q)||el.dataset.cat.includes(q)||el.querySelector('.bi-desc').textContent.toLowerCase().includes(q);
     el.style.display=match?'':'none';
+    // Also hide detail panels when filtering
+    const detail=el.nextElementSibling;
+    if(detail&&detail.classList.contains('brief-detail')){detail.classList.remove('open');el.classList.remove('active')}
   });
 }
+
+// Brief detail panel
+const BRIEF_BASE='https://raw.githubusercontent.com/0xranx/agentbrief/main/briefs/';
+const detailCache={};
+
+async function toggleDetail(item){
+  const name=item.dataset.name;
+  const detail=document.getElementById('detail-'+name);
+  if(!detail)return;
+
+  // Close other open details
+  document.querySelectorAll('.brief-detail.open').forEach(d=>{
+    if(d!==detail){d.classList.remove('open');d.previousElementSibling.classList.remove('active')}
+  });
+
+  // Toggle
+  if(detail.classList.contains('open')){
+    detail.classList.remove('open');item.classList.remove('active');
+    return;
+  }
+
+  item.classList.add('active');
+  detail.classList.add('open');
+
+  // Load content if not cached
+  if(!detailCache[name]){
+    detail.innerHTML='<div style="color:var(--dim);font-size:13px;padding:8px 0">Loading...</div>';
+    try{
+      const [personalityRes,yamlRes]=await Promise.all([
+        fetch(BRIEF_BASE+name+'/personality.md'),
+        fetch(BRIEF_BASE+name+'/brief.yaml')
+      ]);
+      const personality=await personalityRes.text();
+      const yamlText=await yamlRes.text();
+
+      // Parse skills and knowledge from brief.yaml
+      const extendsMatch=yamlText.match(/extends:\n([\s\S]*?)(?=\n\w|\n$|$)/);
+      const descMatch=yamlText.match(/description:\s*(.+)/);
+      const desc=descMatch?descMatch[1].replace(/^["']|["']$/g,''):'';
+      const hasExtends=!!extendsMatch;
+
+      // Strip HTML comments from personality for display
+      const cleanPersonality=personality.replace(/<!--[\s\S]*?-->/g,'').replace(/\n{3,}/g,'\n\n').trim();
+
+      // Render
+      const personalityHtml=marked.parse(cleanPersonality);
+
+      detailCache[name]={personalityHtml,desc,hasExtends,yamlText};
+    }catch(e){
+      detail.innerHTML='<div style="color:var(--dim);font-size:13px">Failed to load. <a href="https://github.com/0xranx/agentbrief/tree/main/briefs/'+name+'">View on GitHub →</a></div>';
+      return;
+    }
+  }
+
+  const d=detailCache[name];
+  detail.innerHTML=`
+    <div class="bd-meta">${d.desc}</div>
+    <div class="bd-grid">
+      <div class="bd-section">
+        <h4>Personality</h4>
+        <div class="bd-personality">${d.personalityHtml}</div>
+      </div>
+      <div class="bd-section">
+        <h4>Install</h4>
+        <div class="bd-install">$ agentbrief use ${name}</div>
+        <div class="bd-links">
+          <a href="https://github.com/0xranx/agentbrief/tree/main/briefs/${name}">View source →</a>
+          ${d.hasExtends?'<span style="color:var(--purple);font-size:11px">⚡ Combo pack — extends multiple briefs</span>':''}
+        </div>
+      </div>
+    </div>
+  `;
+}
 </script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </body>
 </html>
