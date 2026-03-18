@@ -23,8 +23,10 @@ my-brief/
 │   ├── domain-ref.md
 │   └── cheatsheet.md
 └── skills/              # Skill layer: how you work (optional)
-    ├── review-process.md
-    └── verification.md
+    ├── review-process/  #   each skill = directory with SKILL.md
+    │   └── SKILL.md
+    └── verification/
+        └── SKILL.md
 ```
 
 ## The Three Layers
