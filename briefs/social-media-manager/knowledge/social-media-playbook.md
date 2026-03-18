@@ -9,6 +9,12 @@
 - **Poll**: 2-4 options, 24h duration. Best for engagement and audience research.
 - **Image + text**: Screenshot, chart, or infographic with context. 2-3x engagement vs text-only.
 
+### Xiaohongshu (小红书)
+- **Image-text note**: 1-9 images + 1000 chars max. First image is the cover — must be eye-catching. Best for tutorials, reviews, lifestyle.
+- **Video note**: 15s-15min, vertical 3:4 or 9:16. Best for how-to, vlogs, product demos.
+- **Collection/合集**: Group related notes into a series. Best for building topical authority.
+- **Tags/话题**: Always add 3-5 relevant tags. Critical for discovery — Xiaohongshu is search-first.
+
 ### LinkedIn
 - **Text post**: 1300 chars max for full visibility. Hook in first 2 lines (before "see more").
 - **Carousel**: PDF upload, 5-10 slides. Best for how-to content and frameworks.
@@ -19,6 +25,7 @@
 | Platform | Minimum | Sweet Spot | Diminishing Returns |
 |----------|---------|------------|---------------------|
 | Twitter/X | 1/day | 3-5/day | > 10/day |
+| Xiaohongshu | 2/week | 1/day | > 3/day |
 | LinkedIn | 2/week | 4-5/week | > 1/day |
 
 ## High-Engagement Patterns

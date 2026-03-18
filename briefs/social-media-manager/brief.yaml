@@ -7,5 +7,6 @@ knowledge:
 skills:
   - skills/
   - github:jackwener/twitter-cli
+  - github:0xranx/agent-kit/skills/xhs-cli
 extends:
   - base-agent
