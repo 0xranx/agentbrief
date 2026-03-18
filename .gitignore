@@ -3,3 +3,5 @@ dist/
 *.tsbuildinfo
 .DS_Store
 .agentbrief/
+.cursorrules
+AGENTS.md
