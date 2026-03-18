@@ -155,8 +155,8 @@ footer a:hover{color:var(--muted)}
 
 <section class="hero">
   <div class="pill"><span class="dot"></span> 14 official briefs · skills.sh compatible · open source</div>
-  <h1>Role packs for<br><span class="highlight">AI coding agents</span></h1>
-  <p class="sub">One command turns Claude Code, Cursor, OpenCode, or Codex into a specialized professional — with bundled skills, domain knowledge, and behavioral rules.</p>
+  <h1>Make your AI agent<br><span class="highlight">actually good at its job</span></h1>
+  <p class="sub">Security reviews. Code quality. Product specs. Growth hacking. One command gives your Claude Code, Cursor, or Codex real expertise — not just generic answers.</p>
   <div class="ctas">
     <a href="#briefs" class="btn btn-primary">Browse Briefs</a>
     <a href="./docs.html#AUTHORING" class="btn btn-secondary">Create Your Own →</a>
@@ -178,7 +178,7 @@ footer a:hover{color:var(--muted)}
 <section class="section" id="briefs">
   <div class="section-header">
     <h2>Official Briefs</h2>
-    <p>Each brief = personality + knowledge + executable skills. Type <code>agentbrief use &lt;name&gt;</code> to apply.</p>
+    <p>Each brief bundles personality + domain knowledge + executable skills. Click to view details, or copy the command to apply.</p>
   </div>
 
   <div class="search-box">
@@ -186,21 +186,30 @@ footer a:hover{color:var(--muted)}
     <input type="text" id="brief-search" placeholder="Filter briefs..." oninput="filterBriefs()">
   </div>
 
-  <div class="brief-list" id="brief-list">
-    <div class="brief-item" onclick="openBrief(this)" data-name="security-auditor" data-cat="dev"><span class="bi-name">security-auditor</span><span class="bi-desc">OWASP/CWE security review specialist</span><span class="bi-tag dev">dev</span><span class="bi-layers">2 knowledge · 3 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use security-auditor</span></div>
-    <div class="brief-item" onclick="openBrief(this)" data-name="code-reviewer" data-cat="dev"><span class="bi-name">code-reviewer</span><span class="bi-desc">Rigorous PR review — architecture, naming, tests</span><span class="bi-tag dev">dev</span><span class="bi-layers">1 knowledge · 3 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use code-reviewer</span></div>
-    <div class="brief-item" onclick="openBrief(this)" data-name="typescript-strict" data-cat="dev"><span class="bi-name">typescript-strict</span><span class="bi-desc">TypeScript type safety guardian — zero any</span><span class="bi-tag dev">dev</span><span class="bi-layers">1 knowledge · 1 skill</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use typescript-strict</span></div>
-    <div class="brief-item" onclick="openBrief(this)" data-name="nextjs-fullstack" data-cat="dev"><span class="bi-name">nextjs-fullstack</span><span class="bi-desc">Next.js 15 + App Router + React 19 + Tailwind</span><span class="bi-tag dev">dev</span><span class="bi-layers">1 knowledge · 2 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use nextjs-fullstack</span></div>
-    <div class="brief-item" onclick="openBrief(this)" data-name="frontend-design" data-cat="dev"><span class="bi-name">frontend-design</span><span class="bi-desc">React + Tailwind + shadcn/ui design engineering</span><span class="bi-tag dev">dev</span><span class="bi-layers">1 knowledge · 2 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use frontend-design</span></div>
-    <div class="brief-item" onclick="openBrief(this)" data-name="devops-sre" data-cat="dev"><span class="bi-name">devops-sre</span><span class="bi-desc">Infrastructure, monitoring, CI/CD, incident response</span><span class="bi-tag dev">dev</span><span class="bi-layers">1 knowledge · 4 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use devops-sre</span></div>
-    <div class="brief-item" onclick="openBrief(this)" data-name="qa-engineer" data-cat="qa"><span class="bi-name">qa-engineer</span><span class="bi-desc">Automated QA — find bugs, write tests, atomic fixes</span><span class="bi-tag qa">qa</span><span class="bi-layers">1 knowledge · 2 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use qa-engineer</span></div>
-    <div class="brief-item" onclick="openBrief(this)" data-name="tech-writer" data-cat="dev"><span class="bi-name">tech-writer</span><span class="bi-desc">Technical documentation with style guide adherence</span><span class="bi-tag dev">dev</span><span class="bi-layers">1 knowledge · 3 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use tech-writer</span></div>
-    <div class="brief-item" onclick="openBrief(this)" data-name="product-manager" data-cat="biz"><span class="bi-name">product-manager</span><span class="bi-desc">PRD generation, user stories, prioritization (RICE/ICE)</span><span class="bi-tag biz">biz</span><span class="bi-layers">1 knowledge · 2 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use product-manager</span></div>
-    <div class="brief-item" onclick="openBrief(this)" data-name="growth-engineer" data-cat="biz"><span class="bi-name">growth-engineer</span><span class="bi-desc">CRO, SEO, analytics, content strategy</span><span class="bi-tag biz">biz</span><span class="bi-layers">1 knowledge · 4 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use growth-engineer</span></div>
-    <div class="brief-item" onclick="openBrief(this)" data-name="data-analyst" data-cat="biz"><span class="bi-name">data-analyst</span><span class="bi-desc">Metrics framework, SQL queries, data storytelling</span><span class="bi-tag biz">biz</span><span class="bi-layers">1 knowledge · 2 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use data-analyst</span></div>
-    <div class="brief-item" onclick="openBrief(this)" data-name="startup-builder" data-cat="biz"><span class="bi-name">startup-builder</span><span class="bi-desc">Idea validation → MVP → launch + CEO review</span><span class="bi-tag biz">biz</span><span class="bi-layers">1 knowledge · 4 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use startup-builder</span></div>
-    <div class="brief-item" onclick="openBrief(this)" data-name="fullstack-dev" data-cat="combo"><span class="bi-name">fullstack-dev</span><span class="bi-desc">Extends typescript-strict + nextjs + design + reviewer</span><span class="bi-tag combo">combo</span><span class="bi-layers">4 knowledge · 8 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use fullstack-dev</span></div>
-    <div class="brief-item" onclick="openBrief(this)" data-name="startup-kit" data-cat="combo"><span class="bi-name">startup-kit</span><span class="bi-desc">Extends startup + product + growth + security</span><span class="bi-tag combo">combo</span><span class="bi-layers">5 knowledge · 11 skills</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use startup-kit</span></div>
+  <h3 style="font-size:14px;color:var(--purple);margin:20px 0 12px;font-weight:600">⚡ Quick Start Packs — best for getting started</h3>
+  <div class="brief-list" id="brief-list-combo">
+    <div class="brief-item" onclick="openBrief(this)" data-name="fullstack-dev" data-cat="combo"><span class="bi-name">fullstack-dev</span><span class="bi-desc">TypeScript + Next.js + design + code review — 4 briefs in 1</span><span class="bi-tag combo">8 skills</span><span class="bi-layers">4 knowledge</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use fullstack-dev</span></div>
+    <div class="brief-item" onclick="openBrief(this)" data-name="startup-kit" data-cat="combo"><span class="bi-name">startup-kit</span><span class="bi-desc">Product + growth + security + startup — everything to launch</span><span class="bi-tag combo">11 skills</span><span class="bi-layers">5 knowledge</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use startup-kit</span></div>
+  </div>
+
+  <h3 style="font-size:14px;color:var(--accent);margin:24px 0 12px;font-weight:600">Code Quality & Engineering</h3>
+  <div class="brief-list" id="brief-list-dev">
+    <div class="brief-item" onclick="openBrief(this)" data-name="security-auditor" data-cat="dev"><span class="bi-name">security-auditor</span><span class="bi-desc">OWASP/CWE security review specialist</span><span class="bi-tag dev">3 skills</span><span class="bi-layers">2 knowledge</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use security-auditor</span></div>
+    <div class="brief-item" onclick="openBrief(this)" data-name="code-reviewer" data-cat="dev"><span class="bi-name">code-reviewer</span><span class="bi-desc">Architecture review, naming, tests, verification</span><span class="bi-tag dev">3 skills</span><span class="bi-layers">1 knowledge</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use code-reviewer</span></div>
+    <div class="brief-item" onclick="openBrief(this)" data-name="qa-engineer" data-cat="qa"><span class="bi-name">qa-engineer</span><span class="bi-desc">Find bugs, write tests, fix with atomic commits</span><span class="bi-tag qa">2 skills</span><span class="bi-layers">1 knowledge</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use qa-engineer</span></div>
+    <div class="brief-item" onclick="openBrief(this)" data-name="typescript-strict" data-cat="dev"><span class="bi-name">typescript-strict</span><span class="bi-desc">Type safety guardian — zero any, exhaustive checks</span><span class="bi-tag dev">1 skill</span><span class="bi-layers">1 knowledge</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use typescript-strict</span></div>
+    <div class="brief-item" onclick="openBrief(this)" data-name="nextjs-fullstack" data-cat="dev"><span class="bi-name">nextjs-fullstack</span><span class="bi-desc">Next.js 15 App Router + React 19 + Tailwind</span><span class="bi-tag dev">2 skills</span><span class="bi-layers">1 knowledge</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use nextjs-fullstack</span></div>
+    <div class="brief-item" onclick="openBrief(this)" data-name="frontend-design" data-cat="dev"><span class="bi-name">frontend-design</span><span class="bi-desc">React + Tailwind + shadcn/ui + 80-item design review</span><span class="bi-tag dev">2 skills</span><span class="bi-layers">1 knowledge</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use frontend-design</span></div>
+    <div class="brief-item" onclick="openBrief(this)" data-name="devops-sre" data-cat="dev"><span class="bi-name">devops-sre</span><span class="bi-desc">CI/CD, monitoring, incident response, IaC</span><span class="bi-tag dev">4 skills</span><span class="bi-layers">1 knowledge</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use devops-sre</span></div>
+    <div class="brief-item" onclick="openBrief(this)" data-name="tech-writer" data-cat="dev"><span class="bi-name">tech-writer</span><span class="bi-desc">API docs, release notes, style guide adherence</span><span class="bi-tag dev">3 skills</span><span class="bi-layers">1 knowledge</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use tech-writer</span></div>
+  </div>
+
+  <h3 style="font-size:14px;color:var(--orange);margin:24px 0 12px;font-weight:600">Product, Growth & Business</h3>
+  <div class="brief-list" id="brief-list-biz">
+    <div class="brief-item" onclick="openBrief(this)" data-name="product-manager" data-cat="biz"><span class="bi-name">product-manager</span><span class="bi-desc">PRDs, user stories, specs, prioritization (RICE/ICE)</span><span class="bi-tag biz">2 skills</span><span class="bi-layers">1 knowledge</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use product-manager</span></div>
+    <div class="brief-item" onclick="openBrief(this)" data-name="growth-engineer" data-cat="biz"><span class="bi-name">growth-engineer</span><span class="bi-desc">SEO audit, content strategy, analytics, CRO</span><span class="bi-tag biz">4 skills</span><span class="bi-layers">1 knowledge</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use growth-engineer</span></div>
+    <div class="brief-item" onclick="openBrief(this)" data-name="data-analyst" data-cat="biz"><span class="bi-name">data-analyst</span><span class="bi-desc">Metrics framework, SQL queries, data storytelling</span><span class="bi-tag biz">2 skills</span><span class="bi-layers">1 knowledge</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use data-analyst</span></div>
+    <div class="brief-item" onclick="openBrief(this)" data-name="startup-builder" data-cat="biz"><span class="bi-name">startup-builder</span><span class="bi-desc">Idea validation → MVP → launch + CEO review</span><span class="bi-tag biz">4 skills</span><span class="bi-layers">1 knowledge</span><span class="bi-cmd" onclick="event.stopPropagation();copyCmd(this)">use startup-builder</span></div>
   </div>
 </section>
 
@@ -302,6 +311,12 @@ function filterBriefs(){
   document.querySelectorAll('.brief-item').forEach(el=>{
     const match=el.dataset.name.includes(q)||el.dataset.cat.includes(q)||el.querySelector('.bi-desc').textContent.toLowerCase().includes(q);
     el.style.display=match?'':'none';
+  });
+  // Show/hide section headers based on visible items
+  document.querySelectorAll('.brief-list').forEach(list=>{
+    const visible=list.querySelectorAll('.brief-item:not([style*="display: none"])').length;
+    const header=list.previousElementSibling;
+    if(header&&header.tagName==='H3')header.style.display=visible?'':'none';
   });
 }
 function openBrief(item){
