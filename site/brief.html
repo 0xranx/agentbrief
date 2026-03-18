@@ -176,35 +176,11 @@ async function loadBrief(){
     const skillsMatch=yamlText.match(/skills:\n((?:\s+-\s+.+\n?)*)/);
     const skillsList=skillsMatch?skillsMatch[1].match(/- (.+)/g)?.map(m=>m.replace('- ','').trim())||[]:[];
 
-    // Try to load skill SKILL.md files for descriptions
-    let skillDetails=[];
-    if(skillsList.length>0){
-      // Try fetching skill dirs from the brief's skills/ directory
-      try{
-        // We'll try known skill names from the brief structure
-        const skillDirRes=await fetch('https://api.github.com/repos/0xranx/agentbrief/contents/briefs/'+name+'/skills');
-        if(skillDirRes.ok){
-          const dirs=await skillDirRes.json();
-          const skillDirs=dirs.filter(d=>d.type==='dir');
-          const skillFetches=skillDirs.map(async d=>{
-            try{
-              const r=await fetch(BASE+name+'/skills/'+d.name+'/SKILL.md');
-              if(!r.ok)return{name:d.name,description:''};
-              const text=await r.text();
-              const descM=text.match(/^description:\s*["']?(.+?)["']?\s*$/m);
-              return{name:d.name,description:descM?descM[1]:''};
-            }catch{return{name:d.name,description:''}}
-          });
-          skillDetails=await Promise.all(skillFetches);
-        }
-      }catch{}
-    }
-
     // Strip HTML comments from personality
     const cleanPersonality=personality.replace(/<!--[\s\S]*?-->/g,'').replace(/\n{3,}/g,'\n\n').trim();
     const personalityHtml=marked.parse(cleanPersonality);
 
-    // Render page
+    // Render page immediately (skills load async after)
     document.getElementById('content').innerHTML=`
       <div class="brief-hero">
         <div class="breadcrumb"><a href="./#briefs">Briefs</a> / ${name}</div>
@@ -239,16 +215,11 @@ async function loadBrief(){
         <div class="personality-content">${personalityHtml}</div>
       </div>
 
-      ${skillDetails.length?`
+      ${skillsList.length?`
       <div class="detail-section">
-        <h2>Skills <span class="count">${skillDetails.length}</span></h2>
-        <div class="item-list">
-          ${skillDetails.map(s=>`
-            <div class="item-row">
-              <span class="item-name">${s.name}</span>
-              <span class="item-desc">${s.description||'—'}</span>
-            </div>
-          `).join('')}
+        <h2>Skills <span class="count" id="skill-count">...</span></h2>
+        <div class="item-list" id="skill-list">
+          <div class="item-row"><span class="item-desc" style="color:var(--dim)">Loading skills...</span></div>
         </div>
       </div>`:''}
 
@@ -265,6 +236,29 @@ async function loadBrief(){
         </div>
       </div>`:''}
     `;
+
+    // Async: load skill details after page is rendered
+    if(skillsList.length>0){
+      try{
+        const skillDirRes=await fetch('https://api.github.com/repos/0xranx/agentbrief/contents/briefs/'+name+'/skills');
+        if(skillDirRes.ok){
+          const dirs=(await skillDirRes.json()).filter(d=>d.type==='dir');
+          const details=await Promise.all(dirs.map(async d=>{
+            try{
+              const r=await fetch(BASE+name+'/skills/'+d.name+'/SKILL.md');
+              if(!r.ok)return{name:d.name,description:''};
+              const text=await r.text();
+              const m=text.match(/^description:\s*["']?(.+?)["']?\s*$/m);
+              return{name:d.name,description:m?m[1]:''};
+            }catch{return{name:d.name,description:''}}
+          }));
+          const el=document.getElementById('skill-list');
+          const countEl=document.getElementById('skill-count');
+          if(el){el.innerHTML=details.map(s=>`<div class="item-row"><span class="item-name">${s.name}</span><span class="item-desc">${s.description||'—'}</span></div>`).join('')}
+          if(countEl){countEl.textContent=details.length}
+        }
+      }catch{}
+    }
   }catch(e){
     document.getElementById('content').innerHTML=`
       <div class="loading">

@@ -88,7 +88,9 @@ nav .nav-links a.active{color:var(--text)}
 <div class="layout">
   <aside class="sidebar">
     <h4>Getting Started</h4>
-    <a href="#" onclick="load('AUTHORING')" class="active" id="nav-AUTHORING">Authoring Guide</a>
+    <a href="#" onclick="load('GUIDE')" class="active" id="nav-GUIDE">User Guide</a>
+    <a href="#" onclick="load('AUTHORING')" id="nav-AUTHORING">Authoring Guide</a>
+    <h4>About</h4>
     <a href="#" onclick="load('VISION')" id="nav-VISION">Vision & Philosophy</a>
     <a href="#" onclick="load('DESIGN')" id="nav-DESIGN">Design Decisions</a>
     <h4>Reference</h4>
@@ -107,6 +109,7 @@ nav .nav-links a.active{color:var(--text)}
 <script>
 const BASE = 'https://raw.githubusercontent.com/0xranx/agentbrief/main/';
 const paths = {
+  'GUIDE': 'docs/GUIDE.md',
   'AUTHORING': 'docs/AUTHORING.md',
   'VISION': 'docs/VISION.md',
   'DESIGN': 'docs/DESIGN.md',
@@ -115,7 +118,7 @@ const paths = {
   'CATALOG': 'CATALOG.md',
 };
 
-let current = 'AUTHORING';
+let current = 'GUIDE';
 
 async function load(key) {
   current = key;
@@ -146,7 +149,7 @@ const hash = location.hash.replace('#', '');
 if (hash && paths[hash]) {
   load(hash);
 } else {
-  load('AUTHORING');
+  load('GUIDE');
 }
 </script>
 </body>
