@@ -4,11 +4,11 @@
 [![npm](https://img.shields.io/npm/v/agentbrief)](https://www.npmjs.com/package/agentbrief)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
-> Pluggable role definitions for AI coding agents.
+> One command turns your AI coding agent into a domain specialist.
 >
 > [Website](https://0xranx.github.io/agentbrief) · [Catalog](./CATALOG.md) · [npm](https://www.npmjs.com/package/agentbrief)
 
-One command turns your Claude Code / Cursor / OpenCode / Codex from a generic assistant into a specialized professional.
+Your Claude Code, Cursor, OpenCode, or Codex gives generic answers because it doesn't know your domain. AgentBrief fixes that — install a **brief** and your agent gains real expertise: security auditing, code review, product specs, growth hacking, and more.
 
 ```bash
 npx agentbrief use fullstack-engineer
@@ -16,14 +16,114 @@ npx agentbrief use fullstack-engineer
 # builds accessible UIs, and reviews PRs like a staff engineer — 9 skills in 1 command
 ```
 
-## What It Does
+## Before vs After
 
-AgentBrief compiles a **brief** (role definition + domain knowledge + executable skills) into the instruction files your AI agent reads — `CLAUDE.md`, `.cursorrules`, `AGENTS.md` — with content automatically adapted for each engine.
+```
+WITHOUT a brief:
+  You: "Review this code for issues"
+  Agent: "The code looks good overall. Consider adding error handling."
+
+WITH security-auditor brief:
+  You: "Review this code for issues"
+  Agent: "CWE-89 CRITICAL at line 23: SQL injection via string concatenation.
+         Attack vector: attacker injects arbitrary SQL through userId param.
+         Fix: const query = 'SELECT * FROM users WHERE id = $1';
+              await db.query(query, [userId]);"
+```
+
+## Install
+
+```bash
+npm install -g agentbrief
+# or
+pnpm add -g agentbrief
+```
+
+## Quick Start Packs
+
+Not sure where to begin? Pick a combo — each one bundles multiple specialist briefs into a single command:
+
+```
+  fullstack-engineer  →  release-engineer  →  startup-founder
+       Build                 Ship                 Grow
+```
+
+| Pack | What your agent gains |
+|------|----------------------|
+| `fullstack-engineer` | Strict TypeScript + Next.js + accessible UI + PR reviews (9 skills) |
+| `release-engineer` | QA testing + security review + CI/CD + documentation (10 skills) |
+| `startup-founder` | Product specs + SEO + growth analytics + security + launch (12 skills) |
+
+```bash
+agentbrief use fullstack-engineer   # Build: write production code
+agentbrief use release-engineer     # Ship: test, secure, deploy, document
+agentbrief use startup-founder      # Grow: product, growth, launch strategy
+```
+
+## All Briefs
+
+**Code Quality & Engineering:**
+
+| Brief | Your agent becomes... |
+|-------|----------------------|
+| `security-auditor` | OWASP security reviewer who cites CWE numbers |
+| `code-reviewer` | Staff engineer who catches architecture + logic issues |
+| `qa-engineer` | QA who finds bugs, writes tests, fixes with atomic commits |
+| `typescript-engineer` | Type safety enforcer — zero `any`, exhaustive checks |
+| `nextjs-developer` | Next.js 15 specialist (App Router, RSC, Tailwind) |
+| `design-engineer` | Design engineer with 80-item review checklist |
+| `devops-sre` | SRE who sets up CI/CD, monitoring, incident response |
+| `tech-writer` | Documentation specialist with API docs + release notes |
+
+**Product, Growth & Business:**
+
+| Brief | Your agent becomes... |
+|-------|----------------------|
+| `product-manager` | PM who writes PRDs with RICE/ICE prioritization |
+| `growth-engineer` | Growth hacker with SEO audit + analytics + content strategy |
+| `data-analyst` | BI analyst with metrics frameworks + SQL patterns |
+| `startup-advisor` | Startup advisor with CEO review + launch planning |
+| `social-media-manager` | Social media manager — Twitter/X + Xiaohongshu posting |
+
+Browse the **[full Catalog](./CATALOG.md)** or the **[Website](https://0xranx.github.io/agentbrief)** for details on each brief.
+
+## Usage
+
+```bash
+# Apply from the official registry
+agentbrief use security-auditor
+
+# Apply from GitHub
+agentbrief use github:owner/repo
+agentbrief use github:owner/repo@v1.0
+
+# Apply from local path
+agentbrief use ./path/to/brief
+
+# Browse, inspect, manage
+agentbrief search                 # List all briefs
+agentbrief list                   # See what's applied
+agentbrief show <name>            # View injected content
+agentbrief preview <name>         # Preview without applying
+agentbrief update                 # Fetch latest versions
+agentbrief eject <name>           # Clean removal
+```
+
+## How It Works
+
+AgentBrief compiles a **brief** (role + knowledge + skills) into the instruction files your AI agent reads, with content optimized per engine:
+
+| Engine | File | Compilation |
+|--------|------|------------|
+| Claude Code | `CLAUDE.md` | Full — personality, knowledge refs, skill triggers |
+| Cursor | `.cursorrules` | Minimal — headings + first paragraph + lists |
+| OpenCode | `AGENTS.md` | Concise — first sentence per paragraph |
+| Codex | `AGENTS.md` | Concise — same as OpenCode |
+
+Your existing files are preserved — briefs are injected between `<!-- agentbrief:name:start/end -->` markers. Eject removes only the brief content.
 
 <details>
-<summary><b>See it in action</b> — what happens when you run <code>agentbrief use fullstack-engineer</code></summary>
-
-Your `CLAUDE.md` gets this injected (existing content preserved):
+<summary><b>See what gets injected</b> — example output for <code>fullstack-engineer</code></summary>
 
 ```markdown
 <!-- agentbrief:fullstack-engineer:start -->
@@ -49,27 +149,27 @@ strict type safety and review your own code with principal-engineer rigor.
 <!-- agentbrief:fullstack-engineer:end -->
 ```
 
-Cleanly removable with `agentbrief eject fullstack-engineer`.
 </details>
 
-### Before vs After — real conversation difference
+## What's a Brief?
 
 ```
-WITHOUT a brief:
-  You: "Review this code for issues"
-  Agent: "The code looks good overall. Consider adding error handling."
-
-WITH security-auditor brief:
-  You: "Review this code for issues"
-  Agent: "CWE-89 CRITICAL at line 23: SQL injection via string concatenation.
-         Attack vector: attacker injects arbitrary SQL through userId param.
-         Fix: const query = 'SELECT * FROM users WHERE id = $1';
-              await db.query(query, [userId]);"
+my-brief/
+├── brief.yaml          # Config: name, version, extends, skills
+├── personality.md      # Identity: role, tone, constraints
+├── knowledge/          # Reference: domain materials (read on demand)
+│   └── cheatsheet.md
+└── skills/             # Workflows: executable skill directories
+    └── my-skill/
+        ├── SKILL.md    # Trigger condition + step-by-step process
+        └── ...         # Any supporting files
 ```
 
-### Built from the most trusted sources in the ecosystem
+See [`briefs/security-auditor/`](./briefs/security-auditor/) for a complete example.
 
-Every official brief is curated from battle-tested, community-endorsed skills — not written from scratch:
+## Built on Trusted Sources
+
+Every official brief is curated from battle-tested, community-endorsed skills:
 
 - [obra/superpowers](https://github.com/obra/superpowers) **(90.6k ★)** — TDD, systematic debugging, verification
 - [anthropics/skills](https://github.com/anthropics/skills) **(95.8k ★)** — Anthropic's official skill packages
@@ -77,140 +177,24 @@ Every official brief is curated from battle-tested, community-endorsed skills �
 - [vercel-labs](https://github.com/vercel-labs/agent-browser) **(Vercel official)** — Next.js best practices, browser automation
 - [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) — SEO audit, launch strategy, analytics
 
-### Key features
-
-- **One command to apply, one to remove** — `use` and `eject`
-- **Non-invasive** — injected content is wrapped in markers, your existing files are untouched
-- **Stackable** — apply multiple briefs; later ones layer on top
-- **Engine-agnostic** — compiles to all engines simultaneously, optimized for each
-
-## Install
+## Create Your Own
 
 ```bash
-npm install -g agentbrief
-# or
-pnpm add -g agentbrief
+agentbrief init my-agent              # Scaffold
+# Edit personality.md, add knowledge/ and skills/
+agentbrief use ./my-agent             # Test locally
+agentbrief preview ./my-agent         # See compiled output
+# Push to GitHub → agentbrief use github:you/my-agent
 ```
 
-## Usage
-
-```bash
-# Apply from the official registry (short name)
-agentbrief use security-auditor
-agentbrief use nextjs-developer
-agentbrief use typescript-engineer
-
-# Apply from GitHub
-agentbrief use github:owner/repo
-agentbrief use github:owner/repo@v1.0
-
-# Apply from local path
-agentbrief use ./path/to/brief
-
-# Browse available briefs
-agentbrief search
-agentbrief search security
-
-# Manage applied briefs
-agentbrief list
-agentbrief show <name>
-agentbrief update
-agentbrief eject <name>
-
-# Create a new brief
-agentbrief init my-agent
-agentbrief init my-agent --template security
-```
-
-## Official Registry
-
-**⚡ Quick Start Packs** — best if you're not sure where to begin:
-
-| Pack | What your agent gains |
-|------|----------------------|
-| `fullstack-engineer` | Strict TypeScript + Next.js conventions + accessible UI + PR reviews (9 skills) |
-| `startup-founder` | Product specs + SEO audit + growth analytics + security review + launch strategy (12 skills) |
-| `release-engineer` | QA testing + security review + CI/CD + release documentation (10 skills) |
-
-**Code Quality & Engineering:**
-
-| Brief | Your agent becomes... |
-|-------|----------------------|
-| `security-auditor` | OWASP security reviewer who cites CWE numbers |
-| `code-reviewer` | Staff engineer who catches architecture + logic issues |
-| `qa-engineer` | QA who finds bugs, writes tests, fixes with atomic commits |
-| `typescript-engineer` | Type safety enforcer — zero `any`, exhaustive checks |
-| `nextjs-developer` | Next.js 15 specialist (App Router, RSC, Tailwind) |
-| `design-engineer` | Design engineer with 80-item review checklist |
-| `devops-sre` | SRE who sets up CI/CD, monitoring, incident response |
-| `tech-writer` | Documentation specialist with API docs + release notes |
-
-**Product, Growth & Business:**
-
-| Brief | Your agent becomes... |
-|-------|----------------------|
-| `product-manager` | PM who writes PRDs with RICE/ICE prioritization |
-| `growth-engineer` | Growth hacker with SEO audit + analytics + content strategy |
-| `data-analyst` | BI analyst with metrics frameworks + SQL patterns |
-| `startup-advisor` | Startup advisor with CEO review + launch planning |
-| `social-media-manager` | Social media manager with Twitter/X posting + content strategy |
-
-Browse the **[full Catalog](./CATALOG.md)** or the **[Website](https://0xranx.github.io/agentbrief)** to see details for each brief.
-
-## What's a Brief?
-
-A directory containing:
-
-```
-my-brief/
-├── brief.yaml          # Config: name, version, skills (local + remote)
-├── personality.md      # Identity: role, tone, constraints
-├── knowledge/          # Reference: domain materials (read on demand)
-│   └── cheatsheet.md
-└── skills/             # Workflows: executable skill directories
-    └── my-skill/       #   each skill = directory with SKILL.md
-        ├── SKILL.md    #   trigger condition + step-by-step process
-        └── ...         #   any supporting files
-```
-
-See `examples/security-auditor/` for a complete example.
-
-## Create & Publish Your Own
-
-Share your expertise as a reusable brief:
-
-1. **Scaffold** — `agentbrief init my-agent` (or `--template security`)
-2. **Customize** — Edit `personality.md`, add `knowledge/` and `skills/`
-3. **Test** — `agentbrief use ./my-agent` in a temp directory
-4. **Preview** — `agentbrief preview ./my-agent` to see compiled output
-5. **Publish** — Push to GitHub → `agentbrief use github:you/my-agent`
-
-Want it in the official registry? [Submit a PR](./CONTRIBUTING.md). Read the full **[Authoring Guide](https://0xranx.github.io/agentbrief/docs.html#AUTHORING)**.
-
-## Supported Engines
-
-AgentBrief compiles each brief with optimizations for the target engine:
-
-| Engine | File | Compilation |
-|--------|------|------------|
-| Claude Code | `CLAUDE.md` | Full — all sections, verbose knowledge refs |
-| Cursor | `.cursorrules` | Minimal — headings + first paragraph + lists, no knowledge/scale |
-| OpenCode | `AGENTS.md` | Concise — first sentence per paragraph, compact refs |
-| Codex | `AGENTS.md` | Concise — same as OpenCode |
-
-## .gitignore
-
-```
-# Add to your .gitignore
-.agentbrief/
-```
-
-Commit the engine instruction files (`CLAUDE.md`, `.cursorrules`, `AGENTS.md`) so your team shares the same agent behavior.
+Want it in the official registry? [Submit a PR](./CONTRIBUTING.md). Read the **[Authoring Guide](https://0xranx.github.io/agentbrief/docs.html#AUTHORING)**.
 
 ## Community
 
-- [GitHub Discussions](https://github.com/0xranx/agentbrief/discussions) — Questions, showcase your briefs, feature ideas
-- [Contributing Guide](./CONTRIBUTING.md) — How to submit briefs to the registry
+- [GitHub Discussions](https://github.com/0xranx/agentbrief/discussions) — Questions, showcase, feature ideas
+- [Contributing Guide](./CONTRIBUTING.md) — Submit briefs to the registry
+
+Add `.agentbrief/` to your `.gitignore`. Commit the engine files (`CLAUDE.md`, `.cursorrules`, `AGENTS.md`) so your team shares the same agent behavior.
 
 ## License
 
