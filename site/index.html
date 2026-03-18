@@ -10,196 +10,237 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#09090b;--surface:#18181b;--surface2:#27272a;--border:#3f3f46;--border-hover:#52525b;
-  --text:#fafafa;--muted:#b4b4b8;--dim:#71717a;
+  --bg:#050505;
+  --surface:rgba(255,255,255,0.02);
+  --surface2:rgba(255,255,255,0.05);
+  --border:rgba(255,255,255,0.1);
+  --border-hover:rgba(255,255,255,0.2);
+  --text:#ffffff;
+  --muted:#a1a1aa;
+  --dim:#71717a;
   
-  --accent:#2563eb;--accent-hover:#60a5fa;--accent-dim:rgba(37,99,235,.2);
+  --accent:#3b82f6;
+  --accent-hover:#60a5fa;
+  --accent-dim:rgba(59,130,246,.15);
   --accent-bright:#60a5fa;
-  --accent-warm:#f97316;
-  --green:#10b981;--green-dim:rgba(16,185,129,.2);
-  --purple:#8b5cf6;--purple-dim:rgba(139,92,246,.2);
-  --orange:#f97316;--orange-dim:rgba(249,115,22,.2);
+  --green:#10b981;
+  --purple:#8b5cf6;
+  --orange:#f97316;
   
   --mono:'JetBrains Mono',SFMono-Regular,Consolas,monospace;
   --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
-  --max:1080px;--radius:12px;
+  --max:1140px;
+  --radius:16px;
 }
 body{
   font-family:var(--sans);
   background-color:var(--bg);
-  background-image:radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
-  background-size:24px 24px;
   color:var(--text);
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
-a{color:var(--accent-bright);text-decoration:none}
+
+/* Background Effects */
+.bg-effects {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(circle at 50% 0%, black 0%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at 50% 0%, black 0%, transparent 80%);
+}
+.bg-glows {
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 100vh;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 40%, rgba(59,130,246,0.15), transparent 50%),
+    radial-gradient(circle at 80% 60%, rgba(139,92,246,0.15), transparent 50%);
+  filter: blur(80px);
+}
+
+a{color:var(--accent-bright);text-decoration:none;transition:color .2s}
 a:hover{color:var(--accent-hover)}
-code{font-family:var(--mono);font-size:.85em;background:var(--surface2);padding:2px 7px;border-radius:4px}
-::selection{background:var(--accent);color:#fff}
+code{font-family:var(--mono);font-size:.85em;background:rgba(255,255,255,0.05);padding:2px 6px;border-radius:4px;border:1px solid rgba(255,255,255,0.05)}
+::selection{background:rgba(59,130,246,0.3);color:#fff}
 
 /* Nav */
-nav{position:sticky;top:0;z-index:50;background:rgba(9,9,11,.8);backdrop-filter:blur(16px);border-bottom:1px solid rgba(63,63,70,.5)}
-nav .inner{max-width:var(--max);margin:0 auto;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between}
-nav .logo{font-family:var(--mono);font-weight:700;font-size:16px;color:var(--text);letter-spacing:-.5px}
+nav{position:sticky;top:0;z-index:50;background:rgba(5,5,5,0.7);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+nav .inner{max-width:var(--max);margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between}
+nav .logo{font-family:var(--mono);font-weight:700;font-size:18px;color:var(--text);letter-spacing:-.5px;display:flex;align-items:center;gap:8px}
 nav .logo span{color:var(--accent-bright)}
-nav .nav-links{display:flex;gap:24px;align-items:center;font-size:14px;font-weight:500}
-nav .nav-links a{color:var(--muted);transition:color .2s}
+nav .nav-links{display:flex;gap:32px;align-items:center;font-size:14px;font-weight:500}
+nav .nav-links a{color:var(--muted)}
 nav .nav-links a:hover{color:var(--text)}
-.gh-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;color:var(--text);background:var(--surface);transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,0.2)}
-.gh-btn:hover{background:var(--surface2);border-color:var(--border-hover);transform:translateY(-1px)}
+
+.gh-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid rgba(255,255,255,0.15);border-radius:24px;font-size:13px;color:var(--text);background:rgba(255,255,255,0.05);backdrop-filter:blur(8px);transition:all .3s}
+.gh-btn:hover{background:rgba(255,255,255,0.1);transform:translateY(-1px);border-color:rgba(255,255,255,0.2);box-shadow:0 8px 24px rgba(0,0,0,0.4)}
 .gh-btn svg{flex-shrink:0}
 
 /* Hero */
-.hero{position:relative;max-width:var(--max);margin:0 auto;padding:88px 24px 72px;text-align:center;overflow:visible}
-.hero::before{
-  content:'';position:absolute;top:0;left:50%;width:100%;height:100%;transform:translateX(-50%);
-  background:
-    radial-gradient(ellipse at 50% 30%, rgba(37,99,235,0.3) 0%, transparent 50%),
-    radial-gradient(ellipse at 30% 60%, rgba(139,92,246,0.2) 0%, transparent 40%),
-    radial-gradient(ellipse at 70% 50%, rgba(16,185,129,0.2) 0%, transparent 40%);
-  filter:blur(100px);z-index:-1;pointer-events:none;
-}
-.hero::after{
-  content:'';position:absolute;width:600px;height:600px;top:-100px;right:-100px;
-  background:radial-gradient(circle, rgba(167,139,250,0.2) 0%, transparent 70%);
-  filter:blur(80px);animation:float 20s ease-in-out infinite;z-index:-2;pointer-events:none;
-}
-@keyframes float{
-  0%,100%{transform:translate(0,0) scale(1)}
-  50%{transform:translate(40px,-40px) scale(1.05)}
-}
-.hero .pill{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text);background:linear-gradient(90deg, rgba(16,185,129,0.1), rgba(37,99,235,0.1));border:1px solid rgba(16,185,129,0.3);border-radius:24px;padding:6px 16px;margin-bottom:28px;box-shadow:0 4px 16px rgba(16,185,129,0.1)}
-.hero .pill .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;box-shadow:0 0 8px var(--green)}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.hero h1{font-size:clamp(40px,6vw,64px);font-weight:800;line-height:1.1;letter-spacing:-2.5px;margin-bottom:20px;text-shadow:0 4px 24px rgba(0,0,0,0.5)}
+.hero{position:relative;max-width:var(--max);margin:0 auto;padding:120px 24px 80px;text-align:center;overflow:visible}
+.hero .pill{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text);background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:32px;padding:8px 20px;margin-bottom:32px;backdrop-filter:blur(12px);box-shadow:0 4px 24px rgba(0,0,0,0.2)}
+.hero .pill .dot{width:8px;height:8px;border-radius:50%;background:var(--accent-bright);animation:pulse 2s infinite;box-shadow:0 0 12px var(--accent-bright)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.hero h1{font-size:clamp(48px,8vw,80px);font-weight:800;line-height:1.05;letter-spacing:-3px;margin-bottom:24px;text-shadow:0 8px 32px rgba(0,0,0,0.5)}
 .hero h1 .highlight{
-  background:linear-gradient(135deg, #60a5fa 0%, #a78bfa 30%, #f472b6 60%, #fbbf24 100%);
-  animation:gradient-shift 8s ease infinite;background-size:300% 300%;
+  background:linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
 }
-@keyframes gradient-shift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-.hero .sub{font-size:18px;color:var(--muted);max-width:540px;margin:0 auto 36px;line-height:1.8}
-.hero .ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:8px;font-size:14px;font-weight:600;transition:all .3s cubic-bezier(0.4,0,0.2,1);cursor:pointer;border:none;text-decoration:none;position:relative;overflow:hidden}
-.btn:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
-.btn::after{content:'';position:absolute;top:50%;left:50%;width:0;height:0;border-radius:50%;background:rgba(255,255,255,0.2);transform:translate(-50%,-50%);transition:width .6s,height .6s}
-.btn:active::after{width:300px;height:300px}
-.btn-primary{background:var(--text);color:var(--bg)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,255,255,0.2)}
-.btn-secondary{background:rgba(255,255,255,0.05);color:var(--text);border:1px solid var(--border);backdrop-filter:blur(8px)}
-.btn-secondary:hover{border-color:var(--accent);color:var(--accent-bright);background:var(--surface);transform:translateY(-2px);box-shadow:0 8px 24px var(--accent-dim)}
-
-/* Install box (Terminal style) */
-.install-box{max-width:560px;margin:0 auto;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05) inset;text-align:left;overflow:hidden}
-.install-tabs{display:flex;background:linear-gradient(to bottom, var(--surface2), var(--surface));border-bottom:1px solid var(--border);position:relative;padding-left:72px}
-.install-tabs::before{content:'';position:absolute;left:16px;top:16px;width:12px;height:12px;border-radius:50%;background:#ff5f56;box-shadow:20px 0 0 #ffbd2e, 40px 0 0 #27c93f}
-.install-tab{padding:12px 16px;font-size:13px;font-weight:500;color:var(--dim);cursor:pointer;border:none;background:none;transition:all .2s;font-family:var(--sans);border-bottom:2px solid transparent}
-.install-tab.active{color:var(--text);border-bottom-color:var(--accent-bright)}
-.install-tab:hover:not(.active){color:var(--muted)}
-.install-cmd{padding:18px 24px;font-family:var(--mono);font-size:14px;display:flex;align-items:center;justify-content:space-between;background:var(--bg)}
-.install-cmd .prompt{color:var(--green);margin-right:12px;font-weight:700}
-.install-cmd .copy-btn{background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--muted);padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--sans);transition:all .2s}
-.install-cmd .copy-btn:hover{color:var(--text);border-color:var(--accent);background:var(--accent-dim)}
-
-/* Section */
-.section{max-width:var(--max);margin:0 auto;padding:64px 24px}
-.section-header{margin-bottom:40px;text-align:left}
-.section-header h2{font-size:28px;font-weight:800;letter-spacing:-1px;margin-bottom:12px}
-.section-header p{color:var(--muted);font-size:16px;max-width:640px}
-
-/* CSS Scroll Animations */
-@supports (animation-timeline: view()) {
-  @keyframes reveal {
-    0% { opacity: 0; transform: translateY(40px) scale(0.96); filter: blur(4px); }
-    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-  }
-  .section {
-    animation: reveal 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-    animation-timeline: view();
-    animation-range: entry 5% cover 20%;
-  }
+.hero h1 .gradient{
+  background:linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
 }
+.hero .sub{font-size:20px;color:var(--muted);max-width:640px;margin:0 auto 48px;line-height:1.7;letter-spacing:-0.2px;font-weight:400}
+.hero .ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:64px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 28px;border-radius:12px;font-size:15px;font-weight:600;transition:all .3s cubic-bezier(0.16,1,0.3,1);cursor:pointer;border:none;text-decoration:none;position:relative;overflow:hidden}
+.btn-primary{background:var(--text);color:#000;box-shadow:0 0 0 1px rgba(255,255,255,0.1), 0 8px 24px rgba(255,255,255,0.15)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(255,255,255,0.2), 0 12px 32px rgba(255,255,255,0.25);background:#fff}
+.btn-secondary{background:rgba(255,255,255,0.03);color:var(--text);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(12px)}
+.btn-secondary:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2);transform:translateY(-2px)}
+
+/* Install box */
+.install-box{max-width:600px;margin:0 auto;background:rgba(10,10,10,0.8);backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:16px;box-shadow:0 24px 64px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);text-align:left;overflow:hidden;position:relative}
+.install-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent)}
+.install-tabs{display:flex;background:rgba(255,255,255,0.02);border-bottom:1px solid var(--border);position:relative;padding-left:80px}
+.install-tabs::before{content:'';position:absolute;left:20px;top:20px;width:12px;height:12px;border-radius:50%;background:#ff5f56;box-shadow:24px 0 0 #ffbd2e, 48px 0 0 #27c93f}
+.install-tab{padding:16px 20px;font-size:13px;font-weight:500;color:var(--dim);cursor:pointer;border:none;background:none;transition:all .2s;font-family:var(--sans);position:relative}
+.install-tab.active{color:var(--text)}
+.install-tab.active::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--accent-bright)}
+.install-tab:hover:not(.active){color:var(--muted)}
+.install-cmd{padding:24px 32px;font-family:var(--mono);font-size:15px;display:flex;align-items:center;justify-content:space-between;background:transparent}
+.install-cmd .prompt{color:var(--accent-bright);margin-right:16px;font-weight:700}
+.install-cmd .copy-btn{background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans);transition:all .2s;backdrop-filter:blur(8px)}
+.install-cmd .copy-btn:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);transform:translateY(-1px)}
+
+/* Sections */
+.section{max-width:var(--max);margin:0 auto;padding:96px 24px;position:relative}
+.section-header{margin-bottom:56px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.section-header h2{font-size:clamp(32px,5vw,48px);font-weight:800;letter-spacing:-2px;margin-bottom:20px;line-height:1.1;background:linear-gradient(to right, #fff, #a1a1aa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.section-header p{color:var(--muted);font-size:18px;max-width:640px;line-height:1.6}
+
+/* The Difference */
+.diff-container{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch}
+.diff-window{background:rgba(15,15,15,0.6);backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 12px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.02);transition:all .4s}
+.diff-window:hover{transform:translateY(-4px);box-shadow:0 24px 48px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)}
+.diff-window.active{border-color:rgba(16,185,129,0.3);box-shadow:0 0 40px rgba(16,185,129,0.1), inset 0 1px 0 rgba(255,255,255,0.05)}
+.diff-window.active:hover{box-shadow:0 12px 64px rgba(16,185,129,0.15), inset 0 1px 0 rgba(255,255,255,0.05)}
+.diff-header{padding:12px 16px;background:rgba(255,255,255,0.02);border-bottom:1px solid var(--border);display:flex;align-items:center;font-size:12px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase}
+.diff-header.muted{color:var(--dim)}
+.diff-header.active{color:var(--green)}
+.diff-body{padding:24px;font-size:14px;line-height:1.7;flex-grow:1;display:flex;flex-direction:column}
+.chat-bubble{padding:14px 18px;border-radius:12px;margin-bottom:16px;max-width:90%}
+.chat-bubble.user{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.05);align-self:flex-end;margin-left:auto;color:var(--text);border-bottom-right-radius:4px}
+.chat-bubble.agent-bad{background:transparent;border:1px solid transparent;color:var(--muted);align-self:flex-start}
+.chat-bubble.agent-good{background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.1);color:var(--text);align-self:flex-start;border-bottom-left-radius:4px;box-shadow:0 4px 24px rgba(16,185,129,0.05)}
+.diff-body code{font-size:13px;background:rgba(0,0,0,0.3);border-color:rgba(16,185,129,0.2)}
 
 /* Search */
-.search-box{margin-bottom:32px;position:relative;max-width:480px}
-.search-box input{width:100%;padding:14px 16px 14px 44px;background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:15px;font-family:var(--sans);outline:none;transition:all .3s;box-shadow:0 4px 12px rgba(0,0,0,0.1)}
-.search-box input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,0.2), 0 8px 24px rgba(0,0,0,0.2)}
+.search-container{display:flex;justify-content:center;margin-bottom:64px}
+.search-box{position:relative;width:100%;max-width:540px}
+.search-box input{width:100%;padding:16px 20px 16px 52px;background:rgba(255,255,255,0.02);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:16px;color:var(--text);font-size:16px;font-family:var(--sans);outline:none;transition:all .3s;box-shadow:0 4px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.02)}
+.search-box input:focus{border-color:rgba(255,255,255,0.3);box-shadow:0 0 0 4px rgba(255,255,255,0.05), 0 12px 32px rgba(0,0,0,0.4)}
 .search-box input::placeholder{color:var(--dim)}
-.search-box .search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:16px}
+.search-box .search-icon{position:absolute;left:20px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:18px}
 
 /* Brief Cards Grid */
-.brief-list{display:grid;grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));gap:20px;margin-bottom:48px}
-.brief-item{display:flex;flex-direction:column;gap:12px;padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:16px;transition:all .3s cubic-bezier(0.4,0,0.2,1);cursor:pointer;position:relative;overflow:hidden}
+.brief-category{font-size:20px;color:var(--text);margin:64px 0 24px;font-weight:700;display:flex;align-items:center;gap:16px;letter-spacing:-0.5px}
+.brief-category::after{content:'';flex-grow:1;height:1px;background:linear-gradient(to right, var(--border), transparent)}
+.brief-list{display:grid;grid-template-columns:repeat(auto-fill, minmax(340px, 1fr));gap:24px}
+
+.brief-item{display:flex;flex-direction:column;gap:16px;padding:28px;background:rgba(20,20,20,0.6);backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:20px;transition:all .4s cubic-bezier(0.16,1,0.3,1);cursor:pointer;position:relative;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,0.02)}
 .brief-item:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
-.brief-item::before{content:'';position:absolute;left:0;top:0;width:4px;height:100%;background:linear-gradient(to bottom, var(--accent), var(--purple));opacity:0;transition:opacity .3s}
-.brief-item::after{content:'';position:absolute;width:250px;height:250px;background:radial-gradient(circle, rgba(96,165,250,0.12), transparent 70%);top:var(--mouse-y, 50%);left:var(--mouse-x, 50%);transform:translate(-50%,-50%);pointer-events:none;opacity:0;transition:opacity .3s;z-index:1}
-.brief-item:hover{transform:translateY(-4px);border-color:var(--border-hover);box-shadow:0 16px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.02) inset}
+.brief-item::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);opacity:0;transition:opacity .4s}
+.brief-item::after{content:'';position:absolute;width:300px;height:300px;background:radial-gradient(circle, rgba(255,255,255,0.05), transparent 70%);top:var(--mouse-y, 50%);left:var(--mouse-x, 50%);transform:translate(-50%,-50%);pointer-events:none;opacity:0;transition:opacity .4s;z-index:1}
+.brief-item:hover{transform:translateY(-4px);border-color:rgba(255,255,255,0.15);box-shadow:0 24px 48px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)}
 .brief-item:hover::before, .brief-item:hover::after{opacity:1}
 
 .brief-item .bi-header{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:2}
-.brief-item .bi-name{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--text)}
-.brief-item .bi-desc{font-size:14px;color:var(--muted);line-height:1.6;flex-grow:1;position:relative;z-index:2}
-.brief-item .bi-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05);position:relative;z-index:2}
-.brief-item .bi-meta{display:flex;gap:12px;align-items:center}
-.brief-item .bi-layers{font-family:var(--mono);font-size:12px;color:var(--dim)}
-.brief-item .bi-cmd{font-family:var(--mono);font-size:12px;color:var(--muted);background:var(--bg);padding:6px 12px;border-radius:6px;cursor:pointer;transition:all .2s;border:1px solid var(--border)}
-.brief-item .bi-cmd:hover{color:var(--accent-bright);border-color:var(--accent);background:rgba(37,99,235,0.1)}
+.brief-item .bi-name{font-family:var(--mono);font-size:18px;font-weight:700;color:var(--text);letter-spacing:-0.5px}
+.brief-item .bi-desc{font-size:15px;color:var(--muted);line-height:1.6;flex-grow:1;position:relative;z-index:2}
+.brief-item .bi-footer{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:20px;border-top:1px solid rgba(255,255,255,0.05);position:relative;z-index:2}
+.brief-item .bi-layers{font-family:var(--mono);font-size:13px;color:var(--dim);display:flex;align-items:center;gap:6px}
+.brief-item .bi-cmd{font-family:var(--mono);font-size:13px;color:var(--text);background:rgba(255,255,255,0.05);padding:8px 16px;border-radius:8px;cursor:pointer;transition:all .2s;border:1px solid var(--border)}
+.brief-item .bi-cmd:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2)}
 
-.bi-tag{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:0.5px}
-.bi-tag.dev{background:linear-gradient(135deg, #2563eb, #3b82f6);color:#fff;box-shadow:0 2px 10px rgba(37,99,235,0.3)}
-.bi-tag.biz{background:linear-gradient(135deg, #f97316, #fb923c);color:#fff;box-shadow:0 2px 10px rgba(249,115,22,0.3)}
-.bi-tag.qa{background:linear-gradient(135deg, #10b981, #34d399);color:#fff;box-shadow:0 2px 10px rgba(16,185,129,0.3)}
-.bi-tag.combo{background:linear-gradient(135deg, #8b5cf6, #a78bfa);color:#fff;box-shadow:0 2px 10px rgba(139,92,246,0.3)}
+.bi-tag{font-size:12px;font-weight:600;padding:4px 12px;border-radius:24px;text-transform:uppercase;letter-spacing:0.5px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.2)}
+.bi-tag.combo{background:rgba(139,92,246,0.15);color:#c4b5fd;border:1px solid rgba(139,92,246,0.3)}
+.bi-tag.dev{background:rgba(59,130,246,0.15);color:#93c5fd;border:1px solid rgba(59,130,246,0.3)}
+.bi-tag.biz{background:rgba(249,115,22,0.15);color:#fdba74;border:1px solid rgba(249,115,22,0.3)}
+.bi-tag.qa{background:rgba(16,185,129,0.15);color:#6ee7b7;border:1px solid rgba(16,185,129,0.3)}
 
-/* Sources */
-.sources{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
-.source-card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;transition:all .3s cubic-bezier(0.4,0,0.2,1);text-decoration:none;position:relative;overflow:hidden}
-.source-card:hover{border-color:var(--accent);box-shadow:0 12px 32px var(--accent-dim);transform:translateY(-4px)}
-.source-card .sc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.source-card .sc-name{font-family:var(--mono);font-weight:700;font-size:15px;color:var(--text)}
-.source-card .sc-stars{font-family:var(--mono);font-size:12px;color:var(--accent-bright);background:var(--accent-dim);padding:4px 8px;border-radius:6px;font-weight:600}
-.source-card .sc-desc{font-size:14px;color:var(--muted);line-height:1.6}
+/* Cards Grid (Sources, Docs, Create) */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px}
+.card{display:flex;flex-direction:column;background:rgba(15,15,15,0.6);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:20px;padding:32px;transition:all .4s cubic-bezier(0.16,1,0.3,1);text-decoration:none;position:relative;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,0.02)}
+.card:hover{border-color:rgba(255,255,255,0.2);box-shadow:0 24px 48px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);transform:translateY(-4px);background:rgba(25,25,25,0.8)}
+.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.card-title{font-size:18px;font-weight:700;color:var(--text);letter-spacing:-0.5px}
+.card-mono-title{font-family:var(--mono);font-weight:700;font-size:16px;color:var(--text)}
+.card-badge{font-family:var(--mono);font-size:12px;color:var(--text);background:rgba(255,255,255,0.1);padding:4px 10px;border-radius:8px;font-weight:600}
+.card-desc{font-size:15px;color:var(--muted);line-height:1.6}
 
 /* Engines */
-.engines{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.2)}
-.engine{background:var(--surface);padding:32px 24px;text-align:center;transition:background .3s}
-.engine:hover{background:var(--surface2)}
-.engine h3{font-size:16px;font-weight:700;margin-bottom:8px}
-.engine .file{font-family:var(--mono);font-size:13px;color:var(--accent-bright);background:var(--accent-dim);display:inline-block;padding:4px 10px;border-radius:6px;margin-bottom:8px}
-.engine .mode{font-size:13px;color:var(--dim)}
+.engines{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.engine{background:rgba(20,20,20,0.5);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:20px;padding:40px 24px;text-align:center;transition:all .4s;box-shadow:inset 0 1px 0 rgba(255,255,255,0.02)}
+.engine:hover{transform:translateY(-4px);border-color:rgba(255,255,255,0.2);background:rgba(30,30,30,0.6);box-shadow:0 16px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)}
+.engine h3{font-size:20px;font-weight:700;margin-bottom:12px;letter-spacing:-0.5px}
+.engine .file{font-family:var(--mono);font-size:14px;color:var(--text);background:rgba(255,255,255,0.08);display:inline-block;padding:6px 12px;border-radius:8px;margin-bottom:12px;border:1px solid rgba(255,255,255,0.05)}
+.engine .mode{font-size:14px;color:var(--muted)}
 
-/* Docs */
-.docs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
-.doc-card{display:block;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;transition:all .3s cubic-bezier(0.4,0,0.2,1);text-decoration:none}
-.doc-card:hover{border-color:var(--accent);box-shadow:0 12px 32px var(--accent-dim);transform:translateY(-4px);background:linear-gradient(to bottom right, var(--surface2), var(--surface))}
-.doc-card h4{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--text)}
-.doc-card p{font-size:14px;color:var(--muted);line-height:1.6}
+/* Create Steps */
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 
 /* Footer */
-footer{border-top:1px solid var(--border);padding:48px 24px;text-align:center;color:var(--dim);font-size:14px;max-width:var(--max);margin:64px auto 0;background:linear-gradient(to bottom, transparent, rgba(255,255,255,0.02))}
-footer .links{margin-bottom:16px;display:flex;gap:24px;justify-content:center}
+footer{border-top:1px solid var(--border);padding:64px 24px;text-align:center;color:var(--dim);font-size:15px;max-width:var(--max);margin:64px auto 0;background:transparent}
+footer .links{margin-bottom:24px;display:flex;gap:32px;justify-content:center;flex-wrap:wrap}
 footer a{color:var(--muted);font-weight:500;transition:color .2s}
 footer a:hover{color:var(--text)}
 
+/* Animations */
+@supports (animation-timeline: view()) {
+  @keyframes reveal {
+    0% { opacity: 0; transform: translateY(40px); filter: blur(8px); }
+    100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+  }
+  .section {
+    animation: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 15%;
+  }
+}
+
+@media(max-width:1024px){
+  .engines{grid-template-columns:repeat(2,1fr)}
+  .steps-grid{grid-template-columns:repeat(2,1fr)}
+}
 @media(max-width:768px){
-  .hero{padding:64px 20px 48px}
-  .hero h1{font-size:36px;letter-spacing:-1px}
-  .engines{grid-template-columns:1fr 1fr}
-  .brief-list{grid-template-columns:1fr}
-  .sources{grid-template-columns:1fr}
-  .docs-grid{grid-template-columns:1fr}
-  .install-tabs{padding-left:16px}
+  .hero{padding:80px 20px 48px}
+  .hero h1{font-size:clamp(40px,10vw,48px)}
+  .diff-container{grid-template-columns:1fr}
+  .install-tabs{padding-left:20px}
   .install-tabs::before{display:none}
 }
 @media(max-width:480px){
   .engines{grid-template-columns:1fr}
+  .steps-grid{grid-template-columns:1fr}
   .hero .ctas{flex-direction:column}
-  .btn{width:100%;justify-content:center}
+  .btn{width:100%}
+  .install-cmd{flex-direction:column;align-items:flex-start;gap:16px}
+  .install-cmd .copy-btn{align-self:stretch;text-align:center}
 }
 </style>
 </head>
 <body>
+
+<div class="bg-effects"></div>
+<div class="bg-glows"></div>
 
 <nav>
   <div class="inner">
@@ -217,7 +258,7 @@ footer a:hover{color:var(--text)}
 </nav>
 
 <section class="hero">
-  <div class="pill"><span class="dot"></span> Skills from superpowers (90.6k★) · Anthropic · Vercel · YC CEO · open source</div>
+  <div class="pill"><span class="dot"></span> Skills from superpowers (90.6k★) · Anthropic · Vercel · YC CEO</div>
   <h1>Make your AI agent<br><span class="highlight">actually good at its job</span></h1>
   <p class="sub">Security reviews. Code quality. Product specs. Growth hacking. One command gives your Claude Code, Cursor, or Codex real expertise — not just generic answers.</p>
   <div class="ctas">
@@ -244,16 +285,20 @@ footer a:hover{color:var(--text)}
     <h2>The Difference</h2>
     <p>Same question, completely different answer.</p>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;font-size:13px">
-      <div style="font-size:11px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px">Without a brief</div>
-      <div style="color:var(--muted);margin-bottom:8px"><strong style="color:var(--text)">You:</strong> "Review this code for issues"</div>
-      <div style="color:var(--dim);line-height:1.6"><strong style="color:var(--muted)">Agent:</strong> "The code looks good overall. Consider adding some error handling and maybe a few more comments."</div>
+  <div class="diff-container">
+    <div class="diff-window">
+      <div class="diff-header muted">Without a brief</div>
+      <div class="diff-body">
+        <div class="chat-bubble user">"Review this code for issues"</div>
+        <div class="chat-bubble agent-bad">"The code looks good overall. Consider adding some error handling and maybe a few more comments."</div>
+      </div>
     </div>
-    <div style="background:var(--surface);border:1px solid var(--green);border-radius:var(--radius);padding:18px;font-size:13px;box-shadow:0 0 20px rgba(34,197,94,.08)">
-      <div style="font-size:11px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px">With security-auditor brief</div>
-      <div style="color:var(--muted);margin-bottom:8px"><strong style="color:var(--text)">You:</strong> "Review this code for issues"</div>
-      <div style="color:var(--muted);line-height:1.6"><strong style="color:var(--green)">Agent:</strong> "<strong>CWE-89 CRITICAL</strong> at line 23: SQL injection via string concatenation. Attack vector: attacker injects arbitrary SQL through userId. <strong>Fix:</strong> <code style="font-size:11px">db.query('SELECT * FROM users WHERE id = $1', [userId])</code>"</div>
+    <div class="diff-window active">
+      <div class="diff-header active">With security-auditor brief</div>
+      <div class="diff-body">
+        <div class="chat-bubble user">"Review this code for issues"</div>
+        <div class="chat-bubble agent-good">"<strong>CWE-89 CRITICAL</strong> at line 23: SQL injection via string concatenation. Attack vector: attacker injects arbitrary SQL through userId.<br><br><strong>Fix:</strong> <code>db.query('SELECT * FROM users WHERE id = $1', [userId])</code>"</div>
+      </div>
     </div>
   </div>
 </section>
@@ -264,12 +309,14 @@ footer a:hover{color:var(--text)}
     <p>Each brief bundles personality + domain knowledge + executable skills. Click to view details, or copy the command to apply.</p>
   </div>
 
-  <div class="search-box">
-    <span class="search-icon">⌕</span>
-    <input type="text" id="brief-search" placeholder="Filter by name, category, or description..." oninput="filterBriefs()">
+  <div class="search-container">
+    <div class="search-box">
+      <span class="search-icon">⌕</span>
+      <input type="text" id="brief-search" placeholder="Filter by name, category, or description..." oninput="filterBriefs()">
+    </div>
   </div>
 
-  <h3 style="font-size:16px;color:var(--purple);margin:32px 0 16px;font-weight:700;display:flex;align-items:center;gap:8px">⚡ Quick Start Packs</h3>
+  <h3 class="brief-category" style="color:var(--purple)">⚡ Quick Start Packs</h3>
   <div class="brief-list" id="brief-list-combo">
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="fullstack-dev" data-cat="combo">
       <div class="bi-header"><span class="bi-name">fullstack-dev</span><span class="bi-tag combo">9 skills</span></div>
@@ -289,7 +336,7 @@ footer a:hover{color:var(--text)}
     </div>
   </div>
 
-  <h3 style="font-size:16px;color:var(--accent-bright);margin:40px 0 16px;font-weight:700">Code Quality & Engineering</h3>
+  <h3 class="brief-category" style="color:var(--accent-bright)">Code Quality & Engineering</h3>
   <div class="brief-list" id="brief-list-dev">
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="security-auditor" data-cat="dev">
       <div class="bi-header"><span class="bi-name">security-auditor</span><span class="bi-tag dev">4 skills</span></div>
@@ -357,7 +404,7 @@ footer a:hover{color:var(--text)}
     </div>
   </div>
 
-  <h3 style="font-size:16px;color:var(--orange);margin:40px 0 16px;font-weight:700">Product, Growth & Business</h3>
+  <h3 class="brief-category" style="color:var(--orange)">Product, Growth & Business</h3>
   <div class="brief-list" id="brief-list-biz">
     <div class="brief-item" tabindex="0" onclick="openBrief(this)" data-name="product-manager" data-cat="biz">
       <div class="bi-header"><span class="bi-name">product-manager</span><span class="bi-tag biz">3 skills</span></div>
@@ -397,32 +444,32 @@ footer a:hover{color:var(--text)}
 <section class="section" id="ecosystem">
   <div class="section-header">
     <h2>Skill Ecosystem</h2>
-    <p>Skills adapted from the best open-source projects. Completely compatible with the <a href="https://skills.sh">skills.sh</a> SKILL.md format.</p>
+    <p>Skills adapted from the best open-source projects. Completely compatible with the <a href="https://skills.sh">skills.sh</a> format.</p>
   </div>
-  <div class="sources">
-    <a href="https://github.com/obra/superpowers" class="source-card">
-      <div class="sc-top"><span class="sc-name">obra/superpowers</span><span class="sc-stars">90.6k ★</span></div>
-      <div class="sc-desc">TDD, systematic debugging, verification loops, brainstorming, and plan-and-execute workflows.</div>
+  <div class="cards-grid">
+    <a href="https://github.com/obra/superpowers" class="card">
+      <div class="card-top"><span class="card-mono-title">obra/superpowers</span><span class="card-badge">90.6k ★</span></div>
+      <div class="card-desc">TDD, systematic debugging, verification loops, brainstorming, and plan-and-execute workflows.</div>
     </a>
-    <a href="https://github.com/garrytan/gstack" class="source-card">
-      <div class="sc-top"><span class="sc-name">garrytan/gstack</span><span class="sc-stars">YC CEO</span></div>
-      <div class="sc-desc">Tough CEO review (10-star rating), thorough design review (80-item checklist), and atomic commit QA.</div>
+    <a href="https://github.com/garrytan/gstack" class="card">
+      <div class="card-top"><span class="card-mono-title">garrytan/gstack</span><span class="card-badge">YC CEO</span></div>
+      <div class="card-desc">Tough CEO review (10-star rating), thorough design review (80-item checklist), and atomic commit QA.</div>
     </a>
-    <a href="https://github.com/vercel-labs/next-skills" class="source-card">
-      <div class="sc-top"><span class="sc-name">vercel-labs/next-skills</span><span class="sc-stars">Vercel</span></div>
-      <div class="sc-desc">Official Next.js best practices — RSCs, caching strategies, error handling, and 20+ reference files.</div>
+    <a href="https://github.com/vercel-labs/next-skills" class="card">
+      <div class="card-top"><span class="card-mono-title">vercel-labs/next-skills</span><span class="card-badge">Vercel</span></div>
+      <div class="card-desc">Official Next.js best practices — RSCs, caching strategies, error handling, and 20+ reference files.</div>
     </a>
-    <a href="https://github.com/anthropics/skills" class="source-card">
-      <div class="sc-top"><span class="sc-name">anthropics/skills</span><span class="sc-stars">95.8k ★</span></div>
-      <div class="sc-desc">Anthropic's official skills repository for frontend design, robust webapp testing, and MCP builder generation.</div>
+    <a href="https://github.com/anthropics/skills" class="card">
+      <div class="card-top"><span class="card-mono-title">anthropics/skills</span><span class="card-badge">95.8k ★</span></div>
+      <div class="card-desc">Anthropic's official skills repository for frontend design, robust webapp testing, and MCP builder generation.</div>
     </a>
-    <a href="https://github.com/coreyhaines31/marketingskills" class="source-card">
-      <div class="sc-top"><span class="sc-name">marketingskills</span><span class="sc-stars">32+ skills</span></div>
-      <div class="sc-desc">Deep-dive marketing tactics: technical SEO audits, launch strategies, pricing models, and content workflows.</div>
+    <a href="https://github.com/coreyhaines31/marketingskills" class="card">
+      <div class="card-top"><span class="card-mono-title">marketingskills</span><span class="card-badge">32+ skills</span></div>
+      <div class="card-desc">Deep-dive marketing tactics: technical SEO audits, launch strategies, pricing models, and content workflows.</div>
     </a>
-    <a href="https://github.com/akin-ozer/cc-devops-skills" class="source-card">
-      <div class="sc-top"><span class="sc-name">cc-devops-skills</span><span class="sc-stars">31 skills</span></div>
-      <div class="sc-desc">Extensive DevOps toolbelt covering Terraform, Docker, Kubernetes, Helm, and GitHub Actions templates.</div>
+    <a href="https://github.com/akin-ozer/cc-devops-skills" class="card">
+      <div class="card-top"><span class="card-mono-title">cc-devops-skills</span><span class="card-badge">31 skills</span></div>
+      <div class="card-desc">Extensive DevOps toolbelt covering Terraform, Docker, Kubernetes, Helm, and GitHub Actions templates.</div>
     </a>
   </div>
 </section>
@@ -445,25 +492,25 @@ footer a:hover{color:var(--text)}
     <h2>Create & Publish</h2>
     <p>Package your domain expertise into a reusable brief and share it with the developer community.</p>
   </div>
-  <div class="sources">
-    <div class="source-card" style="cursor:default">
-      <div class="sc-top"><span class="sc-name">1. Scaffold</span></div>
-      <div class="sc-desc" style="font-family:var(--mono);font-size:13px;color:var(--accent-bright);background:var(--surface2);padding:6px 10px;border-radius:6px;display:inline-block;margin-top:4px">agentbrief init my-agent</div>
+  <div class="steps-grid">
+    <div class="card" style="cursor:default">
+      <div class="card-top"><span class="card-mono-title">1. Scaffold</span></div>
+      <div class="card-desc" style="font-family:var(--mono);font-size:13px;color:var(--accent-bright);background:rgba(255,255,255,0.05);padding:6px 10px;border-radius:6px;display:inline-block;margin-top:4px;border:1px solid rgba(255,255,255,0.05)">agentbrief init</div>
     </div>
-    <div class="source-card" style="cursor:default">
-      <div class="sc-top"><span class="sc-name">2. Customize</span></div>
-      <div class="sc-desc">Edit <code style="background:transparent;padding:0">personality.md</code>, add markdown files to <code style="background:transparent;padding:0">knowledge/</code> and directories to <code style="background:transparent;padding:0">skills/</code></div>
+    <div class="card" style="cursor:default">
+      <div class="card-top"><span class="card-mono-title">2. Customize</span></div>
+      <div class="card-desc">Edit <code style="background:transparent;padding:0;border:none">personality.md</code>, add markdown files to <code style="background:transparent;padding:0;border:none">knowledge/</code> and dirs to <code style="background:transparent;padding:0;border:none">skills/</code></div>
     </div>
-    <div class="source-card" style="cursor:default">
-      <div class="sc-top"><span class="sc-name">3. Preview</span></div>
-      <div class="sc-desc" style="font-family:var(--mono);font-size:13px;color:var(--accent-bright);background:var(--surface2);padding:6px 10px;border-radius:6px;display:inline-block;margin-top:4px">agentbrief preview ./my-agent</div>
+    <div class="card" style="cursor:default">
+      <div class="card-top"><span class="card-mono-title">3. Preview</span></div>
+      <div class="card-desc" style="font-family:var(--mono);font-size:13px;color:var(--accent-bright);background:rgba(255,255,255,0.05);padding:6px 10px;border-radius:6px;display:inline-block;margin-top:4px;border:1px solid rgba(255,255,255,0.05)">agentbrief preview</div>
     </div>
-    <div class="source-card" style="cursor:default">
-      <div class="sc-top"><span class="sc-name">4. Publish</span></div>
-      <div class="sc-desc">Push your repo to GitHub → submit a PR to the <a href="https://github.com/0xranx/agentbrief/blob/main/CONTRIBUTING.md" style="text-decoration:underline">official registry</a></div>
+    <div class="card" style="cursor:default">
+      <div class="card-top"><span class="card-mono-title">4. Publish</span></div>
+      <div class="card-desc">Push your repo to GitHub → submit a PR to the <a href="https://github.com/0xranx/agentbrief/blob/main/CONTRIBUTING.md" style="text-decoration:underline">official registry</a></div>
     </div>
   </div>
-  <p style="color:var(--dim);font-size:14px;margin-top:24px;text-align:center"><a href="./docs.html#AUTHORING" class="btn btn-secondary" style="padding:8px 16px">Read the Authoring Guide →</a></p>
+  <p style="color:var(--dim);font-size:15px;margin-top:48px;text-align:center"><a href="./docs.html#AUTHORING" class="btn btn-secondary">Read the Authoring Guide →</a></p>
 </section>
 
 <section class="section">
@@ -471,11 +518,11 @@ footer a:hover{color:var(--text)}
     <h2>Documentation</h2>
     <p>Learn how to craft powerful briefs, integrate ecosystem skills, and contribute back.</p>
   </div>
-  <div class="docs-grid">
-    <a href="./docs.html#AUTHORING" class="doc-card"><h4>Authoring Guide</h4><p>Learn to create your own briefs with tailored personality, knowledge, and actionable skills.</p></a>
-    <a href="./docs.html#CATALOG" class="doc-card"><h4>Full Catalog</h4><p>Browse all official roles and skill sources across 7 different business domains.</p></a>
-    <a href="./docs.html#DESIGN" class="doc-card"><h4>Design Decisions</h4><p>Understand why we built it this way — 8 key architectural and user experience choices.</p></a>
-    <a href="./docs.html#VISION" class="doc-card"><h4>Vision</h4><p>Read about our philosophy: creating the eslint-config-airbnb for AI agent behavior.</p></a>
+  <div class="cards-grid">
+    <a href="./docs.html#AUTHORING" class="card"><div class="card-title">Authoring Guide</div><div class="card-desc">Learn to create your own briefs with tailored personality, knowledge, and actionable skills.</div></a>
+    <a href="./docs.html#CATALOG" class="card"><div class="card-title">Full Catalog</div><div class="card-desc">Browse all official roles and skill sources across 7 different business domains.</div></a>
+    <a href="./docs.html#DESIGN" class="card"><div class="card-title">Design Decisions</div><div class="card-desc">Understand why we built it this way — 8 key architectural and user experience choices.</div></a>
+    <a href="./docs.html#VISION" class="card"><div class="card-title">Vision</div><div class="card-desc">Read about our philosophy: creating the eslint-config-airbnb for AI agent behavior.</div></a>
   </div>
 </section>
 
@@ -501,11 +548,11 @@ function copyInstall(){
   const b=document.querySelector('.copy-btn');b.textContent='Copied!';setTimeout(()=>b.textContent='Copy',1500);
 }
 function copyCmd(el){
-  navigator.clipboard.writeText('agentbrief '+el.textContent.replace('use ', 'use ')); // It's already the full command
+  navigator.clipboard.writeText('agentbrief '+el.textContent.replace('use ', 'use '));
   const o=el.textContent;
   el.textContent='Copied!';
-  el.style.color='var(--green)';
-  el.style.borderColor='var(--green)';
+  el.style.color='#10b981';
+  el.style.borderColor='rgba(16,185,129,0.3)';
   setTimeout(()=>{
     el.textContent=o;
     el.style.color='';
@@ -518,7 +565,6 @@ function filterBriefs(){
     const match=el.dataset.name.includes(q)||el.dataset.cat.includes(q)||el.querySelector('.bi-desc').textContent.toLowerCase().includes(q);
     el.style.display=match?'':'none';
   });
-  // Show/hide section headers based on visible items
   document.querySelectorAll('.brief-list').forEach(list=>{
     const visible=list.querySelectorAll('.brief-item:not([style*="display: none"])').length;
     const header=list.previousElementSibling;
