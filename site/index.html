@@ -3,228 +3,257 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AgentBrief — Pluggable role definitions for AI coding agents</title>
-<meta name="description" content="One command turns your Claude Code, Cursor, OpenCode, or Codex into a specialized professional. Browse official briefs for development, product, marketing, and more.">
+<title>AgentBrief — The brief dock for AI coding agents</title>
+<meta name="description" content="One command turns your Claude Code, Cursor, OpenCode, or Codex into a specialized professional. 14 official briefs covering dev, product, growth, and ops.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0d1117;--surface:#161b22;--border:#30363d;--text:#e6edf3;--muted:#8b949e;--accent:#58a6ff;--green:#3fb950;--purple:#bc8cff;--orange:#d29922}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+:root{
+  --bg:#09090b;--surface:#18181b;--surface2:#27272a;--border:#3f3f46;
+  --text:#fafafa;--muted:#a1a1aa;--dim:#71717a;
+  --accent:#3b82f6;--accent-dim:rgba(59,130,246,.12);
+  --green:#22c55e;--green-dim:rgba(34,197,94,.12);
+  --purple:#a78bfa;--orange:#f59e0b;
+  --mono:'JetBrains Mono',SFMono-Regular,Consolas,monospace;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --max:1120px;
+}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
-.container{max-width:960px;margin:0 auto;padding:0 24px}
+code{font-family:var(--mono);font-size:.875em;background:var(--surface);padding:2px 6px;border-radius:4px}
+
+/* Nav */
+nav{position:sticky;top:0;z-index:50;background:rgba(9,9,11,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+nav .inner{max-width:var(--max);margin:0 auto;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between}
+nav .logo{font-family:var(--mono);font-weight:700;font-size:18px;color:var(--text);letter-spacing:-.5px}
+nav .logo span{color:var(--accent)}
+nav .links{display:flex;gap:24px;align-items:center;font-size:14px}
+nav .links a{color:var(--muted);transition:color .15s}
+nav .links a:hover{color:var(--text);text-decoration:none}
+nav .links .badge{font-size:10px;background:var(--green-dim);color:var(--green);padding:2px 6px;border-radius:8px;margin-left:4px}
+.gh-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--border);border-radius:6px;font-size:13px;color:var(--muted);transition:all .15s}
+.gh-btn:hover{color:var(--text);border-color:var(--dim);text-decoration:none}
 
 /* Hero */
-.hero{padding:80px 0 60px;text-align:center}
-.hero h1{font-size:48px;font-weight:700;margin-bottom:8px}
-.hero h1 span{color:var(--accent)}
-.hero .tagline{font-size:20px;color:var(--muted);margin-bottom:40px}
-.terminal{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px 32px;text-align:left;display:inline-block;max-width:100%;font-family:'SF Mono',SFMono-Regular,Consolas,'Liberation Mono',Menlo,monospace;font-size:15px;line-height:1.8}
+.hero{max-width:var(--max);margin:0 auto;padding:80px 24px 64px;text-align:center}
+.hero .kicker{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:1px;text-transform:uppercase;margin-bottom:16px}
+.hero h1{font-size:clamp(36px,6vw,64px);font-weight:700;line-height:1.1;letter-spacing:-1.5px;margin-bottom:20px}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero .sub{font-size:18px;color:var(--muted);max-width:560px;margin:0 auto 36px;line-height:1.6}
+.hero .ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
+.btn{display:inline-flex;align-items:center;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:500;transition:all .15s;cursor:pointer;border:none}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{opacity:.9;text-decoration:none}
+.btn-secondary{background:var(--surface);color:var(--text);border:1px solid var(--border)}
+.btn-secondary:hover{border-color:var(--dim);text-decoration:none}
+
+/* Terminal */
+.terminal{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 24px;text-align:left;max-width:560px;margin:0 auto;font-family:var(--mono);font-size:14px;line-height:2}
 .terminal .prompt{color:var(--green)}
 .terminal .cmd{color:var(--text)}
-.terminal .comment{color:var(--muted)}
+.terminal .out{color:var(--muted)}
 
 /* Section */
-section{padding:60px 0}
-section h2{font-size:28px;font-weight:600;margin-bottom:8px}
-section .subtitle{color:var(--muted);margin-bottom:32px}
+.section{max-width:var(--max);margin:0 auto;padding:64px 24px}
+.section-header{margin-bottom:40px}
+.section-header h2{font-size:28px;font-weight:700;letter-spacing:-.5px;margin-bottom:8px}
+.section-header p{color:var(--muted);font-size:15px}
 
-/* Steps */
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-top:32px}
-.step{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px}
-.step .num{display:inline-block;width:32px;height:32px;line-height:32px;text-align:center;border-radius:50%;background:var(--accent);color:var(--bg);font-weight:700;font-size:14px;margin-bottom:12px}
-.step h3{font-size:16px;margin-bottom:8px}
-.step p{color:var(--muted);font-size:14px}
-.step code{background:var(--bg);padding:2px 6px;border-radius:4px;font-size:13px}
+/* Brief Table */
+.brief-table{width:100%;border-collapse:collapse}
+.brief-table th{text-align:left;font-size:11px;font-weight:500;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;padding:8px 12px;border-bottom:1px solid var(--border)}
+.brief-table td{padding:12px;border-bottom:1px solid var(--surface2);font-size:14px;vertical-align:top}
+.brief-table tr:hover td{background:var(--surface)}
+.brief-table .name-cell{font-family:var(--mono);font-weight:500;white-space:nowrap}
+.brief-table .skills-count{font-family:var(--mono);font-size:12px;color:var(--dim)}
+.brief-table .tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:8px;font-weight:500}
+.tag-dev{background:var(--accent-dim);color:var(--accent)}
+.tag-biz{background:rgba(249,115,22,.12);color:var(--orange)}
+.tag-combo{background:rgba(167,139,250,.12);color:var(--purple)}
+.tag-qa{background:var(--green-dim);color:var(--green)}
+.brief-table .cmd-cell{font-family:var(--mono);font-size:12px;color:var(--dim)}
+.brief-table .desc-cell{color:var(--muted)}
 
-/* Registry */
-.registry-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
-.brief-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;transition:border-color .2s}
-.brief-card:hover{border-color:var(--accent)}
-.brief-card .name{font-weight:600;font-size:16px;margin-bottom:4px}
-.brief-card .badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:12px;margin-left:8px;vertical-align:middle}
-.badge.official{background:rgba(59,185,80,.15);color:var(--green)}
-.brief-card .desc{color:var(--muted);font-size:14px;margin-top:4px}
-.brief-card .cmd{font-family:'SF Mono',monospace;font-size:12px;color:var(--accent);margin-top:12px;background:var(--bg);padding:6px 10px;border-radius:6px}
-
-/* Catalog */
-.catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
-.catalog-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center;transition:border-color .2s}
-.catalog-card:hover{border-color:var(--purple)}
-.catalog-card .icon{font-size:28px;margin-bottom:8px}
-.catalog-card h3{font-size:15px;margin-bottom:4px}
-.catalog-card p{font-size:13px;color:var(--muted)}
+/* Skills Sources */
+.sources{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;margin-top:32px}
+.source-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;transition:border-color .15s}
+.source-card:hover{border-color:var(--dim);text-decoration:none}
+.source-card .source-name{font-weight:600;font-size:15px;margin-bottom:4px;color:var(--text)}
+.source-card .source-meta{font-family:var(--mono);font-size:12px;color:var(--dim);margin-bottom:8px}
+.source-card .source-desc{font-size:13px;color:var(--muted);line-height:1.5}
 
 /* Engines */
-.engines{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:24px}
-.engine{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center}
-.engine .file{font-family:monospace;font-size:13px;color:var(--accent)}
-.engine .mode{font-size:12px;color:var(--muted);margin-top:4px}
+.engines{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:10px;overflow:hidden;margin-top:24px}
+.engine{background:var(--surface);padding:20px;text-align:center}
+.engine h3{font-size:14px;font-weight:600;margin-bottom:4px}
+.engine .file{font-family:var(--mono);font-size:13px;color:var(--accent);margin-bottom:4px}
+.engine .mode{font-size:12px;color:var(--dim)}
+
+/* Docs CTA */
+.docs-cta{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:32px;text-align:center;margin-top:48px}
+.docs-cta h3{font-size:20px;font-weight:600;margin-bottom:8px}
+.docs-cta p{color:var(--muted);font-size:14px;margin-bottom:20px}
+.docs-cta .doc-links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 
 /* Footer */
-footer{border-top:1px solid var(--border);padding:40px 0;text-align:center;color:var(--muted);font-size:14px}
-footer a{color:var(--muted)}
-footer a:hover{color:var(--accent)}
-footer .links{margin-bottom:8px}
-footer .links a{margin:0 12px}
+footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;color:var(--dim);font-size:13px;max-width:var(--max);margin:48px auto 0}
+footer a{color:var(--dim)}
+footer a:hover{color:var(--text)}
+footer .links{margin-bottom:8px;display:flex;gap:20px;justify-content:center}
 
-@media(max-width:600px){
+@media(max-width:768px){
+  .engines{grid-template-columns:repeat(2,1fr)}
+  nav .links{gap:16px}
+}
+@media(max-width:480px){
   .hero h1{font-size:32px}
-  .hero .tagline{font-size:16px}
-  .terminal{font-size:13px;padding:16px 20px}
+  .brief-table .cmd-cell,.brief-table .skills-count{display:none}
+  .engines{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
 <body>
 
-<div class="container">
+<!-- Nav -->
+<nav>
+  <div class="inner">
+    <a href="/" class="logo">agent<span>brief</span></a>
+    <div class="links">
+      <a href="#briefs">Briefs</a>
+      <a href="#ecosystem">Ecosystem</a>
+      <a href="https://github.com/0xranx/agentbrief/blob/main/docs/AUTHORING.md">Docs</a>
+      <a href="https://github.com/0xranx/agentbrief/blob/main/CATALOG.md">Catalog</a>
+      <a href="https://github.com/0xranx/agentbrief" class="gh-btn">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</nav>
 
 <!-- Hero -->
 <section class="hero">
-  <h1>Agent<span>Brief</span></h1>
-  <p class="tagline">Pluggable role definitions for AI coding agents.</p>
+  <div class="kicker">open source · skills.sh compatible · 14 official briefs</div>
+  <h1>The brief dock for <em>AI coding agents</em></h1>
+  <p class="sub">One command turns your Claude Code, Cursor, OpenCode, or Codex from a generic assistant into a specialized professional.</p>
+  <div class="ctas">
+    <a href="#briefs" class="btn btn-primary">Browse Briefs</a>
+    <a href="https://github.com/0xranx/agentbrief/blob/main/docs/AUTHORING.md" class="btn btn-secondary">Create Your Own →</a>
+  </div>
   <div class="terminal">
-    <div><span class="prompt">$</span> <span class="cmd">npm install -g agentbrief</span></div>
-    <div><span class="prompt">$</span> <span class="cmd">agentbrief use security-auditor</span></div>
-    <div class="comment"># Your AI agent is now an OWASP security auditor</div>
-    <br>
-    <div><span class="prompt">$</span> <span class="cmd">agentbrief search</span></div>
-    <div class="comment"># Browse 14 official briefs across dev, product, growth &amp; ops</div>
+    <div><span class="prompt">$</span> <span class="cmd">npx agentbrief use security-auditor</span></div>
+    <div class="out">✓ Applied "security-auditor" v1.0.0</div>
+    <div class="out">&nbsp; Skills: security-review, systematic-debugging, verification</div>
+    <div class="out">&nbsp; Injected into: CLAUDE.md, .cursorrules, AGENTS.md</div>
   </div>
 </section>
 
-<!-- How It Works -->
-<section>
-  <h2>How It Works</h2>
-  <p class="subtitle">Three steps. Under 60 seconds.</p>
-  <div class="steps">
-    <div class="step">
-      <div class="num">1</div>
-      <h3>Install</h3>
-      <p><code>npm install -g agentbrief</code></p>
-    </div>
-    <div class="step">
-      <div class="num">2</div>
-      <h3>Apply a Brief</h3>
-      <p><code>agentbrief use security-auditor</code></p>
-      <p>Injects role, knowledge, and rules into your agent's instruction files.</p>
-    </div>
-    <div class="step">
-      <div class="num">3</div>
-      <h3>Start Coding</h3>
-      <p>Open a new conversation. Your agent now behaves as a specialist.</p>
-    </div>
+<!-- Briefs -->
+<section class="section" id="briefs">
+  <div class="section-header">
+    <h2>Official Briefs</h2>
+    <p>Each brief is a complete function pack — personality + domain knowledge + executable skills. Just <code>agentbrief use &lt;name&gt;</code></p>
+  </div>
+
+  <table class="brief-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Skills</th>
+        <th>Command</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="name-cell">security-auditor</td><td class="desc-cell">OWASP/CWE security review specialist</td><td><span class="tag tag-dev">dev</span></td><td class="skills-count">3</td><td class="cmd-cell">use security-auditor</td></tr>
+      <tr><td class="name-cell">code-reviewer</td><td class="desc-cell">Rigorous PR review — architecture, naming, tests</td><td><span class="tag tag-dev">dev</span></td><td class="skills-count">3</td><td class="cmd-cell">use code-reviewer</td></tr>
+      <tr><td class="name-cell">typescript-strict</td><td class="desc-cell">TypeScript type safety guardian — zero any</td><td><span class="tag tag-dev">dev</span></td><td class="skills-count">1</td><td class="cmd-cell">use typescript-strict</td></tr>
+      <tr><td class="name-cell">nextjs-fullstack</td><td class="desc-cell">Next.js 15 + App Router + React 19 + Tailwind</td><td><span class="tag tag-dev">dev</span></td><td class="skills-count">2</td><td class="cmd-cell">use nextjs-fullstack</td></tr>
+      <tr><td class="name-cell">frontend-design</td><td class="desc-cell">React + Tailwind + shadcn/ui design engineering</td><td><span class="tag tag-dev">dev</span></td><td class="skills-count">2</td><td class="cmd-cell">use frontend-design</td></tr>
+      <tr><td class="name-cell">devops-sre</td><td class="desc-cell">Infrastructure, monitoring, CI/CD, incident response</td><td><span class="tag tag-dev">dev</span></td><td class="skills-count">4</td><td class="cmd-cell">use devops-sre</td></tr>
+      <tr><td class="name-cell">qa-engineer</td><td class="desc-cell">Automated QA — find bugs, write tests, atomic fixes</td><td><span class="tag tag-qa">qa</span></td><td class="skills-count">2</td><td class="cmd-cell">use qa-engineer</td></tr>
+      <tr><td class="name-cell">tech-writer</td><td class="desc-cell">Technical documentation with style guide adherence</td><td><span class="tag tag-dev">dev</span></td><td class="skills-count">3</td><td class="cmd-cell">use tech-writer</td></tr>
+      <tr><td class="name-cell">product-manager</td><td class="desc-cell">PRD generation, user stories, prioritization (RICE/ICE)</td><td><span class="tag tag-biz">biz</span></td><td class="skills-count">2</td><td class="cmd-cell">use product-manager</td></tr>
+      <tr><td class="name-cell">growth-engineer</td><td class="desc-cell">CRO, SEO, analytics, content strategy</td><td><span class="tag tag-biz">biz</span></td><td class="skills-count">4</td><td class="cmd-cell">use growth-engineer</td></tr>
+      <tr><td class="name-cell">data-analyst</td><td class="desc-cell">Metrics framework, SQL queries, data storytelling</td><td><span class="tag tag-biz">biz</span></td><td class="skills-count">2</td><td class="cmd-cell">use data-analyst</td></tr>
+      <tr><td class="name-cell">startup-builder</td><td class="desc-cell">Idea validation → MVP → launch + CEO review</td><td><span class="tag tag-biz">biz</span></td><td class="skills-count">4</td><td class="cmd-cell">use startup-builder</td></tr>
+      <tr><td class="name-cell">fullstack-dev</td><td class="desc-cell">Extends typescript-strict + nextjs + design + reviewer</td><td><span class="tag tag-combo">combo</span></td><td class="skills-count">8</td><td class="cmd-cell">use fullstack-dev</td></tr>
+      <tr><td class="name-cell">startup-kit</td><td class="desc-cell">Extends startup + product + growth + security</td><td><span class="tag tag-combo">combo</span></td><td class="skills-count">11</td><td class="cmd-cell">use startup-kit</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Ecosystem -->
+<section class="section" id="ecosystem">
+  <div class="section-header">
+    <h2>Ecosystem</h2>
+    <p>Skills adapted from the best open-source projects. Compatible with <a href="https://skills.sh">skills.sh</a> SKILL.md format.</p>
+  </div>
+
+  <div class="sources">
+    <a href="https://github.com/obra/superpowers" class="source-card">
+      <div class="source-name">obra/superpowers</div>
+      <div class="source-meta">90.6k ★ · 14 skills</div>
+      <div class="source-desc">TDD, systematic debugging, verification, brainstorming, plan & execute — bundled into briefs</div>
+    </a>
+    <a href="https://github.com/garrytan/gstack" class="source-card">
+      <div class="source-name">garrytan/gstack</div>
+      <div class="source-meta">YC CEO · 13 skills</div>
+      <div class="source-desc">CEO review (10-star), design review (80-item + AI slop), QA with atomic commits, ship workflow</div>
+    </a>
+    <a href="https://github.com/vercel-labs/next-skills" class="source-card">
+      <div class="source-name">vercel-labs/next-skills</div>
+      <div class="source-meta">Vercel Official · 20 files</div>
+      <div class="source-desc">Next.js best practices — RSC boundaries, data patterns, caching, error handling, metadata</div>
+    </a>
+    <a href="https://github.com/coreyhaines31/marketingskills" class="source-card">
+      <div class="source-name">coreyhaines31/marketingskills</div>
+      <div class="source-meta">32+ skills</div>
+      <div class="source-desc">SEO audit, launch strategy, content strategy, pricing, analytics, referral programs</div>
+    </a>
+    <a href="https://github.com/anthropics/skills" class="source-card">
+      <div class="source-name">anthropics/skills</div>
+      <div class="source-meta">Anthropic Official · 95.8k ★</div>
+      <div class="source-desc">Frontend design, webapp testing, document processing (docx/pdf/pptx/xlsx), MCP builder</div>
+    </a>
+    <a href="https://github.com/akin-ozer/cc-devops-skills" class="source-card">
+      <div class="source-name">cc-devops-skills</div>
+      <div class="source-meta">31 skills</div>
+      <div class="source-desc">Terraform, Docker, K8s, Helm, GitHub Actions, GitLab CI — generators + validators</div>
+    </a>
   </div>
 </section>
 
-<!-- Official Registry -->
-<section>
-  <h2>Official Briefs</h2>
-  <p class="subtitle">Ready to use. Just type <code style="background:var(--surface);padding:2px 6px;border-radius:4px">agentbrief use &lt;name&gt;</code></p>
-  <div class="registry-grid">
-
-    <div class="brief-card">
-      <div class="name">security-auditor <span class="badge official">official</span></div>
-      <div class="desc">OWASP/CWE security review specialist</div>
-      <div class="cmd">agentbrief use security-auditor</div>
-    </div>
-
-    <div class="brief-card">
-      <div class="name">code-reviewer <span class="badge official">official</span></div>
-      <div class="desc">Rigorous PR review — naming, tests, architecture</div>
-      <div class="cmd">agentbrief use code-reviewer</div>
-    </div>
-
-    <div class="brief-card">
-      <div class="name">typescript-strict <span class="badge official">official</span></div>
-      <div class="desc">TypeScript type safety guardian — zero any</div>
-      <div class="cmd">agentbrief use typescript-strict</div>
-    </div>
-
-    <div class="brief-card">
-      <div class="name">nextjs-fullstack <span class="badge official">official</span></div>
-      <div class="desc">Next.js 15 + App Router + React 19 + Tailwind</div>
-      <div class="cmd">agentbrief use nextjs-fullstack</div>
-    </div>
-
-    <div class="brief-card">
-      <div class="name">frontend-design <span class="badge official">official</span></div>
-      <div class="desc">React + Tailwind + shadcn/ui design engineering</div>
-      <div class="cmd">agentbrief use frontend-design</div>
-    </div>
-
-    <div class="brief-card">
-      <div class="name">devops-sre <span class="badge official">official</span></div>
-      <div class="desc">Infrastructure monitoring, incident response, IaC</div>
-      <div class="cmd">agentbrief use devops-sre</div>
-    </div>
-
-    <div class="brief-card">
-      <div class="name">tech-writer <span class="badge official">official</span></div>
-      <div class="desc">Technical documentation with style guide adherence</div>
-      <div class="cmd">agentbrief use tech-writer</div>
-    </div>
-
-    <div class="brief-card">
-      <div class="name">growth-engineer <span class="badge official">official</span></div>
-      <div class="desc">CRO, SEO, analytics, growth engineering</div>
-      <div class="cmd">agentbrief use growth-engineer</div>
-    </div>
-
-    <div class="brief-card">
-      <div class="name">product-manager <span class="badge official">official</span></div>
-      <div class="desc">PRD generation, user stories, prioritization</div>
-      <div class="cmd">agentbrief use product-manager</div>
-    </div>
-
-    <div class="brief-card">
-      <div class="name">startup-builder <span class="badge official">official</span></div>
-      <div class="desc">Idea validation → MVP → launch workflow</div>
-      <div class="cmd">agentbrief use startup-builder</div>
-    </div>
-
-    <div class="brief-card">
-      <div class="name">qa-engineer <span class="badge official">official</span></div>
-      <div class="desc">Automated QA — find bugs, write tests, fix with atomic commits</div>
-      <div class="cmd">agentbrief use qa-engineer</div>
-    </div>
-
-    <div class="brief-card">
-      <div class="name">data-analyst <span class="badge official">official</span></div>
-      <div class="desc">Business intelligence — metrics, SQL, dashboards</div>
-      <div class="cmd">agentbrief use data-analyst</div>
-    </div>
-
+<!-- Engines -->
+<section class="section">
+  <div class="section-header">
+    <h2>Works With Every Agent</h2>
+    <p>One brief, compiled and optimized for each engine. Content is automatically adapted.</p>
   </div>
-  <p style="color:var(--muted);margin-top:24px;font-size:14px">Each brief is a complete function pack — personality + domain knowledge + executable skills. Combo packs (fullstack-dev, startup-kit) extend multiple briefs with automatic skill deduplication.</p>
-</section>
-
-<!-- Catalog Categories -->
-<section>
-  <h2>Catalog</h2>
-  <p class="subtitle">Curated resources across the full business lifecycle. <a href="https://github.com/0xranx/agentbrief/blob/main/CATALOG.md">View full catalog →</a></p>
-  <div class="catalog-grid">
-    <div class="catalog-card"><div class="icon">💻</div><h3>Development</h3><p>Frameworks, QA, DevOps, testing</p></div>
-    <div class="catalog-card"><div class="icon">📦</div><h3>Product</h3><p>PM, UX design, data analysis</p></div>
-    <div class="catalog-card"><div class="icon">📈</div><h3>Marketing & Growth</h3><p>SEO, CRO, copywriting, sales</p></div>
-    <div class="catalog-card"><div class="icon">⚙️</div><h3>Operations</h3><p>Scrum, customer success, HR</p></div>
-    <div class="catalog-card"><div class="icon">💰</div><h3>Finance & Legal</h3><p>FP&A, contract review, compliance</p></div>
-    <div class="catalog-card"><div class="icon">🚀</div><h3>Startup</h3><p>Validation to MVP to launch</p></div>
-  </div>
-</section>
-
-<!-- Supported Engines -->
-<section>
-  <h2>Works With Every Agent</h2>
-  <p class="subtitle">One brief, compiled and optimized for each engine automatically.</p>
   <div class="engines">
     <div class="engine"><h3>Claude Code</h3><div class="file">CLAUDE.md</div><div class="mode">Full output</div></div>
-    <div class="engine"><h3>Cursor</h3><div class="file">.cursorrules</div><div class="mode">Minimal — dense rules</div></div>
+    <div class="engine"><h3>Cursor</h3><div class="file">.cursorrules</div><div class="mode">Minimal</div></div>
     <div class="engine"><h3>OpenCode</h3><div class="file">AGENTS.md</div><div class="mode">Concise</div></div>
     <div class="engine"><h3>Codex</h3><div class="file">AGENTS.md</div><div class="mode">Concise</div></div>
   </div>
 </section>
 
-</div>
+<!-- Docs CTA -->
+<section class="section">
+  <div class="docs-cta">
+    <h3>Documentation</h3>
+    <p>Learn how to create your own briefs, integrate skills from the ecosystem, and contribute to the registry.</p>
+    <div class="doc-links">
+      <a href="https://github.com/0xranx/agentbrief/blob/main/docs/AUTHORING.md" class="btn btn-secondary">Authoring Guide</a>
+      <a href="https://github.com/0xranx/agentbrief/blob/main/docs/DESIGN.md" class="btn btn-secondary">Design Decisions</a>
+      <a href="https://github.com/0xranx/agentbrief/blob/main/docs/VISION.md" class="btn btn-secondary">Vision & Philosophy</a>
+      <a href="https://github.com/0xranx/agentbrief/blob/main/CATALOG.md" class="btn btn-secondary">Full Catalog</a>
+    </div>
+  </div>
+</section>
 
 <!-- Footer -->
 <footer>
@@ -232,10 +261,10 @@ footer .links a{margin:0 12px}
     <a href="https://github.com/0xranx/agentbrief">GitHub</a>
     <a href="https://www.npmjs.com/package/agentbrief">npm</a>
     <a href="https://github.com/0xranx/agentbrief/blob/main/CATALOG.md">Catalog</a>
+    <a href="https://github.com/0xranx/agentbrief/blob/main/docs/AUTHORING.md">Docs</a>
   </div>
   <div>MIT License · Built by <a href="https://github.com/0xranx">0xranx</a></div>
 </footer>
 
 </body>
 </html>
-<!-- deployed 2026-03-18T00:55:00Z -->
