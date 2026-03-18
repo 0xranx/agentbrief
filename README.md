@@ -17,13 +17,45 @@ npx agentbrief use security-auditor
 
 ## What It Does
 
-AgentBrief compiles a **brief** (role definition + domain knowledge + behavioral rules) into the instruction files your AI agent reads — `CLAUDE.md`, `.cursorrules`, `AGENTS.md` — with content automatically adapted for each engine.
+AgentBrief compiles a **brief** (role definition + domain knowledge + executable skills) into the instruction files your AI agent reads — `CLAUDE.md`, `.cursorrules`, `AGENTS.md` — with content automatically adapted for each engine.
 
+<details>
+<summary><b>See it in action</b> — before vs after applying <code>security-auditor</code></summary>
+
+**Before** — your CLAUDE.md:
+```markdown
+# My Project
 ```
-Before: Generic AI assistant that knows nothing about your domain
-After:   Security auditor that cites CWE numbers, checks OWASP Top 10,
-         and refuses to approve code with injection vulnerabilities
+
+**After** — `agentbrief use security-auditor`:
+```markdown
+# My Project
+
+<!-- agentbrief:security-auditor:start -->
+# AgentBrief: security-auditor
+> OWASP/CWE security review specialist
+
+## Role
+You are a senior application security auditor. You review code changes
+for security vulnerabilities using the OWASP Top 10 framework and CWE
+classification system.
+
+## Constraints
+- Never approve code containing known injection vectors
+- Flag all hardcoded credentials as Critical severity
+- Every finding must reference a CWE identifier
+
+## Skills
+When the described situation arises, read the skill file and follow its instructions.
+
+- **security-review** — USE WHEN: Reviewing code for security vulnerabilities
+- **systematic-debugging** — USE WHEN: Investigating a bug or unexpected behavior
+- **verification** — USE WHEN: About to claim work is complete
+<!-- agentbrief:security-auditor:end -->
 ```
+
+Your existing content is preserved. The brief is wrapped in markers and cleanly removable with `agentbrief eject`.
+</details>
 
 - **One command to apply, one to remove** — `use` and `eject`
 - **Non-invasive** — injected content is wrapped in markers, your existing files are untouched
