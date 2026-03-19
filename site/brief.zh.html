@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brief — AgentBrief</title>
-<meta name="description" content="View brief details — role definition, personality, skills, and knowledge for your AI coding agent.">
+<title>职能包详情 — AgentBrief</title>
+<meta name="description" content="查看职能包详情——角色定义、人格、技能和知识。">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Brief — AgentBrief">
@@ -153,25 +153,25 @@ footer .links{margin-bottom:6px;display:flex;gap:16px;justify-content:center}
   <div class="inner">
     <a href="./" class="logo">agent<span>brief</span></a>
     <div class="nav-links">
-      <a href="./#briefs">Briefs</a>
-      <a href="./#ecosystem">Ecosystem</a>
-      <a href="./docs.html">Docs</a>
-      <a href="#" onclick="location.href='./brief.zh.html'+location.search;return false">中文</a>
+      <a href="./index.zh.html#briefs">职能包</a>
+      <a href="./index.zh.html#ecosystem">技能生态</a>
+      <a href="./docs.html">文档</a>
+      <a href="#" onclick="location.href='./brief.html'+location.search;return false">English</a>
       <a href="https://github.com/0xranx/agentbrief">GitHub</a>
     </div>
   </div>
 </nav>
 
 <div class="container" id="content">
-  <div class="loading">Loading brief...</div>
+  <div class="loading">加载中...</div>
 </div>
 
 <footer>
   <div class="links">
     <a href="https://github.com/0xranx/agentbrief">GitHub</a>
     <a href="https://www.npmjs.com/package/agentbrief">npm</a>
-    <a href="./docs.html#CATALOG">Catalog</a>
-    <a href="https://github.com/0xranx/agentbrief/discussions">Community</a>
+    <a href="./docs.html#CATALOG">目录</a>
+    <a href="https://github.com/0xranx/agentbrief/discussions">社区讨论</a>
   </div>
   <div>MIT License · Built by <a href="https://github.com/0xranx">0xranx</a></div>
 </footer>
@@ -197,8 +197,8 @@ const CHECK_ICON='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" str
 function copyCode(btn){
   const code=btn.closest('.code-block').querySelector('code');
   navigator.clipboard.writeText(code.textContent).then(()=>{
-    btn.innerHTML=CHECK_ICON+'Copied';btn.classList.add('copied');
-    setTimeout(()=>{btn.innerHTML=COPY_ICON+'Copy';btn.classList.remove('copied')},2000);
+    btn.innerHTML=CHECK_ICON+'已复制';btn.classList.add('copied');
+    setTimeout(()=>{btn.innerHTML=COPY_ICON+'复制';btn.classList.remove('copied')},2000);
   });
 }
 function wrapCodeBlocks(container){
@@ -226,7 +226,7 @@ function enhanceBash(html) {
 async function loadBrief(){
   const params=new URLSearchParams(location.search);
   const name=params.get('name');
-  if(!name){document.getElementById('content').innerHTML='<div class="loading">No brief specified. <a href="./#briefs">Browse briefs →</a></div>';return}
+  if(!name){document.getElementById('content').innerHTML='<div class="loading">未指定职能包。<a href="./index.zh.html#briefs">浏览职能包 →</a></div>';return}
 
   document.title=name+' — AgentBrief';
   const cat=CATEGORIES[name]||'dev';
@@ -265,51 +265,51 @@ async function loadBrief(){
     // Render page immediately (skills load async after)
     document.getElementById('content').innerHTML=`
       <div class="brief-hero">
-        <div class="breadcrumb"><a href="./#briefs">Briefs</a> / ${name}</div>
+        <div class="breadcrumb"><a href="./index.zh.html#briefs">职能包</a> / ${name}</div>
         <h1>${name}</h1>
         <p class="desc">${desc}</p>
         <div class="meta-row">
           <span class="meta-pill ${cat}">${cat}</span>
           <span class="meta-pill version">v${version}</span>
           <span class="meta-pill license">MIT</span>
-          ${extendsList.length?'<span class="meta-pill combo">extends '+extendsList.length+' briefs</span>':''}
+          ${extendsList.length?'<span class="meta-pill combo">继承 '+extendsList.length+' 个职能包</span>':''}
         </div>
         <div class="install-box">
           <code>$ agentbrief use ${name}</code>
-          <button class="copy-btn" onclick="navigator.clipboard.writeText('agentbrief use ${name}');this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1500)">Copy</button>
+          <button class="copy-btn" onclick="navigator.clipboard.writeText('agentbrief use ${name}');this.textContent='已复制!';setTimeout(()=>this.textContent='复制',1500)">复制</button>
         </div>
         <div class="source-link">
-          Source: <a href="https://github.com/0xranx/agentbrief/tree/main/briefs/${name}">github.com/0xranx/agentbrief/briefs/${name}</a>
+          源码: <a href="https://github.com/0xranx/agentbrief/tree/main/briefs/${name}">github.com/0xranx/agentbrief/briefs/${name}</a>
         </div>
       </div>
 
       ${extendsList.length?`
       <div class="detail-section">
-        <h2>What You Get</h2>
-        <p style="font-size:14px;color:var(--muted);margin-bottom:12px">This combo pack bundles ${extendsList.length} specialized briefs into one. After applying, your agent gains all their skills and knowledge — with one command.</p>
+        <h2>包含内容</h2>
+        <p style="font-size:14px;color:var(--muted);margin-bottom:12px">这个组合包将 ${extendsList.length} 个专业职能包合为一体。安装后，你的 Agent 将获得它们所有的技能和知识——一条命令搞定。</p>
         <div class="extends-list">
           ${extendsList.map(e=>`<a href="brief.html?name=${e}" class="extends-pill">${e}</a>`).join('')}
         </div>
       </div>`:''}
 
       <div class="detail-section">
-        <h2>Personality</h2>
+        <h2>人格定义</h2>
         <div class="personality-content">${personalityHtml}</div>
       </div>
 
       ${skillsList.length?`
       <div class="detail-section">
-        <h2>Skills <span class="count" id="skill-count">...</span></h2>
+        <h2>技能 <span class="count" id="skill-count">...</span></h2>
         <div class="item-list" id="skill-list">
-          <div class="item-row"><span class="item-desc" style="color:var(--dim)">Loading skills...</span></div>
+          <div class="item-row"><span class="item-desc" style="color:var(--dim)">加载技能中...</span></div>
         </div>
       </div>`:''}
 
       ${knowledgeList.length?`
       <div class="detail-section">
-        <h2>Knowledge <span class="count" id="knowledge-count">...</span></h2>
+        <h2>知识 <span class="count" id="knowledge-count">...</span></h2>
         <div class="item-list" id="knowledge-list">
-          <div class="item-row"><span class="item-desc" style="color:var(--dim)">Loading knowledge files...</span></div>
+          <div class="item-row"><span class="item-desc" style="color:var(--dim)">加载知识文件中...</span></div>
         </div>
       </div>`:''}
     `;
@@ -405,7 +405,7 @@ async function loadBrief(){
           }));
           const el=document.getElementById('knowledge-list');
           const countEl=document.getElementById('knowledge-count');
-          if(el){el.innerHTML=details.map(k=>`<div class="item-row"><span class="item-name">${k.name}</span><span class="item-desc">${k.description||'Domain reference material'}</span></div>`).join('')}
+          if(el){el.innerHTML=details.map(k=>`<div class="item-row"><span class="item-name">${k.name}</span><span class="item-desc">${k.description||'领域参考材料'}</span></div>`).join('')}
           if(countEl){countEl.textContent=details.length}
         }
       }catch{}
@@ -413,8 +413,8 @@ async function loadBrief(){
   }catch(e){
     document.getElementById('content').innerHTML=`
       <div class="loading">
-        Brief "${name}" not found.<br><br>
-        <a href="./#briefs">← Browse all briefs</a>
+        职能包 "${name}" 未找到。<br><br>
+        <a href="./index.zh.html#briefs">← 浏览所有职能包</a>
       </div>`;
   }
 }
