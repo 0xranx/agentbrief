@@ -104,7 +104,7 @@ fullstack-engineer:
 
 startup-founder:
   source: github:0xranx/agentbrief/briefs/startup-founder
-  description: Startup CTO kit — extends startup + product + growth + security
+  description: Startup founder — extends startup-advisor + product + growth + security
   trust: official
 
 release-engineer:
