@@ -6,5 +6,6 @@ knowledge:
   - knowledge/
 skills:
   - skills/
+  - github:zarazhangrui/frontend-slides
 extends:
   - base-agent
