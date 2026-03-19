@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Documentation — AgentBrief</title>
-<meta name="description" content="AgentBrief documentation — user guide, brief authoring, design decisions, engine formats, and skill ecosystem.">
-<link rel="canonical" href="https://0xranx.github.io/agentbrief/docs.html">
+<title>文档 — AgentBrief</title>
+<meta name="description" content="AgentBrief 文档——使用指南、创作指南、设计决策、引擎格式、技能生态。">
+<link rel="canonical" href="https://0xranx.github.io/agentbrief/docs.zh.html">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Documentation — AgentBrief">
@@ -130,10 +130,10 @@ nav .nav-links a.active{color:var(--text)}
   <div class="inner">
     <a href="./" class="logo">agent<span>brief</span></a>
     <div class="nav-links">
-      <a href="./#briefs">Briefs</a>
-      <a href="./#ecosystem">Ecosystem</a>
-      <a href="./docs.html" class="active">Docs</a>
-      <a href="#" onclick="location.href='./docs.zh.html'+location.hash;return false">中文</a>
+      <a href="./index.zh.html#briefs">职能包</a>
+      <a href="./index.zh.html#ecosystem">技能生态</a>
+      <a href="./docs.zh.html" class="active">文档</a>
+      <a href="./docs.html">English</a>
       <a href="https://github.com/0xranx/agentbrief">GitHub</a>
     </div>
   </div>
@@ -141,21 +141,21 @@ nav .nav-links a.active{color:var(--text)}
 
 <div class="layout">
   <aside class="sidebar">
-    <h4>Getting Started</h4>
-    <a href="#" onclick="load('GUIDE')" class="active" id="nav-GUIDE">User Guide</a>
-    <a href="#" onclick="load('AUTHORING')" id="nav-AUTHORING">Authoring Guide</a>
-    <h4>About</h4>
-    <a href="#" onclick="load('VISION')" id="nav-VISION">Vision & Philosophy</a>
-    <a href="#" onclick="load('DESIGN')" id="nav-DESIGN">Design Decisions</a>
-    <h4>Reference</h4>
-    <a href="#" onclick="load('ENGINE-FORMATS')" id="nav-ENGINE-FORMATS">Engine Formats</a>
-    <a href="#" onclick="load('SKILL-ECOSYSTEM-RESEARCH')" id="nav-SKILL-ECOSYSTEM-RESEARCH">Skill Ecosystem</a>
-    <a href="#" onclick="load('CATALOG')" id="nav-CATALOG">Full Catalog</a>
+    <h4>快速上手</h4>
+    <a href="#" onclick="load('GUIDE')" class="active" id="nav-GUIDE">使用指南</a>
+    <a href="#" onclick="load('AUTHORING')" id="nav-AUTHORING">创作指南</a>
+    <h4>关于</h4>
+    <a href="#" onclick="load('VISION')" id="nav-VISION">愿景与理念</a>
+    <a href="#" onclick="load('DESIGN')" id="nav-DESIGN">设计决策</a>
+    <h4>参考</h4>
+    <a href="#" onclick="load('ENGINE-FORMATS')" id="nav-ENGINE-FORMATS">引擎格式</a>
+    <a href="#" onclick="load('SKILL-ECOSYSTEM-RESEARCH')" id="nav-SKILL-ECOSYSTEM-RESEARCH">技能生态</a>
+    <a href="#" onclick="load('CATALOG')" id="nav-CATALOG">完整目录</a>
   </aside>
 
   <main class="content">
     <div id="md-content" class="md">
-      <div class="loading">Loading documentation...</div>
+      <div class="loading">加载文档中...</div>
     </div>
   </main>
 </div>
@@ -191,10 +191,10 @@ function enhanceBash(html) {
 function copyCode(btn) {
   const code = btn.closest('.code-block').querySelector('code');
   navigator.clipboard.writeText(code.textContent).then(() => {
-    btn.innerHTML = CHECK_ICON + 'Copied';
+    btn.innerHTML = CHECK_ICON + '已复制';
     btn.classList.add('copied');
     setTimeout(() => {
-      btn.innerHTML = COPY_ICON + 'Copy';
+      btn.innerHTML = COPY_ICON + '复制';
       btn.classList.remove('copied');
     }, 2000);
   });
@@ -216,7 +216,7 @@ function wrapCodeBlocks(container) {
     wrapper.innerHTML =
       '<div class="code-header">' +
         '<span class="code-lang">' + label + '</span>' +
-        '<button class="code-copy" onclick="copyCode(this)">' + COPY_ICON + 'Copy</button>' +
+        '<button class="code-copy" onclick="copyCode(this)">' + COPY_ICON + '复制</button>' +
       '</div>';
     pre.parentNode.insertBefore(wrapper, pre);
     wrapper.appendChild(pre);
@@ -225,11 +225,11 @@ function wrapCodeBlocks(container) {
 
 const BASE = 'https://raw.githubusercontent.com/0xranx/agentbrief/main/';
 const paths = {
-  'GUIDE': 'docs/GUIDE.md',
-  'AUTHORING': 'docs/AUTHORING.md',
-  'VISION': 'docs/VISION.md',
-  'DESIGN': 'docs/DESIGN.md',
-  'ENGINE-FORMATS': 'docs/ENGINE-FORMATS.md',
+  'GUIDE': 'docs/GUIDE.zh.md',
+  'AUTHORING': 'docs/AUTHORING.zh.md',
+  'VISION': 'docs/VISION.zh.md',
+  'DESIGN': 'docs/DESIGN.zh.md',
+  'ENGINE-FORMATS': 'docs/ENGINE-FORMATS.zh.md',
   'SKILL-ECOSYSTEM-RESEARCH': 'docs/SKILL-ECOSYSTEM-RESEARCH.md',
   'CATALOG': 'CATALOG.md',
 };
@@ -243,7 +243,7 @@ async function load(key) {
   if (navEl) navEl.classList.add('active');
 
   const container = document.getElementById('md-content');
-  container.innerHTML = '<div class="loading">Loading...</div>';
+  container.innerHTML = '<div class="loading">加载中...</div>';
 
   try {
     const res = await fetch(BASE + paths[key]);
@@ -269,7 +269,7 @@ async function load(key) {
     // 2. Wrap code blocks with header + copy button
     wrapCodeBlocks(container);
   } catch (e) {
-    container.innerHTML = '<p style="color:var(--dim)">Failed to load document. <a href="https://github.com/0xranx/agentbrief/blob/main/' + paths[key] + '">View on GitHub →</a></p>';
+    container.innerHTML = '<p style="color:var(--dim)">文档加载失败。<a href="https://github.com/0xranx/agentbrief/blob/main/' + paths[key] + '">在 GitHub 上查看 →</a></p>';
   }
 
   history.replaceState(null, '', '#' + key);
