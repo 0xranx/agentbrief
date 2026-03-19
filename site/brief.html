@@ -329,26 +329,58 @@ async function loadBrief(){
     // Wrap code blocks with header + copy button
     wrapCodeBlocks(document.getElementById('content'));
 
-    // Async: load skill details
+    // Async: load skill details (local + remote)
     if(skillsList.length>0){
       try{
+        const allSkills=[];
+
+        // 1. Local skills from briefs/{name}/skills/ directory
         const skillDirRes=await fetch('https://api.github.com/repos/0xranx/agentbrief/contents/briefs/'+name+'/skills');
         if(skillDirRes.ok){
           const dirs=(await skillDirRes.json()).filter(d=>d.type==='dir');
-          const details=await Promise.all(dirs.map(async d=>{
+          const localDetails=await Promise.all(dirs.map(async d=>{
             try{
               const r=await fetch(BASE+name+'/skills/'+d.name+'/SKILL.md');
-              if(!r.ok)return{name:d.name,description:''};
+              if(!r.ok)return{name:d.name,description:'',remote:false};
               const text=await r.text();
               const m=text.match(/^description:\s*["']?(.+?)["']?\s*$/m);
-              return{name:d.name,description:m?m[1]:''};
-            }catch{return{name:d.name,description:''}}
+              return{name:d.name,description:m?m[1]:'',remote:false};
+            }catch{return{name:d.name,description:'',remote:false}}
           }));
-          const el=document.getElementById('skill-list');
-          const countEl=document.getElementById('skill-count');
-          if(el){el.innerHTML=details.map(s=>`<div class="item-row"><span class="item-name">${s.name}</span><span class="item-desc">${s.description||'—'}</span></div>`).join('')}
-          if(countEl){countEl.textContent=details.length}
+          allSkills.push(...localDetails);
         }
+
+        // 2. Remote skills (github: refs in brief.yaml)
+        const remoteRefs=skillsList.filter(s=>s.startsWith('github:'));
+        const remoteDetails=await Promise.all(remoteRefs.map(async ref=>{
+          try{
+            // Parse github:owner/repo or github:owner/repo/subdir
+            const raw=ref.slice('github:'.length);
+            const parts=raw.split('/');
+            const owner=parts[0],repo=parts[1];
+            const subdir=parts.length>2?parts.slice(2).join('/'):'';
+            const skillName=subdir?parts[parts.length-1]:repo;
+            // Try to fetch SKILL.md from the remote repo
+            const url='https://raw.githubusercontent.com/'+owner+'/'+repo+'/main/'+(subdir?subdir+'/':'')+'SKILL.md';
+            const r=await fetch(url);
+            if(!r.ok)return{name:skillName,description:'Remote skill from '+owner+'/'+repo,remote:true,ref:ref};
+            const text=await r.text();
+            const m=text.match(/^description:\s*["']?(.+?)["']?\s*$/m);
+            return{name:skillName,description:m?m[1]:'Remote skill from '+owner+'/'+repo,remote:true,ref:ref};
+          }catch{
+            const skillName=ref.split('/').pop()||ref;
+            return{name:skillName,description:'Remote skill',remote:true,ref:ref};
+          }
+        }));
+        allSkills.push(...remoteDetails);
+
+        const el=document.getElementById('skill-list');
+        const countEl=document.getElementById('skill-count');
+        if(el){el.innerHTML=allSkills.map(s=>{
+          const badge=s.remote?'<span style="font-size:10px;color:var(--accent);background:var(--accent-dim);padding:2px 6px;border-radius:4px;margin-left:6px">remote</span>':'';
+          return `<div class="item-row"><span class="item-name">${s.name}${badge}</span><span class="item-desc">${s.description||'—'}</span></div>`;
+        }).join('')}
+        if(countEl){countEl.textContent=allSkills.length}
       }catch{}
     }
 
