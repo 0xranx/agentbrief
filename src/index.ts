@@ -1,5 +1,5 @@
 import { existsSync, readdirSync, statSync } from "node:fs";
-import { cp, mkdir, readFile, writeFile } from "node:fs/promises";
+import { cp, mkdir, readFile, symlink, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import yaml from "js-yaml";
@@ -156,6 +156,9 @@ export async function use(opts: UseOpts): Promise<UseResult> {
 		applied_at: new Date().toISOString(),
 	});
 
+	// 8. Deploy skills to engine-native directories for auto-discovery
+	await deployNativeSkills(projectDir, spec.name, briefDataDir);
+
 	// Count CLAUDE.md lines for context bloat warning
 	const claudeMdPath = join(projectDir, "CLAUDE.md");
 	const claudeLines = existsSync(claudeMdPath) ? (await readFile(claudeMdPath, "utf-8")).split("\n").length : 0;
@@ -177,6 +180,69 @@ export async function use(opts: UseOpts): Promise<UseResult> {
 	};
 }
 
+// ── Native skill paths for engine discovery ─────────────
+
+/**
+ * Engine-native skill directories. Skills placed here are
+ * auto-discovered by each agent without needing CLAUDE.md references.
+ */
+const NATIVE_SKILL_DIRS = [
+	".claude/skills", // Claude Code
+	".agents/skills", // Codex
+	".cursor/skills", // Cursor (also discovered by OpenCode)
+];
+
+/**
+ * Deploy skills to engine-native directories so agents auto-discover them.
+ * Creates symlinks from native paths → .agentbrief/{brief}/skills/{skill}
+ */
+async function deployNativeSkills(projectDir: string, briefName: string, briefDataDir: string): Promise<void> {
+	const deployedSkillsDir = join(briefDataDir, "skills");
+	if (!existsSync(deployedSkillsDir)) return;
+
+	const skills = readdirSync(deployedSkillsDir).filter(
+		(f) => !f.startsWith(".") && statSync(join(deployedSkillsDir, f)).isDirectory(),
+	);
+
+	for (const dir of NATIVE_SKILL_DIRS) {
+		const nativeDir = join(projectDir, dir);
+		await mkdir(nativeDir, { recursive: true });
+		for (const skill of skills) {
+			const target = join(nativeDir, skill);
+			if (existsSync(target)) continue; // don't overwrite existing skills
+			const source = join(deployedSkillsDir, skill);
+			try {
+				await symlink(source, target, "dir");
+			} catch {
+				// Symlink failed (e.g. Windows) — fall back to copy
+				await cp(source, target, { recursive: true });
+			}
+		}
+	}
+}
+
+/**
+ * Clean up engine-native skill symlinks/copies for a brief on eject.
+ */
+async function cleanNativeSkills(projectDir: string, briefName: string, briefDataDir: string): Promise<void> {
+	const deployedSkillsDir = join(briefDataDir, "skills");
+	if (!existsSync(deployedSkillsDir)) return;
+
+	const skills = readdirSync(deployedSkillsDir).filter(
+		(f) => !f.startsWith(".") && statSync(join(deployedSkillsDir, f)).isDirectory(),
+	);
+
+	for (const dir of NATIVE_SKILL_DIRS) {
+		for (const skill of skills) {
+			const target = join(projectDir, dir, skill);
+			if (existsSync(target)) {
+				const { rm } = await import("node:fs/promises");
+				await rm(target, { recursive: true });
+			}
+		}
+	}
+}
+
 // ── eject ───────────────────────────────────────────────
 
 export interface EjectResult {
@@ -186,6 +252,9 @@ export interface EjectResult {
 
 export async function eject(name: string, projectDir?: string): Promise<EjectResult> {
 	const dir = resolve(projectDir || ".");
+	// Clean native skill symlinks/copies before removing brief data
+	const briefDataDir = join(dir, ".agentbrief", name);
+	await cleanNativeSkills(dir, name, briefDataDir);
 	const ejectedFiles = await ejectFromFiles(dir, name);
 	await cleanBriefData(dir, name);
 	await removeEntry(dir, name);

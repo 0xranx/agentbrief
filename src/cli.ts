@@ -7,7 +7,7 @@ const program = new Command();
 program
 	.name("agentbrief")
 	.description("One command turns your AI coding agent into a domain specialist")
-	.version("0.2.2");
+	.version("0.3.0");
 
 program.addHelpText(
 	"after",
