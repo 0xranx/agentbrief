@@ -1,6 +1,6 @@
 {
   "name": "agentbrief",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "One command turns your AI coding agent into a domain specialist",
   "type": "module",
   "main": "./dist/index.js",
