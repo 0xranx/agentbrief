@@ -8,5 +8,6 @@ skills:
   - skills/
   - github:jackwener/twitter-cli
   - github:0xranx/agent-kit/skills/xhs-cli
+  - github:0xranx/agent-kit/skills/douyin-cli
 extends:
   - base-agent
