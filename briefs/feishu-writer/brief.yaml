@@ -1,10 +1,13 @@
 name: feishu-writer
-version: "1.0.0"
-description: "Feishu/Lark document specialist — read, write, edit cloud docs and knowledge bases"
+version: "1.1.0"
+description: "Feishu/Lark specialist — documents, wikis, messaging, tasks, calendar (powered by official lark-cli)"
 personality: personality.md
 knowledge:
   - knowledge/
 skills:
-  - github:0xranx/agent-kit/skills/feishu-doc
+  - github:larksuite/cli/skills/lark-doc
+  - github:larksuite/cli/skills/lark-wiki
+  - github:larksuite/cli/skills/lark-im
+  - github:larksuite/cli/skills/lark-task
 extends:
   - base-agent
