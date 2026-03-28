@@ -97,6 +97,12 @@ agentbrief use ./path/to/my-brief
    - `.cursorrules` — 精简输出（仅人格部分，节省 Token）
    - `AGENTS.md` — 简洁输出（每段取首句）
 4. **锁文件** 在 `.agentbrief/lock.yaml` 中更新
+5. **技能通过符号链接部署到引擎原生目录**，实现自动发现：
+   - `.claude/skills/` — Claude Code
+   - `.agents/skills/` — Codex
+   - `.cursor/skills/` — Cursor（OpenCode 也支持）
+
+这意味着你的 Agent 在启动时就能自动发现技能——不需要先读取 CLAUDE.md 中的引用。
 
 你的 `CLAUDE.md` 中已有的内容会被保留——职能包内容以 HTML 注释标记的方式追加。
 
@@ -207,6 +213,25 @@ my-project/
 └── AGENTS.md                       # ← 提交此文件
 ```
 
+此外，技能会通过符号链接部署到引擎原生目录：
+
+```
+.claude/skills/           # Claude Code 自动发现
+├── security-review → ../.agentbrief/security-auditor/skills/security-review
+├── verification → ...
+└── ...
+.agents/skills/           # Codex 自动发现
+.cursor/skills/           # Cursor 自动发现
+```
+
+将这些目录和 `.agentbrief/` 一起添加到 `.gitignore`：
+```
+.agentbrief/
+.claude/skills/
+.agents/skills/
+.cursor/skills/
+```
+
 ### 哪些应该提交
 
 - **提交** 引擎指令文件（`CLAUDE.md`、`.cursorrules`、`AGENTS.md`）——这样团队成员共享相同的 Agent 行为
@@ -215,6 +240,9 @@ my-project/
 在你的 `.gitignore` 中添加：
 ```
 .agentbrief/
+.claude/skills/
+.agents/skills/
+.cursor/skills/
 ```
 
 ## 引擎特定行为
@@ -249,6 +277,10 @@ and follow its instructions step by step.
 当触发条件匹配时，Agent 会读取完整的 `SKILL.md` 文件，然后遵循其中定义的流程执行。
 
 每个职能包还会从基础层（`base-agent`）继承 `agent-browser` 技能，赋予你的 Agent 浏览器自动化能力，用于视觉验证。
+
+### 自我进化
+
+每个职能包都从 `base-agent` 继承了 `self-improving` 技能。当 Agent 被纠正、遇到意外错误、或发现项目特有的模式时，它会将经验记录到 `.learnings/*.md` 文件中。后续对话会自动读取这些记录——你的 Agent 会越用越聪明。
 
 ## 故障排除
 

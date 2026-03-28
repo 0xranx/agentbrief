@@ -97,6 +97,12 @@ agentbrief use ./path/to/my-brief
    - `.cursorrules` — minimal output (personality only, token-efficient)
    - `AGENTS.md` — concise output (first sentence per paragraph)
 4. **Lock file** is updated at `.agentbrief/lock.yaml`
+5. **Skills are symlinked to engine-native directories** for auto-discovery:
+   - `.claude/skills/` — Claude Code
+   - `.agents/skills/` — Codex
+   - `.cursor/skills/` — Cursor (also discovered by OpenCode)
+
+This means your agent auto-discovers skills at startup — no need to read CLAUDE.md references first.
 
 Your existing `CLAUDE.md` content is preserved — the brief is appended between HTML comment markers.
 
@@ -207,14 +213,36 @@ my-project/
 └── AGENTS.md                       # ← Commit this
 ```
 
+Additionally, skills are symlinked to engine-native directories:
+
+```
+.claude/skills/           # Claude Code auto-discovers these
+├── security-review → ../.agentbrief/security-auditor/skills/security-review
+├── verification → ...
+└── ...
+.agents/skills/           # Codex auto-discovers these
+.cursor/skills/           # Cursor auto-discovers these
+```
+
+Add these to your `.gitignore` along with `.agentbrief/`:
+```
+.agentbrief/
+.claude/skills/
+.agents/skills/
+.cursor/skills/
+```
+
 ### What to commit
 
 - **Commit** engine instruction files (`CLAUDE.md`, `.cursorrules`, `AGENTS.md`) — so your team shares the same agent behavior
-- **Gitignore** `.agentbrief/` — it's generated data, recreatable with `agentbrief use`
+- **Gitignore** `.agentbrief/` and engine skill directories — they're generated data, recreatable with `agentbrief use`
 
 Add to your `.gitignore`:
 ```
 .agentbrief/
+.claude/skills/
+.agents/skills/
+.cursor/skills/
 ```
 
 ## Engine-Specific Behavior
@@ -249,6 +277,10 @@ and follow its instructions step by step.
 The agent reads the full `SKILL.md` file when the trigger condition matches, then follows the process defined inside.
 
 Every brief also inherits `agent-browser` from the foundation layer (`base-agent`), giving your agent browser automation capabilities for visual verification.
+
+### Self-Improving
+
+Every brief inherits the `self-improving` skill from `base-agent`. When the agent gets corrected, hits unexpected failures, or discovers project-specific patterns, it records learnings to `.learnings/*.md` files. Future sessions read these automatically — your agent gets smarter over time.
 
 ## Troubleshooting
 
